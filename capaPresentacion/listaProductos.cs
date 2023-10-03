@@ -252,6 +252,7 @@ namespace capaPresentacion
 
         private void listaProductos_Load(object sender, EventArgs e)
         {
+            cmbBoxCategorias.SelectedIndex = 0;
             System.Drawing.Image image = System.Drawing.Image.FromFile(@"D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\Imagenes\OIP.jpeg");
             dataGridProductos.Rows.Add(image, "Berserk", "Manga", "Breve descripción del manga berserk", "$5000", "150");
             dataGridProductos.Rows.Add(image, "Sherlok", "Libro", "Breve descripción del manga ", "$5000", "150");

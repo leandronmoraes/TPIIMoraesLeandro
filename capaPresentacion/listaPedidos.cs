@@ -15,6 +15,9 @@ namespace capaPresentacion
         public listaPedidos()
         {
             InitializeComponent();
+            // Deshabilitamos los botones Eliminar y Modificar al cargar el formulario.
+            btnEliminar.Enabled = false;
+            btnModificar.Enabled = false;
         }
 
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
@@ -86,6 +89,10 @@ namespace capaPresentacion
                         txtDireccion.Clear();
 
                         MessageBox.Show("Pedido Eliminado", "Eliminación Pedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Deshabilitar los botones "Eliminar" y "Modificar" después de eliminar un pedido
+                        btnEliminar.Enabled = false;
+                        btnModificar.Enabled = false;
                     }
                     else
                     {
@@ -114,17 +121,24 @@ namespace capaPresentacion
                         dgvPedidos.CurrentRow.Cells[0].Value = txtNombreProducto.Text;
                         dgvPedidos.CurrentRow.Cells[1].Value = txtCantidad.Text;
                         dgvPedidos.CurrentRow.Cells[2].Value = txtProveedor.Text;
-                        dgvPedidos.CurrentRow.Cells[3].Value = txtDireccion.Text;
-                        dgvPedidos.CurrentRow.Cells[4].Value = fecha.Text;
+                        dgvPedidos.CurrentRow.Cells[4].Value = txtDireccion.Text;
+                        dgvPedidos.CurrentRow.Cells[3].Value = txtDescripcion.Text;
+
+                        // Actualizar la fecha si es necesario (dependiendo de cómo quieras manejar la fecha)
+                        DateTime fechaSeleccionada = fecha.Value;
+                        dgvPedidos.CurrentRow.Cells[5].Value = fechaSeleccionada.ToString("yyyy-MM-dd");
 
                         txtNombreProducto.Clear();
                         txtCantidad.Clear();
                         txtProveedor.Clear();
                         txtDireccion.Clear();
-                        
-                        
+                        txtDescripcion.Clear();
 
                         MessageBox.Show("Se modificaron correctamente los datos", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Deshabilitar los botones "Eliminar" y "Modificar" después de modificar un pedido
+                        btnEliminar.Enabled = false;
+                        btnModificar.Enabled = false;
                     }
                     else
                     {
@@ -144,13 +158,27 @@ namespace capaPresentacion
             {
                 if (dgvPedidos.CurrentRow != null && dgvPedidos.CurrentRow.Cells.Count >= 5)
                 {
-                  
                     txtNombreProducto.Text = dgvPedidos.CurrentRow.Cells[0].Value.ToString();
                     txtCantidad.Text = dgvPedidos.CurrentRow.Cells[1].Value.ToString();
                     txtProveedor.Text = dgvPedidos.CurrentRow.Cells[2].Value.ToString();
-                    txtDireccion.Text = dgvPedidos.CurrentRow.Cells[3].Value.ToString();
-                    //fecha.Text = dgvPedidos.CurrentRow.Cells[4].Value.ToString();
+                    txtDescripcion.Text = dgvPedidos.CurrentRow.Cells[3].Value.ToString();
+                    txtDireccion.Text = dgvPedidos.CurrentRow.Cells[4].Value.ToString();
 
+                    // Intentar convertir la cadena de la celda en un valor de DateTime de forma segura
+                    DateTime fechaPedido;
+                    if (DateTime.TryParse(dgvPedidos.CurrentRow.Cells[5].Value.ToString(), out fechaPedido))
+                    {
+                        fecha.Value = fechaPedido; // Establece la fecha seleccionada
+                    }
+                    else
+                    {
+                        // La cadena no es una fecha válida
+                        MessageBox.Show("La fecha del pedido no es válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    // Habilitar los botones Eliminar y Modificar cuando se selecciona una fila.
+                    btnEliminar.Enabled = true;
+                    btnModificar.Enabled = true;
                 }
                 else
                 {
@@ -164,5 +192,6 @@ namespace capaPresentacion
                 MessageBox.Show("Se ha producido un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

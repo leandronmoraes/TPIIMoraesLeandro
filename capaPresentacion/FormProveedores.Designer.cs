@@ -266,7 +266,6 @@ namespace capaPresentacion
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(154, 20);
             this.txtEmail.TabIndex = 11;
-            this.txtEmail.UseSystemPasswordChar = true;
             // 
             // lblGestionClientes
             // 
@@ -336,6 +335,7 @@ namespace capaPresentacion
             // rbtnInscripto
             // 
             this.rbtnInscripto.AutoSize = true;
+            this.rbtnInscripto.Checked = true;
             this.rbtnInscripto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbtnInscripto.ForeColor = System.Drawing.Color.White;
             this.rbtnInscripto.Location = new System.Drawing.Point(5, 19);
@@ -355,7 +355,6 @@ namespace capaPresentacion
             this.rbtnNoInscripto.Name = "rbtnNoInscripto";
             this.rbtnNoInscripto.Size = new System.Drawing.Size(194, 22);
             this.rbtnNoInscripto.TabIndex = 26;
-            this.rbtnNoInscripto.TabStop = true;
             this.rbtnNoInscripto.Text = "Responsable no Inscripto";
             this.rbtnNoInscripto.UseVisualStyleBackColor = true;
             // 
@@ -368,7 +367,6 @@ namespace capaPresentacion
             this.rbtnFinal.Name = "rbtnFinal";
             this.rbtnFinal.Size = new System.Drawing.Size(138, 22);
             this.rbtnFinal.TabIndex = 27;
-            this.rbtnFinal.TabStop = true;
             this.rbtnFinal.Text = "Consumidor final";
             this.rbtnFinal.UseVisualStyleBackColor = true;
             // 

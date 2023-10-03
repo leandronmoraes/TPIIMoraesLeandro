@@ -52,11 +52,11 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panelContenedorProductos = new System.Windows.Forms.Panel();
             this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnBuscar = new FontAwesome.Sharp.IconButton();
             this.btnAgregarProducto = new FontAwesome.Sharp.IconButton();
             this.btnModificarProducto = new FontAwesome.Sharp.IconButton();
             this.btnEliminarProducto = new FontAwesome.Sharp.IconButton();
             this.pBoxImagenProducto = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProductos)).BeginInit();
             this.panelContenedorProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxImagenProducto)).BeginInit();
@@ -67,7 +67,7 @@
             this.lblNombre.AutoSize = true;
             this.lblNombre.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombre.ForeColor = System.Drawing.Color.White;
-            this.lblNombre.Location = new System.Drawing.Point(48, 56);
+            this.lblNombre.Location = new System.Drawing.Point(21, 56);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(77, 21);
             this.lblNombre.TabIndex = 0;
@@ -78,7 +78,7 @@
             this.lblCategoria.AutoSize = true;
             this.lblCategoria.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.lblCategoria.ForeColor = System.Drawing.Color.White;
-            this.lblCategoria.Location = new System.Drawing.Point(30, 85);
+            this.lblCategoria.Location = new System.Drawing.Point(21, 85);
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(95, 21);
             this.lblCategoria.TabIndex = 1;
@@ -89,7 +89,7 @@
             this.lblDescripcion.AutoSize = true;
             this.lblDescripcion.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.lblDescripcion.ForeColor = System.Drawing.Color.White;
-            this.lblDescripcion.Location = new System.Drawing.Point(21, 117);
+            this.lblDescripcion.Location = new System.Drawing.Point(21, 112);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(104, 21);
             this.lblDescripcion.TabIndex = 2;
@@ -100,7 +100,7 @@
             this.lblPrecio.AutoSize = true;
             this.lblPrecio.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.lblPrecio.ForeColor = System.Drawing.Color.White;
-            this.lblPrecio.Location = new System.Drawing.Point(64, 162);
+            this.lblPrecio.Location = new System.Drawing.Point(37, 159);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(61, 21);
             this.lblPrecio.TabIndex = 3;
@@ -111,7 +111,7 @@
             this.lblStock.AutoSize = true;
             this.lblStock.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.lblStock.ForeColor = System.Drawing.Color.White;
-            this.lblStock.Location = new System.Drawing.Point(72, 192);
+            this.lblStock.Location = new System.Drawing.Point(37, 189);
             this.lblStock.Name = "lblStock";
             this.lblStock.Size = new System.Drawing.Size(57, 21);
             this.lblStock.TabIndex = 4;
@@ -151,6 +151,7 @@
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(218, 20);
             this.txtStock.TabIndex = 12;
+            this.txtStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtStock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStock_KeyPress);
             // 
             // txtPrecio
@@ -159,6 +160,7 @@
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(218, 20);
             this.txtPrecio.TabIndex = 13;
+            this.txtPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // lblImagen
@@ -197,7 +199,7 @@
             this.descripcion,
             this.precio,
             this.stock});
-            this.dataGridProductos.Location = new System.Drawing.Point(0, 256);
+            this.dataGridProductos.Location = new System.Drawing.Point(2, 256);
             this.dataGridProductos.Name = "dataGridProductos";
             this.dataGridProductos.ReadOnly = true;
             this.dataGridProductos.Size = new System.Drawing.Size(1120, 359);
@@ -269,8 +271,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelContenedorProductos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
+            this.panelContenedorProductos.Controls.Add(this.label1);
             this.panelContenedorProductos.Controls.Add(this.txtBuscar);
-            this.panelContenedorProductos.Controls.Add(this.btnBuscar);
             this.panelContenedorProductos.Controls.Add(this.btnAgregarProducto);
             this.panelContenedorProductos.Controls.Add(this.btnModificarProducto);
             this.panelContenedorProductos.Controls.Add(this.btnEliminarProducto);
@@ -310,29 +312,9 @@
             this.txtBuscar.PasswordChar = '\0';
             this.txtBuscar.PlaceholderText = "Nombre Producto";
             this.txtBuscar.SelectedText = "";
-            this.txtBuscar.Size = new System.Drawing.Size(218, 32);
+            this.txtBuscar.Size = new System.Drawing.Size(218, 21);
             this.txtBuscar.TabIndex = 33;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.FlatAppearance.BorderSize = 0;
-            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.ForeColor = System.Drawing.Color.White;
-            this.btnBuscar.IconChar = FontAwesome.Sharp.IconChar.Sistrix;
-            this.btnBuscar.IconColor = System.Drawing.Color.DodgerBlue;
-            this.btnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnBuscar.IconSize = 25;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(12, 214);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(113, 36);
-            this.btnBuscar.TabIndex = 32;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnAgregarProducto
             // 
@@ -394,6 +376,17 @@
             this.pBoxImagenProducto.TabIndex = 15;
             this.pBoxImagenProducto.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(37, 218);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 21);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "Buscar:";
+            // 
             // listaProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -441,6 +434,6 @@
         private FontAwesome.Sharp.IconButton btnModificarProducto;
         private FontAwesome.Sharp.IconButton btnEliminarProducto;
         private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
-        private FontAwesome.Sharp.IconButton btnBuscar;
+        private System.Windows.Forms.Label label1;
     }
 }

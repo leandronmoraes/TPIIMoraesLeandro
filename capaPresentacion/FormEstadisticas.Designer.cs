@@ -143,7 +143,7 @@ namespace capaPresentacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(1089, 576);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -152,6 +152,7 @@ namespace capaPresentacion
             this.Controls.Add(this.chart3);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.chart1);
+            this.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormEstadisticas";
             this.Text = "FormEstadisticas";

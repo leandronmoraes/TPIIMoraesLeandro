@@ -15,6 +15,10 @@ namespace capaPresentacion
         public FormProveedores()
         {
             InitializeComponent();
+
+            //Deshabilitamos los botones inicialmente
+            btnEliminar.Enabled = false;
+           
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -51,7 +55,6 @@ namespace capaPresentacion
                     txtNombre.Text = dgvProveedores.CurrentRow.Cells[1].Value.ToString();
                     txtTelefono.Text = dgvProveedores.CurrentRow.Cells[2].Value.ToString();
                     txtEmail.Text = dgvProveedores.CurrentRow.Cells[3].Value.ToString();
-                 
                     txtDireccion.Text = dgvProveedores.CurrentRow.Cells[5].Value.ToString();
 
                     // Recuperar el perfil actual
@@ -70,6 +73,10 @@ namespace capaPresentacion
                     {
                         rbtnFinal.Checked = true;
                     }
+
+                    // Habilitar los botones Eliminar y Modificar cuando se selecciona una fila.
+                    btnEliminar.Enabled = true;
+                    
                 }
                 else
                 {
@@ -83,6 +90,7 @@ namespace capaPresentacion
                 MessageBox.Show("Se ha producido un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
@@ -139,20 +147,21 @@ namespace capaPresentacion
                 // Confirmación para poder eliminar un proveedor
                 DialogResult eleccion = MessageBox.Show("¿Confirmar Eliminación?", "Eliminar Usuario", MessageBoxButtons.YesNo);
                 {
-                        // Elección en el caso que sí, guarda los datos
-                        if (eleccion == DialogResult.Yes)
-                        {
+                    // Elección en el caso que sí, guarda los datos
+                    if (eleccion == DialogResult.Yes)
+                    {
                         dgvProveedores.Rows.Remove(dgvProveedores.CurrentRow);
 
-                     
-                            txtCuit.Clear();
-                            txtNombre.Clear();
-                            txtTelefono.Clear();
-                            txtEmail.Clear();
-                            txtDireccion.Clear();
-
+                        txtCuit.Clear();
+                        txtNombre.Clear();
+                        txtTelefono.Clear();
+                        txtEmail.Clear();
+                        txtDireccion.Clear();
 
                         MessageBox.Show("Usuario Eliminado", "Eliminación Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Deshabilitar el botón "Eliminar" después de eliminar un usuario
+                        btnEliminar.Enabled = false;
                     }
                     else
                     {
@@ -165,6 +174,7 @@ namespace capaPresentacion
                 MessageBox.Show("Debe seleccionar un usuario de la lista antes de eliminarlo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
