@@ -1,0 +1,9 @@
+E:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\capaDatos.dll
+E:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\capaDatos.pdb
+E:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\CapaEntidad.dll
+E:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\CapaEntidad.pdb
+E:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.csproj.AssemblyReference.cache
+E:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.csproj.CoreCompileInputs.cache
+E:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.csproj.CopyComplete
+E:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.dll
+E:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.pdb

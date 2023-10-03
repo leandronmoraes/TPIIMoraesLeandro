@@ -1,0 +1,135 @@
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.exe.config
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.exe
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.pdb
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.AssemblyReference.cache
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.SuggestedBindingRedirects.cache
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.Properties.Resources.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.GenerateResource.cache
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.CoreCompileInputs.cache
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.exe
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.pdb
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormAdministrador.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaProductos.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.Login.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormVendedor.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.catalogoProductos.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\FontAwesome.Sharp.dll
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.CopyComplete
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\Guna.UI2.dll
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormGerente.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaUsuarios.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormPrueba.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.configuracionesAdmin.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.formVenta.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.nuevaVenta.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.exe.config
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.exe
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.pdb
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\FontAwesome.Sharp.dll
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\Guna.UI2.dll
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.AssemblyReference.cache
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.configuracionesAdmin.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormAdministrador.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormGerente.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormPrueba.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormVendedor.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaUsuarios.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaProductos.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.formVenta.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.Login.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.nuevaVenta.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.Properties.Resources.resources
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.GenerateResource.cache
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.CoreCompileInputs.cache
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.CopyComplete
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.exe
+C:\Users\morae\Downloads\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.pdb
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.exe.config
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.exe
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.pdb
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\FontAwesome.Sharp.dll
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\Guna.UI2.dll
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.AssemblyReference.cache
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.SuggestedBindingRedirects.cache
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.configuracionesAdmin.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormAdministrador.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormGerente.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormProveedores.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormPrueba.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormVendedor.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaUsuarios.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaProductos.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.formVenta.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.Login.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.nuevaVenta.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.Properties.Resources.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.GenerateResource.cache
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.CoreCompileInputs.cache
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.CopyComplete
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.exe
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.pdb
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaDetalleVenta.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.totalVentas.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.agregarCliente.resources
+D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoActualizado\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaPedidos.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.exe.config
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.exe
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.pdb
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\FontAwesome.Sharp.dll
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\Guna.UI2.dll
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.AssemblyReference.cache
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.agregarCliente.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.configuracionesAdmin.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormAdministrador.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormGerente.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormProveedores.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormVendedor.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaDetalleVenta.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaPedidos.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaUsuarios.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaProductos.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.formVenta.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.Login.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.nuevaVenta.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.Properties.Resources.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.totalVentas.resources
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.GenerateResource.cache
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.CoreCompileInputs.cache
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.CopyComplete
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.exe
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.pdb
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.exe.config
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.exe
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaPresentacion.pdb
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\FontAwesome.Sharp.dll
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\Guna.UI2.dll
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.AssemblyReference.cache
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.SuggestedBindingRedirects.cache
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.agregarCliente.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.configuracionesAdmin.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormAdministrador.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormGerente.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormProveedores.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormVendedor.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaDetalleVenta.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaPedidos.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaUsuarios.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.listaProductos.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.formVenta.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.Login.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.nuevaVenta.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.Properties.Resources.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.totalVentas.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.GenerateResource.cache
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.CoreCompileInputs.cache
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.CopyComplete
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.exe
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.pdb
+D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormEstadisticas.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.FormEstadisticas.resources
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\CapaEntidad.dll
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaNegocio.dll
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaDatos.dll
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\CapaEntidad.pdb
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaNegocio.pdb
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaDatos.pdb

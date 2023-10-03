@@ -1,0 +1,11 @@
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\capaNegocio.dll
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\capaNegocio.pdb
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\capaDatos.dll
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\CapaEntidad.dll
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\capaDatos.pdb
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\CapaEntidad.pdb
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.csproj.AssemblyReference.cache
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.csproj.CoreCompileInputs.cache
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.csproj.CopyComplete
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.dll
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.pdb
