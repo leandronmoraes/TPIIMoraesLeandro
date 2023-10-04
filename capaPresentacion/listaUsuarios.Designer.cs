@@ -47,17 +47,12 @@
             this.rbtnGerente = new System.Windows.Forms.RadioButton();
             this.rbtnVendedor = new System.Windows.Forms.RadioButton();
             this.lblTipoUsuario = new System.Windows.Forms.Label();
-            this.btnAñadirAvatar = new FontAwesome.Sharp.IconButton();
-            this.btnAñadir = new FontAwesome.Sharp.IconButton();
-            this.btnModificar = new FontAwesome.Sharp.IconButton();
-            this.btnEliminar = new FontAwesome.Sharp.IconButton();
             this.lblGestionClientes = new System.Windows.Forms.Label();
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.txtDNI = new System.Windows.Forms.TextBox();
             this.lblOperaciones = new System.Windows.Forms.Label();
             this.txtUsuario = new System.Windows.Forms.TextBox();
-            this.pBoxAvatar = new System.Windows.Forms.PictureBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblContraseña = new System.Windows.Forms.Label();
@@ -69,6 +64,11 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblBuscar = new System.Windows.Forms.Label();
+            this.btnAñadirAvatar = new FontAwesome.Sharp.IconButton();
+            this.btnAñadir = new FontAwesome.Sharp.IconButton();
+            this.btnModificar = new FontAwesome.Sharp.IconButton();
+            this.btnEliminar = new FontAwesome.Sharp.IconButton();
+            this.pBoxAvatar = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panelContenedorClientes.SuspendLayout();
@@ -263,69 +263,6 @@
             this.lblTipoUsuario.TabIndex = 25;
             this.lblTipoUsuario.Text = "Tipo Usuario";
             // 
-            // btnAñadirAvatar
-            // 
-            this.btnAñadirAvatar.IconChar = FontAwesome.Sharp.IconChar.Image;
-            this.btnAñadirAvatar.IconColor = System.Drawing.Color.Black;
-            this.btnAñadirAvatar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnAñadirAvatar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAñadirAvatar.Location = new System.Drawing.Point(665, 199);
-            this.btnAñadirAvatar.Name = "btnAñadirAvatar";
-            this.btnAñadirAvatar.Size = new System.Drawing.Size(151, 54);
-            this.btnAñadirAvatar.TabIndex = 24;
-            this.btnAñadirAvatar.Text = "Seleccionar Imagen";
-            this.btnAñadirAvatar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAñadirAvatar.UseVisualStyleBackColor = true;
-            this.btnAñadirAvatar.Click += new System.EventHandler(this.btnAñadirAvatar_Click);
-            // 
-            // btnAñadir
-            // 
-            this.btnAñadir.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
-            this.btnAñadir.IconColor = System.Drawing.Color.Black;
-            this.btnAñadir.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnAñadir.IconSize = 50;
-            this.btnAñadir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAñadir.Location = new System.Drawing.Point(911, 35);
-            this.btnAñadir.Name = "btnAñadir";
-            this.btnAñadir.Size = new System.Drawing.Size(144, 42);
-            this.btnAñadir.TabIndex = 23;
-            this.btnAñadir.Text = "Añadir Usuario";
-            this.btnAñadir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAñadir.UseVisualStyleBackColor = true;
-            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.IconChar = FontAwesome.Sharp.IconChar.UserGear;
-            this.btnModificar.IconColor = System.Drawing.Color.Black;
-            this.btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnModificar.IconSize = 50;
-            this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new System.Drawing.Point(911, 133);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(144, 43);
-            this.btnModificar.TabIndex = 22;
-            this.btnModificar.Text = "Modificar Usuario";
-            this.btnModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click_1);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.IconChar = FontAwesome.Sharp.IconChar.UserXmark;
-            this.btnEliminar.IconColor = System.Drawing.Color.Black;
-            this.btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnEliminar.IconSize = 50;
-            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(911, 83);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(144, 44);
-            this.btnEliminar.TabIndex = 21;
-            this.btnEliminar.Text = "Eliminar Usuario";
-            this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click_1);
-            // 
             // lblGestionClientes
             // 
             this.lblGestionClientes.AutoSize = true;
@@ -378,17 +315,6 @@
             this.txtUsuario.Size = new System.Drawing.Size(154, 20);
             this.txtUsuario.TabIndex = 10;
             this.txtUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsuario_KeyPress);
-            // 
-            // pBoxAvatar
-            // 
-            this.pBoxAvatar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
-            this.pBoxAvatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pBoxAvatar.Location = new System.Drawing.Point(642, 33);
-            this.pBoxAvatar.Name = "pBoxAvatar";
-            this.pBoxAvatar.Size = new System.Drawing.Size(194, 160);
-            this.pBoxAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBoxAvatar.TabIndex = 14;
-            this.pBoxAvatar.TabStop = false;
             // 
             // txtApellido
             // 
@@ -513,6 +439,82 @@
             this.lblBuscar.Size = new System.Drawing.Size(71, 22);
             this.lblBuscar.TabIndex = 29;
             this.lblBuscar.Text = "Buscar";
+            // 
+            // btnAñadirAvatar
+            // 
+            this.btnAñadirAvatar.IconChar = FontAwesome.Sharp.IconChar.Image;
+            this.btnAñadirAvatar.IconColor = System.Drawing.Color.Black;
+            this.btnAñadirAvatar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAñadirAvatar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAñadirAvatar.Location = new System.Drawing.Point(665, 199);
+            this.btnAñadirAvatar.Name = "btnAñadirAvatar";
+            this.btnAñadirAvatar.Size = new System.Drawing.Size(151, 54);
+            this.btnAñadirAvatar.TabIndex = 24;
+            this.btnAñadirAvatar.Text = "Seleccionar Imagen";
+            this.btnAñadirAvatar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAñadirAvatar.UseVisualStyleBackColor = true;
+            this.btnAñadirAvatar.Click += new System.EventHandler(this.btnAñadirAvatar_Click);
+            // 
+            // btnAñadir
+            // 
+            this.btnAñadir.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            this.btnAñadir.IconColor = System.Drawing.Color.Black;
+            this.btnAñadir.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAñadir.IconSize = 50;
+            this.btnAñadir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAñadir.Location = new System.Drawing.Point(911, 35);
+            this.btnAñadir.Name = "btnAñadir";
+            this.btnAñadir.Size = new System.Drawing.Size(144, 42);
+            this.btnAñadir.TabIndex = 23;
+            this.btnAñadir.Text = "Añadir Usuario";
+            this.btnAñadir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAñadir.UseVisualStyleBackColor = true;
+            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.IconChar = FontAwesome.Sharp.IconChar.UserGear;
+            this.btnModificar.IconColor = System.Drawing.Color.Black;
+            this.btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnModificar.IconSize = 50;
+            this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnModificar.Location = new System.Drawing.Point(911, 133);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(144, 43);
+            this.btnModificar.TabIndex = 22;
+            this.btnModificar.Text = "Modificar Usuario";
+            this.btnModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click_1);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.IconChar = FontAwesome.Sharp.IconChar.UserXmark;
+            this.btnEliminar.IconColor = System.Drawing.Color.Black;
+            this.btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnEliminar.IconSize = 50;
+            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEliminar.Location = new System.Drawing.Point(911, 83);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(144, 44);
+            this.btnEliminar.TabIndex = 21;
+            this.btnEliminar.Text = "Eliminar Usuario";
+            this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click_1);
+            // 
+            // pBoxAvatar
+            // 
+            this.pBoxAvatar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            this.pBoxAvatar.BackgroundImage = global::capaPresentacion.Properties.Resources.usuario_verificado;
+            this.pBoxAvatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pBoxAvatar.ErrorImage = null;
+            this.pBoxAvatar.Location = new System.Drawing.Point(642, 33);
+            this.pBoxAvatar.Name = "pBoxAvatar";
+            this.pBoxAvatar.Size = new System.Drawing.Size(194, 160);
+            this.pBoxAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBoxAvatar.TabIndex = 14;
+            this.pBoxAvatar.TabStop = false;
             // 
             // listaUsuarios
             // 

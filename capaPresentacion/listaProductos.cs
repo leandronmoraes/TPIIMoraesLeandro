@@ -18,15 +18,20 @@ namespace capaPresentacion
         public listaProductos()
         {
             InitializeComponent();
+            btnEliminarProducto.Enabled = false;
+            btnModificarProducto.Enabled = false;
+            cmbBoxCategorias.SelectedIndex = 0;
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            // Permite letras (mayúsculas y minúsculas), números y espacios
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
         }
+
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -87,6 +92,9 @@ namespace capaPresentacion
                         txtStock.Clear();
                         pBoxImagenProducto.Image = imagenPorDefecto;
 
+                        btnEliminarProducto.Enabled = false;
+                        btnModificarProducto.Enabled = false;
+
                         MessageBox.Show("Se insertaron correctamente los datos del producto", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -137,6 +145,8 @@ namespace capaPresentacion
                         txtStock.Clear();
 
                         pBoxImagenProducto.Image = imagenPorDefecto;
+                        btnEliminarProducto.Enabled = false;
+                        btnModificarProducto.Enabled = false;
 
                         MessageBox.Show("Se modificaron correctamente los datos del producto", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -177,6 +187,8 @@ namespace capaPresentacion
                     txtPrecio.Clear();
                     txtStock.Clear();
                     pBoxImagenProducto.Image = imagenPorDefecto;
+                    btnEliminarProducto.Enabled = false;
+                    btnModificarProducto.Enabled = false;
 
                     MessageBox.Show("Producto Eliminado", "Eliminación Producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -252,13 +264,16 @@ namespace capaPresentacion
 
         private void listaProductos_Load(object sender, EventArgs e)
         {
-            cmbBoxCategorias.SelectedIndex = 0;
-            System.Drawing.Image image = System.Drawing.Image.FromFile(@"D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\Imagenes\OIP.jpeg");
-            dataGridProductos.Rows.Add(image, "Berserk", "Manga", "Breve descripción del manga berserk", "$5000", "150");
-            dataGridProductos.Rows.Add(image, "Sherlok", "Libro", "Breve descripción del manga ", "$5000", "150");
-            dataGridProductos.Rows.Add(image, "Jujutsu Kaisen", "Manga", "Breve descripción del manga Jujutsu", "$5000", "150");
-           
-            imagenPorDefecto = System.Drawing.Image.FromFile(@"D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\Imagenes\OIP.jpeg");
+            //Cargamos las imagenes que se encuentran en los recursos del proyecto
+            Image imagen1 = Properties.Resources.onepiece;
+            Image imagen2 = Properties.Resources.batman;
+            Image imagen3 = Properties.Resources.libro100años;
+            //Cargamos de manera local
+            dataGridProductos.Rows.Add(imagen1, "Producto1", "Mangas", "Breve Descripción", "5000", "100", "Detalles Venta");
+            dataGridProductos.Rows.Add(imagen2, "Producto2", "Comics", "Breve Descripción", "5000", "100", "Detalles Venta");
+            dataGridProductos.Rows.Add(imagen3, "Producto3", "Libros", "Breve Descripción", "5000", "100", "Detalles Venta");
+
+            Image imagenPorDefecto = Properties.Resources.producto_pbox;
             pBoxImagenProducto.Image = imagenPorDefecto;
         }
 
@@ -277,6 +292,11 @@ namespace capaPresentacion
                     txtDescripcion.Text = selectedRow.Cells[3].Value.ToString();
                     txtPrecio.Text = selectedRow.Cells[4].Value.ToString();
                     txtStock.Text = selectedRow.Cells[5].Value.ToString();
+
+                    // Habilita los botones "Eliminar" y "Modificar" cuando se selecciona una fila válida.
+                    btnEliminarProducto.Enabled = true;
+                    btnModificarProducto.Enabled = true;
+                    
                 }
                 else
                 {
@@ -285,8 +305,10 @@ namespace capaPresentacion
                 }
             }
         }
-    }
 
+    }
 }
+
+
 
 

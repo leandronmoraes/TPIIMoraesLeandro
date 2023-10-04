@@ -18,6 +18,7 @@ namespace capaPresentacion
         public agregarCliente()
         {
             InitializeComponent();
+            btnModificar.Enabled = false;
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -75,6 +76,7 @@ namespace capaPresentacion
 
                     Image imagen = (Image)dataGridClientes.CurrentRow.Cells[6].Value as System.Drawing.Image;
                     pBoxAvatar.Image = imagen;
+                    btnModificar.Enabled = true;
                 }
                 else
                 {
@@ -114,6 +116,7 @@ namespace capaPresentacion
                             txtUsuario.Clear();
                             txtDNI.Clear();
                             pBoxAvatar.Image = imagenPorDefecto;
+                            btnModificar.Enabled = true;
 
                             MessageBox.Show("Usuario Agregado", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -132,7 +135,7 @@ namespace capaPresentacion
 
         private void agregarCliente_Load(object sender, EventArgs e)
         {
-            imagenPorDefecto = System.Drawing.Image.FromFile(@"D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\Imagenes\clientes.png");
+            Image image2 = Properties.Resources.usuario_verificado;
             pBoxAvatar.Image = imagenPorDefecto;
 
             /*Incorporarlo en la base de datos con las distintas capas

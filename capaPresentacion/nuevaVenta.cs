@@ -28,6 +28,24 @@ namespace capaPresentacion
         }
         private decimal precioUnitarioActual;
 
+
+        public class Clientess
+        {
+
+            public string DNI { get; set; }
+            public string Nombre { get; set; }
+
+            
+        }
+
+        List<Clientess> clientes = new List<Clientess>
+        {
+            new Clientess { DNI = "42743277", Nombre = "Leandro Moraes" },
+            new Clientess { DNI = "1234", Nombre = "Usuario1" },
+            new Clientess { DNI = "5678", Nombre = "Usuario2" },
+        };
+
+    
         public class Producto
         {
             public string Nombre { get; set; }
@@ -132,24 +150,7 @@ namespace capaPresentacion
 
         }
 
-        //private void btnBuscarCliente_Click(object sender, EventArgs e)
-        //{
-        //    string dniCliente = txtDNICliente.Text;
-
-        //    // Buscar el cliente en la lista de clientes por DNI
-        //    Cliente clienteEncontrado = clientes.FirstOrDefault(c => c.DNI == dniCliente);
-
-        //    if (clienteEncontrado != null)
-        //    {
-        //        // Establece el nombre del cliente en el campo txtDNICliente
-        //        txtDNICliente.Text = clienteEncontrado.Nombre;
-        //        btnLimpiarCliente.Visible = true;
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Cliente no se encuentra registrado");
-        //    }
-        //}
+     
 
         private void btnBuscarProducto_Click(object sender, EventArgs e)
         {
@@ -227,6 +228,25 @@ namespace capaPresentacion
         private void btnRegistrarVenta_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Productos Comprado con Exito");
+        }
+
+        private void btnBuscarCliente_Click_1(object sender, EventArgs e)
+        {
+            string dniCliente = txtDNICliente.Text;
+
+            // Buscar el cliente en la lista de clientes por DNI
+            Clientess clienteEncontrado = clientes.FirstOrDefault(c => c.DNI == dniCliente);
+
+            if (clienteEncontrado != null)
+            {
+                // Establece el nombre del cliente en el campo txtDNICliente
+                txtDNICliente.Text = clienteEncontrado.Nombre;
+                btnLimpiarCliente.Visible = true;
+            }
+            else
+            {
+                MessageBox.Show("Cliente no se encuentra registrado");
+            }
         }
     }
 }

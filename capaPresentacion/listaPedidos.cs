@@ -18,6 +18,8 @@ namespace capaPresentacion
             // Deshabilitamos los botones Eliminar y Modificar al cargar el formulario.
             btnEliminar.Enabled = false;
             btnModificar.Enabled = false;
+
+            cmbProveedor.SelectedIndex = 0;
         }
 
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
@@ -31,7 +33,7 @@ namespace capaPresentacion
         private void btnAñadir_Click(object sender, EventArgs e)
         {
             if (txtNombreProducto.Text.Length > 0 && txtCantidad.Text.Length > 0 &&
-                txtProveedor.Text.Length > 0 && txtDescripcion.Text.Length > 0 &&
+                 txtDescripcion.Text.Length > 0 &&
                 txtDireccion.Text.Length > 0)
             {
                 // Confirmación para poder ingresar un pedido
@@ -44,12 +46,11 @@ namespace capaPresentacion
                         DateTime fechaSeleccionada = fecha.Value;
 
                         // Agrega el pedido al DataGridView
-                        dgvPedidos.Rows.Add(txtNombreProducto.Text, txtCantidad.Text, txtProveedor.Text,
+                        dgvPedidos.Rows.Add(txtNombreProducto.Text, txtCantidad.Text, cmbProveedor.Text,
                             txtDescripcion.Text, txtDireccion.Text, fechaSeleccionada.ToString("yyyy-MM-dd")); // Formatea la fecha como desees
 
                         txtNombreProducto.Clear();
-                        txtCantidad.Clear();
-                        txtProveedor.Clear();
+                        txtCantidad.Clear();              
                         txtDescripcion.Clear();
                         txtDireccion.Clear();
 
@@ -71,7 +72,7 @@ namespace capaPresentacion
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (txtNombreProducto.Text.Length > 0 && txtCantidad.Text.Length > 0 &&
-                txtProveedor.Text.Length > 0 && txtDescripcion.Text.Length > 0 &&
+                txtDescripcion.Text.Length > 0 &&
                 txtDireccion.Text.Length > 0)
             {
                 //Confirmación para poder eliminar un pedido
@@ -83,8 +84,7 @@ namespace capaPresentacion
                         dgvPedidos.Rows.Remove(dgvPedidos.CurrentRow);
 
                         txtNombreProducto.Clear();
-                        txtCantidad.Clear();
-                        txtProveedor.Clear();
+                        txtCantidad.Clear();      
                         txtDescripcion.Clear();
                         txtDireccion.Clear();
 
@@ -109,7 +109,7 @@ namespace capaPresentacion
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (txtNombreProducto.Text.Length > 0 && txtCantidad.Text.Length > 0 &&
-               txtProveedor.Text.Length > 0 && txtDescripcion.Text.Length > 0 &&
+                txtDescripcion.Text.Length > 0 &&
                txtDireccion.Text.Length > 0)
             {
                 //Confirmación para poder modificar un pedido
@@ -120,7 +120,7 @@ namespace capaPresentacion
                     {
                         dgvPedidos.CurrentRow.Cells[0].Value = txtNombreProducto.Text;
                         dgvPedidos.CurrentRow.Cells[1].Value = txtCantidad.Text;
-                        dgvPedidos.CurrentRow.Cells[2].Value = txtProveedor.Text;
+                        dgvPedidos.CurrentRow.Cells[2].Value = cmbProveedor.Text;
                         dgvPedidos.CurrentRow.Cells[4].Value = txtDireccion.Text;
                         dgvPedidos.CurrentRow.Cells[3].Value = txtDescripcion.Text;
 
@@ -130,7 +130,6 @@ namespace capaPresentacion
 
                         txtNombreProducto.Clear();
                         txtCantidad.Clear();
-                        txtProveedor.Clear();
                         txtDireccion.Clear();
                         txtDescripcion.Clear();
 
@@ -160,7 +159,7 @@ namespace capaPresentacion
                 {
                     txtNombreProducto.Text = dgvPedidos.CurrentRow.Cells[0].Value.ToString();
                     txtCantidad.Text = dgvPedidos.CurrentRow.Cells[1].Value.ToString();
-                    txtProveedor.Text = dgvPedidos.CurrentRow.Cells[2].Value.ToString();
+                    cmbProveedor.Text = dgvPedidos.CurrentRow.Cells[2].Value.ToString();
                     txtDescripcion.Text = dgvPedidos.CurrentRow.Cells[3].Value.ToString();
                     txtDireccion.Text = dgvPedidos.CurrentRow.Cells[4].Value.ToString();
 
@@ -193,5 +192,33 @@ namespace capaPresentacion
             }
         }
 
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            string encontrarPedido = txtBuscar.Text;
+            bool encontrado = false;
+
+            foreach (DataGridViewRow recorrer in dgvPedidos.Rows)
+            {
+                if (recorrer.Cells[0].Value.ToString().IndexOf(encontrarPedido, StringComparison.OrdinalIgnoreCase) >= 0 )
+                {
+                    recorrer.Visible = true;
+                    encontrado = true;
+                }
+                else
+                {
+                    recorrer.Visible = false;
+                }
+            }
+
+            if (!encontrado)
+            {
+                // Si no se encuentra ningún pedido, muestra todas las filas
+                foreach (DataGridViewRow recorrer in dgvPedidos.Rows)
+                {
+                    recorrer.Visible = true;
+                }
+            }
+        }
+    
     }
 }

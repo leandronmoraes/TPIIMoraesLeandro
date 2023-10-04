@@ -44,11 +44,10 @@ namespace capaPresentacion
 
         private void totalVentas_Load(object sender, EventArgs e)
         {
-            dgvVentas.Rows.Add("Leandro morales", "42743277", "Raul Alfonzin", "99999", "23/09/2023", "10","Detalles Venta");
-            dgvVentas.Rows.Add("Leandro morales", "11111", "Raul Alfonzin", "99999", "23/09/2023", "10", "Detalles Venta");
-            dgvVentas.Rows.Add("Leandro morales", "22222", "Raul Alfonzin", "99999", "23/09/2023", "10", "Detalles Venta");
-            dgvVentas.Rows.Add("Leandro morales", "33333", "Raul Alfonzin", "99999", "23/09/2023", "10", "Detalles Venta");
-            dgvVentas.Rows.Add("Leandro morales", "424242", "Raul Alfonzin", "99999", "23/09/2023", "10", "Detalles Venta");
+            dgvVentas.Rows.Add("Leandro Moraes", "1111", "Cliente 1", "11111", "23/09/2023", "10","Detalles Venta");
+            dgvVentas.Rows.Add("Leandro Moraes", "2222", "Cliente 2", "22222", "23/09/2023", "20", "Detalles Venta");
+            dgvVentas.Rows.Add("Leandro Moraes", "3333", "Cliente 3", "33333", "23/09/2023", "30", "Detalles Venta");
+            
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)

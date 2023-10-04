@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(listaProductos));
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblCategoria = new System.Windows.Forms.Label();
             this.lblDescripcion = new System.Windows.Forms.Label();
@@ -51,12 +50,12 @@
             this.cmbBoxCategorias = new System.Windows.Forms.ComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panelContenedorProductos = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnAgregarProducto = new FontAwesome.Sharp.IconButton();
             this.btnModificarProducto = new FontAwesome.Sharp.IconButton();
             this.btnEliminarProducto = new FontAwesome.Sharp.IconButton();
             this.pBoxImagenProducto = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProductos)).BeginInit();
             this.panelContenedorProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxImagenProducto)).BeginInit();
@@ -199,10 +198,10 @@
             this.descripcion,
             this.precio,
             this.stock});
-            this.dataGridProductos.Location = new System.Drawing.Point(2, 256);
+            this.dataGridProductos.Location = new System.Drawing.Point(5, 256);
             this.dataGridProductos.Name = "dataGridProductos";
             this.dataGridProductos.ReadOnly = true;
-            this.dataGridProductos.Size = new System.Drawing.Size(1120, 359);
+            this.dataGridProductos.Size = new System.Drawing.Size(1113, 356);
             this.dataGridProductos.TabIndex = 18;
             this.dataGridProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProductos_CellDoubleClick);
             // 
@@ -211,14 +210,14 @@
             this.imagen.HeaderText = "Imagen";
             this.imagen.Name = "imagen";
             this.imagen.ReadOnly = true;
-            this.imagen.Width = 179;
+            this.imagen.Width = 177;
             // 
             // nombre
             // 
             this.nombre.HeaderText = "Nombre";
             this.nombre.Name = "nombre";
             this.nombre.ReadOnly = true;
-            this.nombre.Width = 180;
+            this.nombre.Width = 179;
             // 
             // categoria
             // 
@@ -232,21 +231,21 @@
             this.descripcion.HeaderText = "Descripción";
             this.descripcion.Name = "descripcion";
             this.descripcion.ReadOnly = true;
-            this.descripcion.Width = 179;
+            this.descripcion.Width = 178;
             // 
             // precio
             // 
             this.precio.HeaderText = "Precio";
             this.precio.Name = "precio";
             this.precio.ReadOnly = true;
-            this.precio.Width = 180;
+            this.precio.Width = 178;
             // 
             // stock
             // 
             this.stock.HeaderText = "Stock";
             this.stock.Name = "stock";
             this.stock.ReadOnly = true;
-            this.stock.Width = 180;
+            this.stock.Width = 179;
             // 
             // cmbBoxCategorias
             // 
@@ -295,6 +294,17 @@
             this.panelContenedorProductos.Name = "panelContenedorProductos";
             this.panelContenedorProductos.Size = new System.Drawing.Size(1123, 615);
             this.panelContenedorProductos.TabIndex = 20;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(37, 218);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 21);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "Buscar:";
             // 
             // txtBuscar
             // 
@@ -355,7 +365,7 @@
             this.btnEliminarProducto.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnEliminarProducto.IconSize = 50;
             this.btnEliminarProducto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminarProducto.Location = new System.Drawing.Point(898, 101);
+            this.btnEliminarProducto.Location = new System.Drawing.Point(898, 99);
             this.btnEliminarProducto.Name = "btnEliminarProducto";
             this.btnEliminarProducto.Size = new System.Drawing.Size(144, 44);
             this.btnEliminarProducto.TabIndex = 24;
@@ -367,7 +377,7 @@
             // pBoxImagenProducto
             // 
             this.pBoxImagenProducto.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.pBoxImagenProducto.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pBoxImagenProducto.BackgroundImage")));
+            this.pBoxImagenProducto.BackgroundImage = global::capaPresentacion.Properties.Resources.producto_pbox;
             this.pBoxImagenProducto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pBoxImagenProducto.Location = new System.Drawing.Point(492, 48);
             this.pBoxImagenProducto.Name = "pBoxImagenProducto";
@@ -375,17 +385,6 @@
             this.pBoxImagenProducto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBoxImagenProducto.TabIndex = 15;
             this.pBoxImagenProducto.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(37, 218);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 21);
-            this.label1.TabIndex = 34;
-            this.label1.Text = "Buscar:";
             // 
             // listaProductos
             // 

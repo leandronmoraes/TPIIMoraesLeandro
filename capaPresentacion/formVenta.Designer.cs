@@ -38,7 +38,7 @@
             this.dataGridVenta = new Guna.UI2.WinForms.Guna2DataGridView();
             this.cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dato3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detalles = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVenta)).BeginInit();
@@ -117,7 +117,7 @@
             this.dataGridVenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cliente,
             this.dni,
-            this.dato3,
+            this.producto,
             this.detalles});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
@@ -169,11 +169,11 @@
             this.dni.Name = "dni";
             this.dni.ReadOnly = true;
             // 
-            // dato3
+            // producto
             // 
-            this.dato3.HeaderText = "Dato3";
-            this.dato3.Name = "dato3";
-            this.dato3.ReadOnly = true;
+            this.producto.HeaderText = "Producto";
+            this.producto.Name = "producto";
+            this.producto.ReadOnly = true;
             // 
             // detalles
             // 
@@ -209,7 +209,7 @@
         private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
         private System.Windows.Forms.DataGridViewTextBoxColumn cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn dni;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dato3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn producto;
         private System.Windows.Forms.DataGridViewButtonColumn detalles;
     }
 }

@@ -156,6 +156,17 @@
     <Compile Include="totalVentas.Designer.cs">
       <DependentUpon>totalVentas.cs</DependentUpon>
     </Compile>
+    <None Include="Imagenes\OIP.jpeg" />
+    <None Include="Resources\comic.png" />
+    <None Include="Resources\usuario-verificado.png" />
+    <None Include="Resources\perfil.png" />
+    <None Include="Resources\usuario.png" />
+    <None Include="Resources\onepiece.jpg" />
+    <None Include="Resources\naruto.jpg" />
+    <None Include="Resources\1984.jpg" />
+    <None Include="Resources\100años.jpg" />
+    <None Include="Resources\batman.jpg" />
+    <None Include="Resources\watchmen.jpg" />
     <EmbeddedResource Include="agregarCliente.resx">
       <DependentUpon>agregarCliente.cs</DependentUpon>
     </EmbeddedResource>

@@ -40,9 +40,9 @@ namespace capaPresentacion
 
         private void formVenta_Load(object sender, EventArgs e)
         {
-            dataGridVenta.Rows.Add("Leandro morales", "42743277", "Raul Alfonzin", "Detalles");
-            dataGridVenta.Rows.Add("Leandro morales", "2323", "Raul Alfonzin", "Detalles");
-            dataGridVenta.Rows.Add("Leandro morales", "4343", "Raul Alfonzin", "Detalles");
+            dataGridVenta.Rows.Add("Cliente 1", "11111", "Producto 1", "Detalles");
+            dataGridVenta.Rows.Add("Cliente 2", "22222", "Producto 2", "Detalles");
+            dataGridVenta.Rows.Add("Cliente 3", "33333", "Producto 3", "Detalles");
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)

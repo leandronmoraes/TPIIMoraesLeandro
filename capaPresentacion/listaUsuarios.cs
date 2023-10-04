@@ -18,6 +18,10 @@ namespace capaPresentacion
         public listaUsuarios()
         {
             InitializeComponent();
+            btnModificar.Enabled = false;
+            btnEliminar.Enabled = false;
+
+            
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -93,6 +97,8 @@ namespace capaPresentacion
                 
                     Image imagen = (Image)dataGridClientes.CurrentRow.Cells[7].Value as System.Drawing.Image;
                     pBoxAvatar.Image = imagen;
+                    btnModificar.Enabled = true;
+                    btnEliminar.Enabled = true;
                 }
                 else
                 {
@@ -114,41 +120,31 @@ namespace capaPresentacion
                 txtNombre.Text.Length > 0 && txtUsuario.Text.Length > 0 &&
                 pBoxAvatar.Image != null)
             {
-                // Verifica si al menos un radio button está marcado
-                if (rbtnAdmin.Checked || rbtnGerente.Checked || rbtnVendedor.Checked)
+                // Verifica si el usuario ya existe
+                if (UsuarioYaExiste(txtUsuario.Text, int.Parse(txtDNI.Text)))
                 {
-                    // Confirmación para poder ingresar un usuario
-                    DialogResult eleccion = MessageBox.Show("¿Confirmar Inserción?", "Agregar Usuario", MessageBoxButtons.YesNo);
-                    {
-                        // Elección en el caso que sí, guarda los datos
-                        if (eleccion == DialogResult.Yes)
-                        {
-                            // Obtiene el valor seleccionado de los radio buttons
-                            string perfil = rbtnAdmin.Checked ? "Admin" : (rbtnGerente.Checked ? "Gerente" : "Vendedor");
-
-                            Image imagen = pBoxAvatar.Image;
-                            dataGridClientes.Rows.Add(txtNombre.Text, txtApellido.Text, txtUsuario.Text,
-                                txtDNI.Text, txtDireccion.Text, txtContraseña.Text, perfil, pBoxAvatar.Image);
-
-                            txtApellido.Clear();
-                            txtContraseña.Clear();
-                            txtDireccion.Clear();
-                            txtNombre.Clear();
-                            txtUsuario.Clear();
-                            txtDNI.Clear();
-                            pBoxAvatar.Image = imagenPorDefecto;
-
-                            MessageBox.Show("Usuario Agregado", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Usuario no agregado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
+                    MessageBox.Show("El usuario se encuentra registrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Debes seleccionar un perfil (Admin, Gerente o Vendedor) antes de agregar un usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // Si el usuario no existe, continúa con la lógica de agregar
+                    // ...
+
+                    // Código para agregar el usuario aquí
+                    string perfil = rbtnAdmin.Checked ? "Admin" : (rbtnGerente.Checked ? "Gerente" : "Vendedor");
+                    dataGridClientes.Rows.Add(txtNombre.Text, txtApellido.Text, txtUsuario.Text,
+                        txtDNI.Text, txtDireccion.Text, txtContraseña.Text, perfil, pBoxAvatar.Image);
+
+                    txtApellido.Clear();
+                    txtContraseña.Clear();
+                    txtDireccion.Clear();
+                    txtNombre.Clear();
+                    txtUsuario.Clear();
+                    txtDNI.Clear();
+
+                    pBoxAvatar.Image = imagenPorDefecto;
+
+                    MessageBox.Show("Usuario Agregado", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -181,6 +177,9 @@ namespace capaPresentacion
                         pBoxAvatar.Image = imagenPorDefecto;
 
                         MessageBox.Show("Usuario Eliminado", "Eliminación Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        btnModificar.Enabled = false;
+                        btnEliminar.Enabled = false;
                     }
                     else
                     {
@@ -244,6 +243,9 @@ namespace capaPresentacion
                         txtDNI.Clear();
                         pBoxAvatar.Image = imagenPorDefecto;
 
+                        btnModificar.Enabled = false;
+                        btnEliminar.Enabled = false;
+
                         MessageBox.Show("Se modificaron correctamente los datos", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -301,23 +303,17 @@ namespace capaPresentacion
         private void listaUsuarios_Load(object sender, EventArgs e)
         {
 
-            //Cargamos de manera local
-
-            dataGridClientes.Rows.Add("Leandro", "Moraes", "leandromoraes", 123, "barrio1", "contraseña", "vendedor");
-            dataGridClientes.Rows.Add("Alexis", "Colman", "alexiscolman", 1234, "barrio1", "contraseña", "vendedor");
-            dataGridClientes.Rows.Add("Lucas", "Haberles", "lucashaberles", 12345, "barrio1", "contraseña", "vendedor");
-            dataGridClientes.Rows.Add("Lucas", "Parodi", "lucasparodi", 123456, "barrio1", "contraseña", "vendedor");
-            dataGridClientes.Rows.Add("Leandro", "Ponce", "leandroponce", 1234567, "barrio1", "contraseña", "vendedor");
-            imagenPorDefecto = System.Drawing.Image.FromFile(@"D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\Imagenes\clientes.png");
+            Image imagenPorDefecto = Properties.Resources.usuario_verificado;
             pBoxAvatar.Image = imagenPorDefecto;
 
 
-            /*
-            System.Drawing.Image image = System.Drawing.Image.FromFile
-                (@"D:\Facultad 2023 2do cuatrimestre\Taller de Programación II\ProyectoTPII_MoraesLeandro\ProyectoTPII_MoraesLeandro\capaPresentacion\Imagenes\catalogar.png");
-            dataGridClientes.Rows.Add("Leandro", "Moraes", "leandromoraes", "42743277", "Barrio Pirayui", "contraseña","Vendedor", image);
-            */
+            //Cargamos de manera local
 
+            dataGridClientes.Rows.Add("Leandro", "Moraes", "leandromoraes", 1228, "dirección 1", "contraseña", "admin", imagenPorDefecto);
+            dataGridClientes.Rows.Add("usuario1", "user1", "usuario1", 1234, "dirección 1", "contraseña", "vendedor", imagenPorDefecto);
+            dataGridClientes.Rows.Add("usuario2", "user2", "usuario2", 4321, "dirección 1", "contraseña", "gerente", imagenPorDefecto);
+
+            
 
         }
 
@@ -398,6 +394,23 @@ namespace capaPresentacion
                 }
             }
         }
+
+        private bool UsuarioYaExiste(string nombreUsuario, int dni)
+        {
+            foreach (DataGridViewRow row in dataGridClientes.Rows)
+            {
+                string usuarioExistente = row.Cells[2].Value.ToString();
+                int dniExistente = Convert.ToInt32(row.Cells[3].Value);
+
+                if (usuarioExistente.Equals(nombreUsuario, StringComparison.OrdinalIgnoreCase) || dniExistente == dni)
+                {
+                    return true; // El usuario ya existe
+                }
+            }
+
+            return false; // El usuario no existe
+        }
+
     }
 }
 

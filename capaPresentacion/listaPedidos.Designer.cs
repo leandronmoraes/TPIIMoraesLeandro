@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblGestionClientes = new System.Windows.Forms.Label();
-            this.txtProveedor = new System.Windows.Forms.TextBox();
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.txtNombreProducto = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
@@ -40,23 +39,24 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblDireccion = new System.Windows.Forms.Label();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.fecha = new System.Windows.Forms.DateTimePicker();
             this.dgvPedidos = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnAñadir = new FontAwesome.Sharp.IconButton();
-            this.btnModificar = new FontAwesome.Sharp.IconButton();
-            this.btnEliminar = new FontAwesome.Sharp.IconButton();
-            this.lblOperaciones = new System.Windows.Forms.Label();
             this.nombreproducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.proveedor1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.direccion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaPedido1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.lblBuscar = new System.Windows.Forms.Label();
+            this.btnAñadir = new FontAwesome.Sharp.IconButton();
+            this.btnModificar = new FontAwesome.Sharp.IconButton();
+            this.btnEliminar = new FontAwesome.Sharp.IconButton();
+            this.lblOperaciones = new System.Windows.Forms.Label();
+            this.cmbProveedor = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,13 +70,6 @@
             this.lblGestionClientes.Size = new System.Drawing.Size(186, 22);
             this.lblGestionClientes.TabIndex = 33;
             this.lblGestionClientes.Text = "Gestión de Pedidos";
-            // 
-            // txtProveedor
-            // 
-            this.txtProveedor.Location = new System.Drawing.Point(212, 130);
-            this.txtProveedor.Name = "txtProveedor";
-            this.txtProveedor.Size = new System.Drawing.Size(154, 20);
-            this.txtProveedor.TabIndex = 29;
             // 
             // txtCantidad
             // 
@@ -141,20 +134,20 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(34, 163);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 21);
+            this.label1.Size = new System.Drawing.Size(104, 21);
             this.label1.TabIndex = 35;
-            this.label1.Text = "Descripción";
+            this.label1.Text = "Descripción:";
             // 
-            // label2
+            // lblDireccion
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(34, 231);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 21);
-            this.label2.TabIndex = 37;
-            this.label2.Text = "Dirección";
+            this.lblDireccion.AutoSize = true;
+            this.lblDireccion.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDireccion.ForeColor = System.Drawing.Color.White;
+            this.lblDireccion.Location = new System.Drawing.Point(34, 231);
+            this.lblDireccion.Name = "lblDireccion";
+            this.lblDireccion.Size = new System.Drawing.Size(87, 21);
+            this.lblDireccion.TabIndex = 37;
+            this.lblDireccion.Text = "Dirección:";
             // 
             // txtDireccion
             // 
@@ -213,7 +206,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvPedidos.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPedidos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvPedidos.Location = new System.Drawing.Point(12, 314);
+            this.dgvPedidos.Location = new System.Drawing.Point(6, 317);
             this.dgvPedidos.Name = "dgvPedidos";
             this.dgvPedidos.ReadOnly = true;
             this.dgvPedidos.RowHeadersVisible = false;
@@ -242,23 +235,60 @@
             this.dgvPedidos.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvPedidos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPedidos_CellDoubleClick);
             // 
-            // textBox3
+            // nombreproducto
             // 
-            this.textBox3.Location = new System.Drawing.Point(210, 288);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(154, 20);
-            this.textBox3.TabIndex = 43;
+            this.nombreproducto.HeaderText = "Producto";
+            this.nombreproducto.Name = "nombreproducto";
+            this.nombreproducto.ReadOnly = true;
             // 
-            // label4
+            // cantidad1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(32, 285);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(119, 21);
-            this.label4.TabIndex = 42;
-            this.label4.Text = "Buscar Pedido";
+            this.cantidad1.HeaderText = "Cantidad";
+            this.cantidad1.Name = "cantidad1";
+            this.cantidad1.ReadOnly = true;
+            // 
+            // proveedor1
+            // 
+            this.proveedor1.HeaderText = "Proveedor";
+            this.proveedor1.Name = "proveedor1";
+            this.proveedor1.ReadOnly = true;
+            // 
+            // descripcion1
+            // 
+            this.descripcion1.HeaderText = "Descripción";
+            this.descripcion1.Name = "descripcion1";
+            this.descripcion1.ReadOnly = true;
+            // 
+            // direccion1
+            // 
+            this.direccion1.HeaderText = "Dirección";
+            this.direccion1.Name = "direccion1";
+            this.direccion1.ReadOnly = true;
+            // 
+            // fechaPedido1
+            // 
+            this.fechaPedido1.HeaderText = "Fecha Pedido";
+            this.fechaPedido1.Name = "fechaPedido1";
+            this.fechaPedido1.ReadOnly = true;
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Location = new System.Drawing.Point(212, 285);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(154, 20);
+            this.txtBuscar.TabIndex = 43;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            // 
+            // lblBuscar
+            // 
+            this.lblBuscar.AutoSize = true;
+            this.lblBuscar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBuscar.ForeColor = System.Drawing.Color.White;
+            this.lblBuscar.Location = new System.Drawing.Point(32, 285);
+            this.lblBuscar.Name = "lblBuscar";
+            this.lblBuscar.Size = new System.Drawing.Size(119, 21);
+            this.lblBuscar.TabIndex = 42;
+            this.lblBuscar.Text = "Buscar Pedido";
             // 
             // btnAñadir
             // 
@@ -318,41 +348,17 @@
             this.lblOperaciones.TabIndex = 44;
             this.lblOperaciones.Text = "Operaciones";
             // 
-            // nombreproducto
+            // cmbProveedor
             // 
-            this.nombreproducto.HeaderText = "Producto";
-            this.nombreproducto.Name = "nombreproducto";
-            this.nombreproducto.ReadOnly = true;
-            // 
-            // cantidad1
-            // 
-            this.cantidad1.HeaderText = "Cantidad";
-            this.cantidad1.Name = "cantidad1";
-            this.cantidad1.ReadOnly = true;
-            // 
-            // proveedor1
-            // 
-            this.proveedor1.HeaderText = "Proveedor";
-            this.proveedor1.Name = "proveedor1";
-            this.proveedor1.ReadOnly = true;
-            // 
-            // descripcion1
-            // 
-            this.descripcion1.HeaderText = "Descripción";
-            this.descripcion1.Name = "descripcion1";
-            this.descripcion1.ReadOnly = true;
-            // 
-            // direccion1
-            // 
-            this.direccion1.HeaderText = "Dirección";
-            this.direccion1.Name = "direccion1";
-            this.direccion1.ReadOnly = true;
-            // 
-            // fechaPedido1
-            // 
-            this.fechaPedido1.HeaderText = "Fecha Pedido";
-            this.fechaPedido1.Name = "fechaPedido1";
-            this.fechaPedido1.ReadOnly = true;
+            this.cmbProveedor.FormattingEnabled = true;
+            this.cmbProveedor.Items.AddRange(new object[] {
+            "Proveedor1",
+            "Proveedor2",
+            "Proveedor3"});
+            this.cmbProveedor.Location = new System.Drawing.Point(212, 132);
+            this.cmbProveedor.Name = "cmbProveedor";
+            this.cmbProveedor.Size = new System.Drawing.Size(154, 21);
+            this.cmbProveedor.TabIndex = 48;
             // 
             // listaPedidos
             // 
@@ -360,21 +366,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(1103, 612);
+            this.Controls.Add(this.cmbProveedor);
             this.Controls.Add(this.btnAñadir);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.lblOperaciones);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.lblBuscar);
             this.Controls.Add(this.dgvPedidos);
             this.Controls.Add(this.fecha);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtDireccion);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblDireccion);
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblGestionClientes);
-            this.Controls.Add(this.txtProveedor);
             this.Controls.Add(this.txtCantidad);
             this.Controls.Add(this.txtNombreProducto);
             this.Controls.Add(this.lblNombre);
@@ -392,7 +398,6 @@
         #endregion
 
         private System.Windows.Forms.Label lblGestionClientes;
-        private System.Windows.Forms.TextBox txtProveedor;
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.TextBox txtNombreProducto;
         private System.Windows.Forms.Label lblNombre;
@@ -400,12 +405,12 @@
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblDireccion;
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker fecha;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.Label lblBuscar;
         private FontAwesome.Sharp.IconButton btnAñadir;
         private FontAwesome.Sharp.IconButton btnModificar;
         private FontAwesome.Sharp.IconButton btnEliminar;
@@ -417,5 +422,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion1;
         private System.Windows.Forms.DataGridViewTextBoxColumn direccion1;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaPedido1;
+        private System.Windows.Forms.ComboBox cmbProveedor;
     }
 }

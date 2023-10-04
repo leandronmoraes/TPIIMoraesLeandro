@@ -162,7 +162,9 @@
             // pBoxAvatar
             // 
             this.pBoxAvatar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            this.pBoxAvatar.BackgroundImage = global::capaPresentacion.Properties.Resources.usuario_verificado;
             this.pBoxAvatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pBoxAvatar.ErrorImage = null;
             this.pBoxAvatar.Location = new System.Drawing.Point(529, 49);
             this.pBoxAvatar.Name = "pBoxAvatar";
             this.pBoxAvatar.Size = new System.Drawing.Size(194, 160);
@@ -281,7 +283,7 @@
             this.direccion,
             this.contraseña,
             this.avatar});
-            this.dataGridClientes.Location = new System.Drawing.Point(3, 287);
+            this.dataGridClientes.Location = new System.Drawing.Point(3, 296);
             this.dataGridClientes.Name = "dataGridClientes";
             this.dataGridClientes.ReadOnly = true;
             this.dataGridClientes.Size = new System.Drawing.Size(1116, 313);
