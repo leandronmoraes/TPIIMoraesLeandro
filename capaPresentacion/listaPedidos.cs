@@ -20,6 +20,8 @@ namespace capaPresentacion
             btnModificar.Enabled = false;
 
             cmbProveedor.SelectedIndex = 0;
+            // se deshabilito la modificación de fecha, para que solo se registre la fecha actual.
+            fecha.Enabled = false;
         }
 
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)

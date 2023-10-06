@@ -139,4 +139,9 @@ D:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaDatos.dll
 D:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\CapaEntidad.pdb
 D:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaNegocio.pdb
 D:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaDatos.pdb
-D:\ProyectoTPII_MoraesLeandro\capaPresentacion\obj\Debug\capaPresentacion.csproj.SuggestedBindingRedirects.cache
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaDatos.dll.config
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\EntityFramework.dll
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\capaNegocio.dll.config
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\EntityFramework.xml
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\EntityFramework.SqlServer.dll
+E:\ProyectoTPII_MoraesLeandro\capaPresentacion\bin\Debug\EntityFramework.SqlServer.xml

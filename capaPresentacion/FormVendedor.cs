@@ -13,7 +13,7 @@ namespace capaPresentacion
     
     public partial class FormVendedor : Form
     {
-       // private TemporizadorHoraFecha temporizadorHoraFecha;
+        private TemporizadorHoraFecha temporizadorHoraFecha;
         //Clase mediante la cuál podemos limpiar el panelContenedor y volver al Inicio
         private FormularioBase formularioBase;
 
@@ -27,7 +27,7 @@ namespace capaPresentacion
             lblFecha.Text = DateTime.Now.ToLongDateString();
 
             // Crear instancia de TemporizadorHoraFecha y pasar los Label correspondientes
-           // temporizadorHoraFecha = new TemporizadorHoraFecha(lblHora, lblFecha);
+            temporizadorHoraFecha = new TemporizadorHoraFecha(lblHora, lblFecha);
 
             // Asigna los controles necesarios
             formularioBase = new FormularioBase(panelContenedor, lblHora, lblFecha, lblMensaje, pBoxInicio);
@@ -83,19 +83,41 @@ namespace capaPresentacion
             this.WindowState = FormWindowState.Minimized;
         }
 
-       
+
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            if (cerrarSesion.ConfirmarCerrarSesion())
+            DialogResult result = MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.Yes)
             {
-                Login ventana = new Login();
-                ventana.Show();
+                // Crear una lista de formularios a cerrar
+                List<Form> formulariosParaCerrar = new List<Form>();
+
+                // Identificar los formularios a cerrar
+                foreach (Form form in Application.OpenForms)
+                {
+                    if (form != this && (form.Name == "listaDetalleVenta"))
+                    {
+                        formulariosParaCerrar.Add(form);
+                    }
+                }
+
+                // Cerrar los formularios en la lista
+                foreach (Form form in formulariosParaCerrar)
+                {
+                    form.Close();
+                }
+
+                // Abre un nuevo formulario 
+                Login form1 = new Login();
+                form1.Show();
+
+                // Oculta este formulario
                 this.Hide();
             }
         }
 
-       
+
 
         private void btnInicio_Click(object sender, EventArgs e)
         {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices; //Se agrego para poder mover la ventana
+using System.Runtime.InteropServices;
 using FontAwesome.Sharp;
 using System.Windows.Media;
 using capaPresentacion;
@@ -146,15 +146,37 @@ namespace capaPresentacion
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            if (cerrarSesion.ConfirmarCerrarSesion())
+            DialogResult result = MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.Yes)
             {
-                Login ventana = new Login();
-                ventana.Show();
+                // Crear una lista de formularios a cerrar
+                List<Form> formulariosParaCerrar = new List<Form>();
+
+                // Identificar los formularios a cerrar
+                foreach (Form form in Application.OpenForms)
+                {
+                    if (form != this && (form.Name == "listaDetalleVenta"))
+                    {
+                        formulariosParaCerrar.Add(form);
+                    }
+                }
+
+                // Cerrar los formularios en la lista
+                foreach (Form form in formulariosParaCerrar)
+                {
+                    form.Close();
+                }
+
+                // Abre un nuevo formulario 
+                Login form1 = new Login();
+                form1.Show();
+
+                // Oculta este formulario
                 this.Hide();
             }
         }
 
-        private void btnConfiguracion_Click(object sender, EventArgs e)
+            private void btnConfiguracion_Click(object sender, EventArgs e)
         {
             AbrirFormConfiguraciones(new configuracionesAdmin());
         }
@@ -181,7 +203,7 @@ namespace capaPresentacion
 
         private void FormAdministrador_SizeChanged(object sender, EventArgs e)
         {
-                // Asegúrate de que haya un formulario cargado en el panelContenedor
+                // Asegúramos de que haya un formulario cargado en el panelContenedor
                 if (panelContenedor.Controls.Count > 0 && panelContenedor.Controls[0] is Form formularioCargado)
                 {
                     // Redimensiona el formulario cargado para que coincida con el tamaño del panelContenedor

@@ -35,6 +35,7 @@
             this.btnCerrar = new System.Windows.Forms.PictureBox();
             this.lblVendedor = new System.Windows.Forms.Label();
             this.panelMenuLateral = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelSeparador = new System.Windows.Forms.Panel();
@@ -53,7 +54,6 @@
             this.lblHora = new System.Windows.Forms.Label();
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.HoraFecha = new System.Windows.Forms.Timer(this.components);
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panelTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
@@ -129,6 +129,14 @@
             this.panelMenuLateral.Name = "panelMenuLateral";
             this.panelMenuLateral.Size = new System.Drawing.Size(197, 612);
             this.panelMenuLateral.TabIndex = 3;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
+            this.panel3.Location = new System.Drawing.Point(0, 300);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(196, 1);
+            this.panel3.TabIndex = 6;
             // 
             // panel2
             // 
@@ -362,14 +370,6 @@
             this.HoraFecha.Enabled = true;
             this.HoraFecha.Tick += new System.EventHandler(this.HoraFecha_Tick);
             // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(80)))), ((int)(((byte)(200)))));
-            this.panel3.Location = new System.Drawing.Point(0, 300);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(196, 1);
-            this.panel3.TabIndex = 6;
-            // 
             // FormGerente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -379,6 +379,7 @@
             this.Controls.Add(this.panelMenuLateral);
             this.Controls.Add(this.panelTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormGerente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormGerente";

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using capaDatos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Navigation;
+
 
 namespace capaPresentacion
 {
@@ -127,11 +129,10 @@ namespace capaPresentacion
                 }
                 else
                 {
-                    // Si el usuario no existe, continúa con la lógica de agregar
-                    // ...
 
-                    // Código para agregar el usuario aquí
+                    // Agregamos el usuario en esta parte
                     string perfil = rbtnAdmin.Checked ? "Admin" : (rbtnGerente.Checked ? "Gerente" : "Vendedor");
+
                     dataGridClientes.Rows.Add(txtNombre.Text, txtApellido.Text, txtUsuario.Text,
                         txtDNI.Text, txtDireccion.Text, txtContraseña.Text, perfil, pBoxAvatar.Image);
 
@@ -143,7 +144,10 @@ namespace capaPresentacion
                     txtDNI.Clear();
 
                     pBoxAvatar.Image = imagenPorDefecto;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
 
+                 
                     MessageBox.Show("Usuario Agregado", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -303,15 +307,18 @@ namespace capaPresentacion
         private void listaUsuarios_Load(object sender, EventArgs e)
         {
 
-            Image imagenPorDefecto = Properties.Resources.usuario_verificado;
-            pBoxAvatar.Image = imagenPorDefecto;
+
+
+
+            //Image imagenPorDefecto = Properties.Resources.usuario_verificado;
+            //pBoxAvatar.Image = imagenPorDefecto;
 
 
             //Cargamos de manera local
 
-            dataGridClientes.Rows.Add("Leandro", "Moraes", "leandromoraes", 1228, "dirección 1", "contraseña", "admin", imagenPorDefecto);
-            dataGridClientes.Rows.Add("usuario1", "user1", "usuario1", 1234, "dirección 1", "contraseña", "vendedor", imagenPorDefecto);
-            dataGridClientes.Rows.Add("usuario2", "user2", "usuario2", 4321, "dirección 1", "contraseña", "gerente", imagenPorDefecto);
+            //dataGridClientes.Rows.Add("Leandro", "Moraes", "leandromoraes", 1228, "dirección 1", "contraseña", "admin", imagenPorDefecto);
+            //dataGridClientes.Rows.Add("usuario1", "user1", "usuario1", 1234, "dirección 1", "contraseña", "vendedor", imagenPorDefecto);
+            //dataGridClientes.Rows.Add("usuario2", "user2", "usuario2", 4321, "dirección 1", "contraseña", "gerente", imagenPorDefecto);
 
             
 

@@ -9,21 +9,24 @@ namespace capaPresentacion
 {
     public static class cerrarSesion
     {
-        public static bool ConfirmarCerrarSesion()
+        public static void ConfirmarCerrarSesion()
         {
-            DialogResult eleccion = MessageBox.Show("¿Desea Cerrar Sesión?", "Cierre de Sesión", MessageBoxButtons.YesNo);
-
-            if (eleccion == DialogResult.Yes)
+            DialogResult result = MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.Yes)
             {
-                MessageBox.Show("Cierre de Sesión Correcto", "Cierre de Sesión Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return true;
-            }
+                // Copiar la lista de formularios abiertos a una nueva lista
+                List<Form> formulariosParaCerrar = Application.OpenForms.OfType<Form>().Where(f => f.Name == "listaDetalleVenta").ToList();
 
-            return false;
+                // Cerrar los formularios en la lista copiada
+                foreach (Form form in formulariosParaCerrar)
+                {
+                    form.Close();
+                }
+
+                // Abre un nuevo formulario de inicio de sesión
+                Login form1 = new Login();
+                form1.Show();
+            }
         }
     }
 }
-
-
-   
-

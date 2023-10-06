@@ -53,10 +53,10 @@ namespace capaPresentacion
         }
         List<Producto> productos = new List<Producto>
         {
-            new Producto { Nombre = "Berserk", Precio = 600 },
-            new Producto { Nombre = "Jujutsu Kaisen", Precio = 800 },
-            new Producto { Nombre = "Kimetsu no Yaiba", Precio = 800 },
-            // Agrega más productos aquí
+            new Producto { Nombre = "producto1", Precio = 600 },
+            new Producto { Nombre = "producto2", Precio = 800 },
+            new Producto { Nombre = "producto3", Precio = 1200 },
+            // Agregar más productos aquí
         };
 
         private void btnSumarCantidad_Click(object sender, EventArgs e)
@@ -146,11 +146,7 @@ namespace capaPresentacion
             txtCantidad.Text = "1";
             txtPrecio.Text = "";
             txtNombreProducto.Text = "";
-
-
         }
-
-     
 
         private void btnBuscarProducto_Click(object sender, EventArgs e)
         {
@@ -227,7 +223,7 @@ namespace capaPresentacion
 
         private void btnRegistrarVenta_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Productos Comprado con Exito");
+            MessageBox.Show("Venta Registrada con Exito");
         }
 
         private void btnBuscarCliente_Click_1(object sender, EventArgs e)

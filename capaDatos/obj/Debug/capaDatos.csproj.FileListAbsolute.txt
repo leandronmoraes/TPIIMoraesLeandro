@@ -7,3 +7,8 @@ E:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.csproj.CoreCompileIn
 E:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.csproj.CopyComplete
 E:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.dll
 E:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.pdb
+E:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\capaDatos.dll.config
+E:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\EntityFramework.dll
+E:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\EntityFramework.SqlServer.dll
+E:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\EntityFramework.xml
+E:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\EntityFramework.SqlServer.xml

@@ -9,3 +9,9 @@ E:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.csproj.CoreCompi
 E:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.csproj.CopyComplete
 E:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.dll
 E:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.pdb
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\capaDatos.dll.config
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\capaNegocio.dll.config
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\EntityFramework.dll
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\EntityFramework.SqlServer.dll
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\EntityFramework.xml
+E:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\EntityFramework.SqlServer.xml

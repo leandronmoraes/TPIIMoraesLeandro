@@ -31,28 +31,26 @@
             this.components = new System.ComponentModel.Container();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridClientes = new System.Windows.Forms.DataGridView();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contraseña = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.perfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.avatar = new System.Windows.Forms.DataGridViewImageColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.panelContenedorClientes = new System.Windows.Forms.Panel();
+            this.cboRol = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbtnAdmin = new System.Windows.Forms.RadioButton();
             this.rbtnGerente = new System.Windows.Forms.RadioButton();
             this.rbtnVendedor = new System.Windows.Forms.RadioButton();
             this.lblTipoUsuario = new System.Windows.Forms.Label();
+            this.btnAñadirAvatar = new FontAwesome.Sharp.IconButton();
+            this.btnAñadir = new FontAwesome.Sharp.IconButton();
+            this.btnModificar = new FontAwesome.Sharp.IconButton();
+            this.btnEliminar = new FontAwesome.Sharp.IconButton();
             this.lblGestionClientes = new System.Windows.Forms.Label();
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.txtDNI = new System.Windows.Forms.TextBox();
             this.lblOperaciones = new System.Windows.Forms.Label();
             this.txtUsuario = new System.Windows.Forms.TextBox();
+            this.pBoxAvatar = new System.Windows.Forms.PictureBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblContraseña = new System.Windows.Forms.Label();
@@ -64,11 +62,6 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             this.lblBuscar = new System.Windows.Forms.Label();
-            this.btnAñadirAvatar = new FontAwesome.Sharp.IconButton();
-            this.btnAñadir = new FontAwesome.Sharp.IconButton();
-            this.btnModificar = new FontAwesome.Sharp.IconButton();
-            this.btnEliminar = new FontAwesome.Sharp.IconButton();
-            this.pBoxAvatar = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panelContenedorClientes.SuspendLayout();
@@ -86,77 +79,12 @@
             this.dataGridClientes.AllowUserToDeleteRows = false;
             this.dataGridClientes.BackgroundColor = System.Drawing.Color.Silver;
             this.dataGridClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nombre,
-            this.apellido,
-            this.usuario,
-            this.dni,
-            this.direccion,
-            this.contraseña,
-            this.perfil,
-            this.avatar});
             this.dataGridClientes.Location = new System.Drawing.Point(0, 318);
             this.dataGridClientes.Name = "dataGridClientes";
             this.dataGridClientes.ReadOnly = true;
             this.dataGridClientes.Size = new System.Drawing.Size(1122, 296);
             this.dataGridClientes.TabIndex = 0;
             this.dataGridClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridClientes_CellDoubleClick);
-            // 
-            // nombre
-            // 
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            this.nombre.Width = 135;
-            // 
-            // apellido
-            // 
-            this.apellido.HeaderText = "Apellido";
-            this.apellido.Name = "apellido";
-            this.apellido.ReadOnly = true;
-            this.apellido.Width = 135;
-            // 
-            // usuario
-            // 
-            this.usuario.HeaderText = "Usuario";
-            this.usuario.Name = "usuario";
-            this.usuario.ReadOnly = true;
-            this.usuario.Width = 135;
-            // 
-            // dni
-            // 
-            this.dni.HeaderText = "DNI";
-            this.dni.Name = "dni";
-            this.dni.ReadOnly = true;
-            this.dni.Width = 135;
-            // 
-            // direccion
-            // 
-            this.direccion.HeaderText = "Direccion";
-            this.direccion.Name = "direccion";
-            this.direccion.ReadOnly = true;
-            this.direccion.Width = 135;
-            // 
-            // contraseña
-            // 
-            this.contraseña.HeaderText = "Contraseña";
-            this.contraseña.Name = "contraseña";
-            this.contraseña.ReadOnly = true;
-            this.contraseña.Width = 135;
-            // 
-            // perfil
-            // 
-            this.perfil.HeaderText = "Perfil";
-            this.perfil.Name = "perfil";
-            this.perfil.ReadOnly = true;
-            this.perfil.Width = 135;
-            // 
-            // avatar
-            // 
-            this.avatar.HeaderText = "Avatar";
-            this.avatar.Name = "avatar";
-            this.avatar.ReadOnly = true;
-            this.avatar.Width = 135;
             // 
             // errorProvider1
             // 
@@ -176,6 +104,7 @@
             // panelContenedorClientes
             // 
             this.panelContenedorClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
+            this.panelContenedorClientes.Controls.Add(this.cboRol);
             this.panelContenedorClientes.Controls.Add(this.groupBox1);
             this.panelContenedorClientes.Controls.Add(this.lblTipoUsuario);
             this.panelContenedorClientes.Controls.Add(this.btnAñadirAvatar);
@@ -202,6 +131,18 @@
             this.panelContenedorClientes.Name = "panelContenedorClientes";
             this.panelContenedorClientes.Size = new System.Drawing.Size(1122, 256);
             this.panelContenedorClientes.TabIndex = 21;
+            // 
+            // cboRol
+            // 
+            this.cboRol.FormattingEnabled = true;
+            this.cboRol.Items.AddRange(new object[] {
+            "Admin",
+            "Gerente",
+            "Vendedor"});
+            this.cboRol.Location = new System.Drawing.Point(355, 119);
+            this.cboRol.Name = "cboRol";
+            this.cboRol.Size = new System.Drawing.Size(121, 21);
+            this.cboRol.TabIndex = 29;
             // 
             // groupBox1
             // 
@@ -263,6 +204,69 @@
             this.lblTipoUsuario.TabIndex = 25;
             this.lblTipoUsuario.Text = "Tipo Usuario";
             // 
+            // btnAñadirAvatar
+            // 
+            this.btnAñadirAvatar.IconChar = FontAwesome.Sharp.IconChar.Image;
+            this.btnAñadirAvatar.IconColor = System.Drawing.Color.Black;
+            this.btnAñadirAvatar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAñadirAvatar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAñadirAvatar.Location = new System.Drawing.Point(665, 199);
+            this.btnAñadirAvatar.Name = "btnAñadirAvatar";
+            this.btnAñadirAvatar.Size = new System.Drawing.Size(151, 54);
+            this.btnAñadirAvatar.TabIndex = 24;
+            this.btnAñadirAvatar.Text = "Seleccionar Imagen";
+            this.btnAñadirAvatar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAñadirAvatar.UseVisualStyleBackColor = true;
+            this.btnAñadirAvatar.Click += new System.EventHandler(this.btnAñadirAvatar_Click);
+            // 
+            // btnAñadir
+            // 
+            this.btnAñadir.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            this.btnAñadir.IconColor = System.Drawing.Color.Black;
+            this.btnAñadir.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAñadir.IconSize = 50;
+            this.btnAñadir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAñadir.Location = new System.Drawing.Point(911, 35);
+            this.btnAñadir.Name = "btnAñadir";
+            this.btnAñadir.Size = new System.Drawing.Size(144, 42);
+            this.btnAñadir.TabIndex = 23;
+            this.btnAñadir.Text = "Añadir Usuario";
+            this.btnAñadir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAñadir.UseVisualStyleBackColor = true;
+            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.IconChar = FontAwesome.Sharp.IconChar.UserGear;
+            this.btnModificar.IconColor = System.Drawing.Color.Black;
+            this.btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnModificar.IconSize = 50;
+            this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnModificar.Location = new System.Drawing.Point(911, 133);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(144, 43);
+            this.btnModificar.TabIndex = 22;
+            this.btnModificar.Text = "Modificar Usuario";
+            this.btnModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click_1);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.IconChar = FontAwesome.Sharp.IconChar.UserXmark;
+            this.btnEliminar.IconColor = System.Drawing.Color.Black;
+            this.btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnEliminar.IconSize = 50;
+            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEliminar.Location = new System.Drawing.Point(911, 83);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(144, 44);
+            this.btnEliminar.TabIndex = 21;
+            this.btnEliminar.Text = "Eliminar Usuario";
+            this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click_1);
+            // 
             // lblGestionClientes
             // 
             this.lblGestionClientes.AutoSize = true;
@@ -315,6 +319,19 @@
             this.txtUsuario.Size = new System.Drawing.Size(154, 20);
             this.txtUsuario.TabIndex = 10;
             this.txtUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsuario_KeyPress);
+            // 
+            // pBoxAvatar
+            // 
+            this.pBoxAvatar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            this.pBoxAvatar.BackgroundImage = global::capaPresentacion.Properties.Resources.usuario_verificado;
+            this.pBoxAvatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pBoxAvatar.ErrorImage = null;
+            this.pBoxAvatar.Location = new System.Drawing.Point(642, 33);
+            this.pBoxAvatar.Name = "pBoxAvatar";
+            this.pBoxAvatar.Size = new System.Drawing.Size(194, 160);
+            this.pBoxAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBoxAvatar.TabIndex = 14;
+            this.pBoxAvatar.TabStop = false;
             // 
             // txtApellido
             // 
@@ -440,82 +457,6 @@
             this.lblBuscar.TabIndex = 29;
             this.lblBuscar.Text = "Buscar";
             // 
-            // btnAñadirAvatar
-            // 
-            this.btnAñadirAvatar.IconChar = FontAwesome.Sharp.IconChar.Image;
-            this.btnAñadirAvatar.IconColor = System.Drawing.Color.Black;
-            this.btnAñadirAvatar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnAñadirAvatar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAñadirAvatar.Location = new System.Drawing.Point(665, 199);
-            this.btnAñadirAvatar.Name = "btnAñadirAvatar";
-            this.btnAñadirAvatar.Size = new System.Drawing.Size(151, 54);
-            this.btnAñadirAvatar.TabIndex = 24;
-            this.btnAñadirAvatar.Text = "Seleccionar Imagen";
-            this.btnAñadirAvatar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAñadirAvatar.UseVisualStyleBackColor = true;
-            this.btnAñadirAvatar.Click += new System.EventHandler(this.btnAñadirAvatar_Click);
-            // 
-            // btnAñadir
-            // 
-            this.btnAñadir.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
-            this.btnAñadir.IconColor = System.Drawing.Color.Black;
-            this.btnAñadir.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnAñadir.IconSize = 50;
-            this.btnAñadir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAñadir.Location = new System.Drawing.Point(911, 35);
-            this.btnAñadir.Name = "btnAñadir";
-            this.btnAñadir.Size = new System.Drawing.Size(144, 42);
-            this.btnAñadir.TabIndex = 23;
-            this.btnAñadir.Text = "Añadir Usuario";
-            this.btnAñadir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAñadir.UseVisualStyleBackColor = true;
-            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.IconChar = FontAwesome.Sharp.IconChar.UserGear;
-            this.btnModificar.IconColor = System.Drawing.Color.Black;
-            this.btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnModificar.IconSize = 50;
-            this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new System.Drawing.Point(911, 133);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(144, 43);
-            this.btnModificar.TabIndex = 22;
-            this.btnModificar.Text = "Modificar Usuario";
-            this.btnModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click_1);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.IconChar = FontAwesome.Sharp.IconChar.UserXmark;
-            this.btnEliminar.IconColor = System.Drawing.Color.Black;
-            this.btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnEliminar.IconSize = 50;
-            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(911, 83);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(144, 44);
-            this.btnEliminar.TabIndex = 21;
-            this.btnEliminar.Text = "Eliminar Usuario";
-            this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click_1);
-            // 
-            // pBoxAvatar
-            // 
-            this.pBoxAvatar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
-            this.pBoxAvatar.BackgroundImage = global::capaPresentacion.Properties.Resources.usuario_verificado;
-            this.pBoxAvatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pBoxAvatar.ErrorImage = null;
-            this.pBoxAvatar.Location = new System.Drawing.Point(642, 33);
-            this.pBoxAvatar.Name = "pBoxAvatar";
-            this.pBoxAvatar.Size = new System.Drawing.Size(194, 160);
-            this.pBoxAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBoxAvatar.TabIndex = 14;
-            this.pBoxAvatar.TabStop = false;
-            // 
             // listaUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -549,14 +490,6 @@
         #endregion
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         public System.Windows.Forms.DataGridView dataGridClientes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn apellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn usuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dni;
-        private System.Windows.Forms.DataGridViewTextBoxColumn direccion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn contraseña;
-        private System.Windows.Forms.DataGridViewTextBoxColumn perfil;
-        private System.Windows.Forms.DataGridViewImageColumn avatar;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelContenedorClientes;
@@ -587,5 +520,6 @@
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblBuscar;
+        private System.Windows.Forms.ComboBox cboRol;
     }
 }

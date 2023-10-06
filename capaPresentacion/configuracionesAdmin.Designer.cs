@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
-            this.iconButton2 = new FontAwesome.Sharp.IconButton();
+            this.btnBackup = new FontAwesome.Sharp.IconButton();
+            this.btnRestore = new FontAwesome.Sharp.IconButton();
             this.label2 = new System.Windows.Forms.Label();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
@@ -50,31 +50,33 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Configuracion Aplicación\r\n";
             // 
-            // iconButton1
+            // btnBackup
             // 
-            this.iconButton1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.Location = new System.Drawing.Point(577, 263);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(206, 69);
-            this.iconButton1.TabIndex = 1;
-            this.iconButton1.Text = "Backup";
-            this.iconButton1.UseVisualStyleBackColor = true;
+            this.btnBackup.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBackup.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnBackup.IconColor = System.Drawing.Color.Black;
+            this.btnBackup.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnBackup.Location = new System.Drawing.Point(577, 263);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Size = new System.Drawing.Size(206, 69);
+            this.btnBackup.TabIndex = 1;
+            this.btnBackup.Text = "Backup";
+            this.btnBackup.UseVisualStyleBackColor = true;
+            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
             // 
-            // iconButton2
+            // btnRestore
             // 
-            this.iconButton2.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconButton2.IconColor = System.Drawing.Color.Black;
-            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton2.Location = new System.Drawing.Point(316, 263);
-            this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Size = new System.Drawing.Size(206, 69);
-            this.iconButton2.TabIndex = 2;
-            this.iconButton2.Text = "Restore";
-            this.iconButton2.UseVisualStyleBackColor = true;
+            this.btnRestore.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRestore.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnRestore.IconColor = System.Drawing.Color.Black;
+            this.btnRestore.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnRestore.Location = new System.Drawing.Point(316, 263);
+            this.btnRestore.Name = "btnRestore";
+            this.btnRestore.Size = new System.Drawing.Size(206, 69);
+            this.btnRestore.TabIndex = 2;
+            this.btnRestore.Text = "Restore";
+            this.btnRestore.UseVisualStyleBackColor = true;
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
             // label2
             // 
@@ -120,9 +122,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel.Controls.Add(this.iconPictureBox2);
-            this.panel.Controls.Add(this.iconButton2);
+            this.panel.Controls.Add(this.btnRestore);
             this.panel.Controls.Add(this.iconPictureBox1);
-            this.panel.Controls.Add(this.iconButton1);
+            this.panel.Controls.Add(this.btnBackup);
             this.panel.Location = new System.Drawing.Point(-1, 0);
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(1117, 616);
@@ -151,8 +153,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private FontAwesome.Sharp.IconButton iconButton1;
-        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton btnBackup;
+        private FontAwesome.Sharp.IconButton btnRestore;
         private System.Windows.Forms.Label label2;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox2;

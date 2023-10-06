@@ -73,13 +73,13 @@ namespace capaPresentacion
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
             if (txtNombre.Text.Length > 0 && cmbBoxCategorias.Text.Length > 0
-               &&
-               txtPrecio.Text.Length > 0 && txtStock.Text.Length > 0 && pBoxImagenProducto.Image != null)
+                && txtStock.Text.Length > 0 && pBoxImagenProducto.Image != null)
             {
-                //Confirmación para poder ingresar un usuario
-                DialogResult eleccion = MessageBox.Show("¿Confirmar Inserción del Producto?", "Confirmación Producto", MessageBoxButtons.YesNo);
+                if (decimal.TryParse(txtPrecio.Text, out decimal precio) && precio > 0)
                 {
-                    //Elección en el caso que si, guarda los datos
+                    // Confirmación para poder ingresar un producto
+                    DialogResult eleccion = MessageBox.Show("¿Confirmar Inserción del Producto?", "Confirmación Producto", MessageBoxButtons.YesNo);
+
                     if (eleccion == DialogResult.Yes)
                     {
                         Image imagen = pBoxImagenProducto.Image;
@@ -102,13 +102,17 @@ namespace capaPresentacion
                         MessageBox.Show("Producto no agregado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-
+                else
+                {
+                    MessageBox.Show("El precio debe ser un número mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("No ingreso todos los datos para poder añadir", "ERROR");
+                MessageBox.Show("No ingresó todos los datos para poder añadir", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnModificarProducto_Click(object sender, EventArgs e)
         {
@@ -306,6 +310,10 @@ namespace capaPresentacion
             }
         }
 
+        private void txtPrecio_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

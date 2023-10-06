@@ -16,5 +16,15 @@ namespace capaPresentacion
         {
             InitializeComponent();
         }
+
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Backup Generado Exitosamente! implementar segunda entrega");
+        }
+
+        private void btnRestore_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Se ha restaurado con Exito! Implementar segunda entrega");
+        }
     }
 }

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProyectoTPII_MoraesLeandroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="DNI_cliente" />
+    </Key>
+    <Property Name="DNI_cliente" Type="int" Nullable="false" />
+    <Property Name="nombre_cliente" Type="varchar" MaxLength="50" />
+    <Property Name="apellido_cliente" Type="varchar" MaxLength="50" />
+    <Property Name="direccion" Type="varchar" MaxLength="50" />
+    <Property Name="telefono" Type="varchar" MaxLength="15" />
+    <Property Name="avatar" Type="image" />
+    <Property Name="estado" Type="int" />
+  </EntityType>
+  <EntityType Name="tipo_rol">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="int" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="DNI_usuario" />
+    </Key>
+    <Property Name="DNI_usuario" Type="int" Nullable="false" />
+    <Property Name="id_rol" Type="int" />
+    <Property Name="nombre_usuario" Type="varchar" MaxLength="50" />
+    <Property Name="apellido_usuario" Type="varchar" MaxLength="50" />
+    <Property Name="direccion_usuario" Type="varchar" MaxLength="50" />
+    <Property Name="contraseña_usuario" Type="varchar" MaxLength="50" />
+    <Property Name="avatar" Type="image" />
+    <Property Name="estado" Type="int" />
+  </EntityType>
+  <Association Name="FK_id_rol">
+    <End Role="tipo_rol" Type="Self.tipo_rol" Multiplicity="0..1" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_rol">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="usuario">
+        <PropertyRef Name="id_rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProyectoTPII_MoraesLeandroModelStoreContainer">
+    <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tipo_rol" EntityType="Self.tipo_rol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_id_rol" Association="Self.FK_id_rol">
+      <End Role="tipo_rol" EntitySet="tipo_rol" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

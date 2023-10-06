@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace capaPresentacion
 {
-
     public partial class totalVentas : Form
     {
         public totalVentas()
@@ -19,7 +18,7 @@ namespace capaPresentacion
         }
 
     
-        // Declara una variable para realizar un seguimiento del formulario de detalles abierto.
+        // Declaramos una variable para formulario de detalles abierto.
         private listaDetalleVenta detallesAbiertos = null;
 
         private void dgvVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -29,7 +28,7 @@ namespace capaPresentacion
                 // Verifica si el formulario de detalles ya está abierto.
                 if (detallesAbiertos == null || detallesAbiertos.IsDisposed)
                 {
-                    // Si no está abierto o se ha cerrado, crea una nueva instancia y ábrela.
+                    // Si no está abierto el form o se ha cerrado, crea una nueva instancia.
                     detallesAbiertos = new listaDetalleVenta();
                     detallesAbiertos.Show();
                 }

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProyectoTPII_MoraesLeandroModelStoreContainer" CdmEntityContainer="ProyectoTPII_MoraesLeandroEntities">
+    <EntitySetMapping Name="cliente">
+      <EntityTypeMapping TypeName="ProyectoTPII_MoraesLeandroModel.cliente">
+        <MappingFragment StoreEntitySet="cliente">
+          <ScalarProperty Name="DNI_cliente" ColumnName="DNI_cliente" />
+          <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+          <ScalarProperty Name="apellido_cliente" ColumnName="apellido_cliente" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_rol">
+      <EntityTypeMapping TypeName="ProyectoTPII_MoraesLeandroModel.tipo_rol">
+        <MappingFragment StoreEntitySet="tipo_rol">
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="ProyectoTPII_MoraesLeandroModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="DNI_usuario" ColumnName="DNI_usuario" />
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+          <ScalarProperty Name="apellido_usuario" ColumnName="apellido_usuario" />
+          <ScalarProperty Name="direccion_usuario" ColumnName="direccion_usuario" />
+          <ScalarProperty Name="contraseña_usuario" ColumnName="contraseña_usuario" />
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -160,6 +160,7 @@
             this.txtPrecio.Size = new System.Drawing.Size(218, 20);
             this.txtPrecio.TabIndex = 13;
             this.txtPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPrecio.TextChanged += new System.EventHandler(this.txtPrecio_TextChanged);
             this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // lblImagen
@@ -198,7 +199,7 @@
             this.descripcion,
             this.precio,
             this.stock});
-            this.dataGridProductos.Location = new System.Drawing.Point(5, 256);
+            this.dataGridProductos.Location = new System.Drawing.Point(7, 256);
             this.dataGridProductos.Name = "dataGridProductos";
             this.dataGridProductos.ReadOnly = true;
             this.dataGridProductos.Size = new System.Drawing.Size(1113, 356);

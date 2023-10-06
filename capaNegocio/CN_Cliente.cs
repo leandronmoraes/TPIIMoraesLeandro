@@ -10,11 +10,12 @@ namespace capaNegocio
 {
     public class CN_Cliente
     {
-        private CD_Cliente objCliente = new CD_Cliente();//instanciamos un cliente
-        public List<Cliente> listarCliente()
+        public static List<capaDatos.cliente> Get ()
         {
-            return objCliente.listarr();
+            using (capaDatos.ProyectoTPII_MoraesLeandroEntities db = new capaDatos.ProyectoTPII_MoraesLeandroEntities())
+            {
+                return db.cliente.ToList();
+            }
         }
-        
     }
 }

@@ -89,12 +89,34 @@ namespace capaPresentacion
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-                if (cerrarSesion.ConfirmarCerrarSesion())
+            DialogResult result = MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.Yes)
+            {
+                // Crear una lista de formularios a cerrar
+                List<Form> formulariosParaCerrar = new List<Form>();
+
+                // Identificar los formularios a cerrar
+                foreach (Form form in Application.OpenForms)
                 {
-                    Login ventana = new Login();
-                    ventana.Show();
-                    this.Hide();
+                    if (form != this && (form.Name == "listaDetalleVenta"))
+                    {
+                        formulariosParaCerrar.Add(form);
+                    }
                 }
+
+                // Cerrar los formularios en la lista
+                foreach (Form form in formulariosParaCerrar)
+                {
+                    form.Close();
+                }
+
+                // Abre un nuevo formulario 
+                Login form1 = new Login();
+                form1.Show();
+
+                // Oculta este formulario
+                this.Hide();
+            }
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)

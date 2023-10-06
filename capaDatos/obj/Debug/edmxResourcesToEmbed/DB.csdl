@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProyectoTPII_MoraesLeandroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="DNI_cliente" />
+    </Key>
+    <Property Name="DNI_cliente" Type="Int32" Nullable="false" />
+    <Property Name="nombre_cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="apellido_cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="estado" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tipo_rol">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_id_rol" FromRole="tipo_rol" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="DNI_usuario" />
+    </Key>
+    <Property Name="DNI_usuario" Type="Int32" Nullable="false" />
+    <Property Name="id_rol" Type="Int32" />
+    <Property Name="nombre_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="apellido_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="direccion_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="contraseña_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="estado" Type="Int32" />
+    <NavigationProperty Name="tipo_rol" Relationship="Self.FK_id_rol" FromRole="usuario" ToRole="tipo_rol" />
+  </EntityType>
+  <Association Name="FK_id_rol">
+    <End Role="tipo_rol" Type="Self.tipo_rol" Multiplicity="0..1" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_rol">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="usuario">
+        <PropertyRef Name="id_rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProyectoTPII_MoraesLeandroEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cliente" EntityType="Self.cliente" />
+    <EntitySet Name="tipo_rol" EntityType="Self.tipo_rol" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <AssociationSet Name="FK_id_rol" Association="Self.FK_id_rol">
+      <End Role="tipo_rol" EntitySet="tipo_rol" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
