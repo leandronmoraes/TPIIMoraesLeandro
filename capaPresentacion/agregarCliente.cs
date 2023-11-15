@@ -1,5 +1,5 @@
 ﻿using capaDatos;
-using CapaEntidad;
+
 using capaNegocio;
 using System;
 using System.Collections.Generic;
@@ -12,21 +12,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using capaDatos.Models;
+
 
 namespace capaPresentacion
 {
     public partial class agregarCliente : Form
     {
 
-        private Image imagenPorDefecto;
+        
+        private bool mostrarInactivos = false;
         public agregarCliente()
         {
             InitializeComponent();
             btnModificar.Enabled = false;
-
+            btnEliminar.Enabled = false;
+            btnMostrarInactivos.Text = "Mostrar Inactivos"; 
         }
 
-     
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -67,85 +70,49 @@ namespace capaPresentacion
             }
         }
 
-        private void dataGridClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (dataGridClientes.CurrentRow != null && dataGridClientes.CurrentRow.Cells.Count >= 5)
-                {
-                    txtNombre.Text = dataGridClientes.CurrentRow.Cells[1].Value.ToString();
-                    txtApellido.Text = dataGridClientes.CurrentRow.Cells[2].Value.ToString();
-                    txtDNI.Text = dataGridClientes.CurrentRow.Cells[0].Value.ToString();
-                    txtDireccion.Text = dataGridClientes.CurrentRow.Cells[3].Value.ToString();
-                    txtTelefono.Text = dataGridClientes.CurrentRow.Cells[4].Value.ToString();
-                    // Obtén la imagen desde la celda como tipo byte[]
-                    byte[] imagenBytes = (byte[])dataGridClientes.CurrentRow.Cells[5].Value;
-
-                    // Convierte los bytes en una imagen
-                    using (MemoryStream ms = new MemoryStream(imagenBytes))
-                    {
-                        Image imagen = Image.FromStream(ms);
-                        pBoxAvatar.Image = imagen;
-                    }
-
-                    btnModificar.Enabled = true;
-                }
-                else
-                {
-                    // Mostrar un mensaje de error o realizar alguna otra acción apropiada cuando no hay elementos seleccionados o no hay suficientes columnas.
-                    MessageBox.Show("No se ha seleccionado un usuario válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejar cualquier otra excepción que pueda ocurrir durante la recuperación de datos.
-                MessageBox.Show("Se ha producido un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            if (txtApellido.Text.Length > 0 && txtDireccion.Text.Length > 0 && txtDNI.Text.Length > 0 && txtNombre.Text.Length > 0 && pBoxAvatar.Image != null)
+            if (txtApellido.Text.Length > 0 && txtDireccion.Text.Length > 0 && txtDNI.Text.Length > 0 && txtNombre.Text.Length > 0)
             {
-                int numeroDNI = 0;
-                int.TryParse(txtDNI.Text, out numeroDNI);
-
-                using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+                DialogResult result = MessageBox.Show("Desea Agregar un cliente", "Agregar Cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
                 {
-                    // Validar si existe otro cliente con el mismo DNI
-                    cliente clienteExistente = db.cliente.FirstOrDefault(c => c.DNI_cliente == numeroDNI);
-
-                    if (clienteExistente == null)
+                    using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
                     {
-                        // Crear un nuevo cliente
-                        cliente nuevoCliente = new cliente
-                        {
-                            nombre_cliente = txtNombre.Text,
-                            apellido_cliente = txtApellido.Text,
-                            direccion = txtDireccion.Text,
-                            telefono = txtTelefono.Text
-                        };
+                        // Validar si existe otro cliente con el mismo DNI
+                        cliente clienteExistente = db.cliente.FirstOrDefault(c => c.DNI_cliente == txtDNI.Text);
 
-                        // Guardar la imagen si se ha seleccionado una
-                        using (MemoryStream ms = new MemoryStream())
+                        if (clienteExistente == null)
                         {
-                            pBoxAvatar.Image.Save(ms, pBoxAvatar.Image.RawFormat);
-                            nuevoCliente.avatar = ms.ToArray();
+                            // Crear un nuevo cliente
+                            cliente nuevoCliente = new cliente
+                            {
+                                nombre_cliente = txtNombre.Text,
+                                apellido_cliente = txtApellido.Text,
+                                direccion = txtDireccion.Text,
+                                telefono = txtTelefono.Text,
+                                estado = 1 //Establecemos el estado como activo (1)
+                            };
+
+
+                            // Asignar el DNI
+                            nuevoCliente.DNI_cliente = txtDNI.Text;
+
+                            // Agregar el nuevo cliente a la base de datos
+                            db.cliente.Add(nuevoCliente);
+                            db.SaveChanges();
+
+                            cargarFormulario();
+
+                            MessageBox.Show("Cliente insertado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
 
-                        // Asignar el DNI
-                        nuevoCliente.DNI_cliente = numeroDNI;
-
-                        // Agregar el nuevo cliente a la base de datos
-                        db.cliente.Add(nuevoCliente);
-                        db.SaveChanges();
-
-                        MessageBox.Show("Cliente insertado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ya existe otro cliente con el mismo DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        else
+                        {
+                            MessageBox.Show("Ya existe otro cliente con el mismo DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }
@@ -157,29 +124,44 @@ namespace capaPresentacion
 
 
         private void agregarCliente_Load(object sender, EventArgs e)
-        {
+        { 
 
-            using(ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
-            {
-                
-                var lst = from c in db.cliente
-                          
-                          select c;
-                dataGridClientes.DataSource = lst.ToList();
-            }
+            cargarFormulario();
 
 
-
-            Image image2 = Properties.Resources.usuario_verificado;
-            pBoxAvatar.Image = imagenPorDefecto;
-
-         
-  
         }
+
+        private void cargarFormulario()
+        {
+            using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+            {
+                var clientes = from c in db.cliente
+                               where (mostrarInactivos ? c.estado == 0 : c.estado == 1)
+                               select new
+                               {
+                                   c.id_cliente,
+                                   c.DNI_cliente,
+                                   c.nombre_cliente,
+                                   c.apellido_cliente,
+                                   c.direccion,
+                                   c.telefono,
+                                   c.estado,
+                               };
+
+                dataGridClientes.DataSource = clientes.ToList();
+
+                // Hace visible los botones según la condición
+                btnCambiarEstado.Visible = mostrarInactivos;
+                btnAñadir.Visible = !mostrarInactivos;
+                btnModificar.Visible = !mostrarInactivos;
+                btnEliminar.Visible = !mostrarInactivos;
+            }
+        }
+
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (txtApellido.Text.Length > 0 && txtDireccion.Text.Length > 0 && txtDNI.Text.Length > 0 && txtNombre.Text.Length > 0 && pBoxAvatar.Image != null)
+            if (txtApellido.Text.Length > 0 && txtDireccion.Text.Length > 0 && txtDNI.Text.Length > 0 && txtNombre.Text.Length > 0)
             {
                 int numeroDNI = 0;
                 int.TryParse(txtDNI.Text, out numeroDNI);
@@ -190,38 +172,35 @@ namespace capaPresentacion
                     int dniClienteSeleccionado = Convert.ToInt32(dataGridClientes.CurrentRow.Cells[0].Value);
 
                     // Buscar el cliente en la base de datos por su DNI
-                    cliente clienteModificar = db.cliente.FirstOrDefault(c => c.DNI_cliente == dniClienteSeleccionado);
+                    cliente clienteModificar = db.cliente.FirstOrDefault(c => c.DNI_cliente == txtDNI.Text);
 
                     if (clienteModificar != null)
                     {
-                        // Actualizar los valores del cliente
-                        clienteModificar.nombre_cliente = txtNombre.Text;
-                        clienteModificar.apellido_cliente = txtApellido.Text;
-                        clienteModificar.direccion = txtDireccion.Text;
-                        clienteModificar.telefono = txtTelefono.Text;
+                        // Mostrar un cuadro de diálogo de confirmación
+                        DialogResult result = MessageBox.Show("¿Desea modificar este cliente?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                        // Actualizar la imagen si se ha seleccionado una nueva
-                        if (pBoxAvatar.Image != null)
+                        if (result == DialogResult.Yes)
                         {
-                            using (MemoryStream ms = new MemoryStream())
-                            {
-                                pBoxAvatar.Image.Save(ms, pBoxAvatar.Image.RawFormat);
-                                clienteModificar.avatar = ms.ToArray();
-                            }
+                            // Realizar la modificación solo si el usuario confirma
+                            // Actualizar los valores del cliente
+                            clienteModificar.nombre_cliente = txtNombre.Text;
+                            clienteModificar.apellido_cliente = txtApellido.Text;
+                            clienteModificar.direccion = txtDireccion.Text;
+                            clienteModificar.telefono = txtTelefono.Text;
+
+                            // Guardar los cambios en la base de datos
+                            db.SaveChanges();
+                            cargarFormulario();
+
+                            // Actualizar el DataGridView si es necesario
+                            dataGridClientes.CurrentRow.Cells[1].Value = txtDNI.Text;
+                            dataGridClientes.CurrentRow.Cells[2].Value = txtNombre.Text;
+                            dataGridClientes.CurrentRow.Cells[3].Value = txtApellido.Text;
+                            dataGridClientes.CurrentRow.Cells[4].Value = txtDireccion.Text;
+                            dataGridClientes.CurrentRow.Cells[5].Value = txtTelefono.Text;
+
+                            MessageBox.Show("Se modificaron correctamente los datos", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-
-                        // Guardar los cambios en la base de datos
-                        db.SaveChanges();
-
-                        // Actualizar el DataGridView si es necesario
-                        dataGridClientes.CurrentRow.Cells[0].Value = txtDNI.Text;
-                        dataGridClientes.CurrentRow.Cells[1].Value = txtNombre.Text;
-                        dataGridClientes.CurrentRow.Cells[2].Value = txtApellido.Text;
-                        dataGridClientes.CurrentRow.Cells[3].Value = txtDireccion.Text;
-                        dataGridClientes.CurrentRow.Cells[4].Value = txtTelefono.Text;
-                        dataGridClientes.CurrentRow.Cells[5].Value = pBoxAvatar.Image;
-
-                        MessageBox.Show("Se modificaron correctamente los datos", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -236,82 +215,26 @@ namespace capaPresentacion
         }
 
 
-        
-        private void btnAñadirAvatar_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog avatar = new OpenFileDialog();
-            avatar.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.gif;*.bmp"; // Filtra por extensiones de imágenes comunes
-            if (avatar.ShowDialog() == DialogResult.OK)
+
+        private void btnBuscar_Click(object sender, EventArgs e)
             {
-                try
-                {
-                    // Intenta cargar el archivo como una imagen
-                    Image img = Image.FromFile(avatar.FileName);
-
-                    // Verifica si es una imagen válida
-                    if (EsImagenValida(img))
-                    {
-                        pBoxAvatar.BackgroundImage = null;
-                        pBoxAvatar.Image = img;
-                    }
-                    else
-                    {
-                        MessageBox.Show("El archivo seleccionado no es una imagen válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al cargar la imagen: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private bool EsImagenValida(Image img)
-        {
-            if (img != null)
-            {
-                // En caso que sea necesario se puede agregar más validaciones como el tamaño máximo, resolución.
-
-                return true;
-            }
-            return false;
-        }
-
-       
-        
-            private void btnBuscar_Click(object sender, EventArgs e)
-            {
-                // Obtén el número de DNI ingresado en el TextBox
+                // Se obtiene el DNI ingresado en el textBoxBuscar
                 int dniBuscado = 0;
                 if (int.TryParse(txtBuscar.Text, out dniBuscado))
                 {
                     using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
                     {
-                        // Realiza la consulta en la base de datos para buscar el cliente por DNI
-                        var clienteEncontrado = db.cliente.FirstOrDefault(c => c.DNI_cliente == dniBuscado);
+                        // Realizamos la consulta en la base de datos para buscar el cliente por DNI
+                        var clienteEncontrado = db.cliente.FirstOrDefault(c => c.DNI_cliente == txtDNI.Text);
 
                         if (clienteEncontrado != null)
                         {
-                            // Si se encuentra el cliente, muestra sus datos en los controles correspondientes
+                            // Si se encuentra el cliente, muestra sus datos
                             txtNombre.Text = clienteEncontrado.nombre_cliente;
                             txtApellido.Text = clienteEncontrado.apellido_cliente;
                             txtDNI.Text = clienteEncontrado.DNI_cliente.ToString();
                             txtDireccion.Text = clienteEncontrado.direccion;
                             txtTelefono.Text = clienteEncontrado.telefono.ToString();
-
-                            // Carga la imagen del cliente (si está disponible)
-                            if (clienteEncontrado.avatar != null && clienteEncontrado.avatar.Length > 0)
-                            {
-                                using (MemoryStream ms = new MemoryStream(clienteEncontrado.avatar))
-                                {
-                                    pBoxAvatar.Image = Image.FromStream(ms);
-                                }
-                            }
-                            else
-                            {
-                                // Si no hay imagen, establece una imagen por defecto
-                                pBoxAvatar.Image = imagenPorDefecto;
-                            }
 
                             btnModificar.Enabled = true;
                         }
@@ -329,7 +252,235 @@ namespace capaPresentacion
                 }
             }
 
+   
+
+        private void dataGridClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (dataGridClientes.CurrentRow != null && dataGridClientes.CurrentRow.Cells.Count >= 5)
+                {
+                    txtNombre.Text = dataGridClientes.CurrentRow.Cells[2].Value.ToString();
+                    txtApellido.Text = dataGridClientes.CurrentRow.Cells[3].Value.ToString();
+                    txtDNI.Text = dataGridClientes.CurrentRow.Cells[1].Value.ToString();
+                    txtDireccion.Text = dataGridClientes.CurrentRow.Cells[4].Value.ToString();
+                    txtTelefono.Text = dataGridClientes.CurrentRow.Cells[5].Value.ToString();
+
+
+
+                    btnModificar.Enabled = true;
+                    btnEliminar.Enabled = true;
+
+                }
+                else
+                {
+                    // Mostrar un mensaje de error o realizar alguna otra acción apropiada cuando no hay elementos seleccionados o no hay suficientes columnas.
+                    MessageBox.Show("No se ha seleccionado un usuario válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier otra excepción que pueda ocurrir durante la recuperación de datos.
+                MessageBox.Show("Se ha producido un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+      
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dataGridClientes.CurrentRow != null && dataGridClientes.CurrentRow.Cells.Count >= 5)
+            {
+                // Obtén el ID del cliente seleccionado
+                int clienteId = Convert.ToInt32(dataGridClientes.CurrentRow.Cells[0].Value);
+
+                using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+                {
+                    // Recupera el cliente de la base de datos según el ID
+                    cliente clienteEliminar = db.cliente.FirstOrDefault(c => c.id_cliente == clienteId);
+
+                    if (clienteEliminar != null)
+                    {
+                        // Muestra un cuadro de diálogo de confirmación
+                        DialogResult result = MessageBox.Show("¿Desea dar de baja este cliente?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            // Establece el estado en 0 (inactivo)
+                            clienteEliminar.estado = 0;
+
+                            // Guarda los cambios en la base de datos
+                            db.SaveChanges();
+
+                            // Recarga el formulario para actualizar el DataGridView
+                            cargarFormulario();
+                        }
+                        MessageBox.Show("Cliente dado de baja correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró un cliente con el ID especificado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un cliente de la lista antes de eliminarlo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnMostrarInactivos_Click(object sender, EventArgs e)
+        {
+            mostrarInactivos = !mostrarInactivos; // Cambia el estado de la variable
+
+            if (mostrarInactivos)
+            {
+                btnMostrarInactivos.Text = "Mostrar Activos"; // Actualiza el texto del botón
+            }
+            else
+            {
+                btnMostrarInactivos.Text = "Mostrar Inactivos"; // Actualiza el texto del botón
+            }
+
+            // Recarga el formulario para mostrar los clientes según el estado seleccionado
+            cargarFormulario();
+        }
+
+        private void btnCambiarEstado_Click(object sender, EventArgs e)
+        {
+            if (dataGridClientes.CurrentRow != null && dataGridClientes.CurrentRow.Cells.Count >= 5)
+            {
+                // Obtén el ID del cliente seleccionado
+                int clienteId = Convert.ToInt32(dataGridClientes.CurrentRow.Cells[0].Value);
+
+                using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+                {
+                    // Recupera el cliente de la base de datos según el ID
+                    cliente clienteCambiarEstado = db.cliente.FirstOrDefault(c => c.id_cliente == clienteId);
+
+                    if (clienteCambiarEstado != null)
+                    {
+                        // Muestra un cuadro de diálogo de confirmación
+                        DialogResult result = MessageBox.Show("¿Desea cambiar el estado de este cliente?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            // Cambia el estado del cliente (1 a 0 o viceversa)
+                            clienteCambiarEstado.estado = (clienteCambiarEstado.estado == 1) ? 0 : 1;
+
+                            // Guarda los cambios en la base de datos
+                            db.SaveChanges();
+
+                            // Recarga el formulario para actualizar el DataGridView
+                            cargarFormulario();
+
+                            MessageBox.Show("Estado del cliente cambiado correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró un cliente con el ID especificado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un cliente de la lista antes de cambiar su estado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+            {
+                // Verifica si el cuadro de búsqueda está vacío
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                {
+                    // Si está vacío y estás en la vista de inactivos, muestra solo los clientes inactivos
+                    if (mostrarInactivos)
+                    {
+                        CargarClientesInactivos();
+                    }
+                    else
+                    {
+                        // Si está vacío y no estás en la vista de inactivos, reinicia el DataGridView (muestra todos los clientes activos)
+                        CargarClientes();
+                    }
+                }
+                else
+                {
+                    // Filtra los clientes por DNI y estado (insensible a mayúsculas y minúsculas)
+                    var clientes = from c in db.cliente
+                                   where (mostrarInactivos ? c.estado == 0 : c.estado == 1) &&
+                                         c.DNI_cliente.ToLower().Contains(txtBuscar.Text.ToLower())
+                                   select new
+                                   {
+                                       c.id_cliente,
+                                       c.DNI_cliente,
+                                       c.nombre_cliente,
+                                       c.apellido_cliente,
+                                       c.direccion,
+                                       c.telefono,
+                                       c.estado,
+                                   };
+
+                    dataGridClientes.DataSource = clientes.ToList();
+                }
+            }
+        }
+
+        // Método para cargar todos los clientes (sin filtrar)
+        private void CargarClientes()
+        {
+            using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+            {
+                var clientes = from c in db.cliente
+                               where (mostrarInactivos ? true : c.estado == 1)
+                               select new
+                               {
+                                   c.id_cliente,
+                                   c.DNI_cliente,
+                                   c.nombre_cliente,
+                                   c.apellido_cliente,
+                                   c.direccion,
+                                   c.telefono,
+                                   c.estado,
+                               };
+
+                dataGridClientes.DataSource = clientes.ToList();
+            }
+        }
+
+        // Método para cargar solo los clientes inactivos
+        private void CargarClientesInactivos()
+        {
+            using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+            {
+                var clientesInactivos = from c in db.cliente
+                                        where c.estado == 0
+                                        select new
+                                        {
+                                            c.id_cliente,
+                                            c.DNI_cliente,
+                                            c.nombre_cliente,
+                                            c.apellido_cliente,
+                                            c.direccion,
+                                            c.telefono,
+                                            c.estado,
+                                        };
+
+                dataGridClientes.DataSource = clientesInactivos.ToList();
+            }
+        }
+
+        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo números y la tecla de retroceso (backspace)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+            }
         }
     }
+}
 
 

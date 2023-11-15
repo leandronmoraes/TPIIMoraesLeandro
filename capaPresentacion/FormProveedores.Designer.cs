@@ -29,16 +29,11 @@ namespace capaPresentacion
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvProveedores = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iva = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblApellido = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
@@ -58,10 +53,14 @@ namespace capaPresentacion
             this.rbtnInscripto = new System.Windows.Forms.RadioButton();
             this.rbtnNoInscripto = new System.Windows.Forms.RadioButton();
             this.rbtnFinal = new System.Windows.Forms.RadioButton();
-            this.lblBuscar = new System.Windows.Forms.Label();
-            this.txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtBuscarCuit = new Guna.UI2.WinForms.Guna2TextBox();
+            this.btnAlternarEstado = new FontAwesome.Sharp.IconButton();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnCambiarEstado = new FontAwesome.Sharp.IconButton();
+            this.lblBuscarCuit = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvProveedores
@@ -83,13 +82,6 @@ namespace capaPresentacion
             this.dgvProveedores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProveedores.ColumnHeadersHeight = 15;
             this.dgvProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.dgvProveedores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cuit,
-            this.nombre,
-            this.telefono,
-            this.email,
-            this.iva,
-            this.direccion});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -127,42 +119,6 @@ namespace capaPresentacion
             this.dgvProveedores.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvProveedores.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvProveedores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProveedores_CellDoubleClick);
-            // 
-            // cuit
-            // 
-            this.cuit.HeaderText = "Cuit";
-            this.cuit.Name = "cuit";
-            this.cuit.ReadOnly = true;
-            // 
-            // nombre
-            // 
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // telefono
-            // 
-            this.telefono.HeaderText = "Teléfono";
-            this.telefono.Name = "telefono";
-            this.telefono.ReadOnly = true;
-            // 
-            // email
-            // 
-            this.email.HeaderText = "Email";
-            this.email.Name = "email";
-            this.email.ReadOnly = true;
-            // 
-            // iva
-            // 
-            this.iva.HeaderText = "IVA";
-            this.iva.Name = "iva";
-            this.iva.ReadOnly = true;
-            // 
-            // direccion
-            // 
-            this.direccion.HeaderText = "Dirección";
-            this.direccion.Name = "direccion";
-            this.direccion.ReadOnly = true;
             // 
             // lblUsuario
             // 
@@ -223,7 +179,7 @@ namespace capaPresentacion
             // 
             this.txtNombre.Location = new System.Drawing.Point(152, 49);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(154, 20);
+            this.txtNombre.Size = new System.Drawing.Size(209, 20);
             this.txtNombre.TabIndex = 8;
             this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
@@ -231,16 +187,18 @@ namespace capaPresentacion
             // 
             this.txtTelefono.Location = new System.Drawing.Point(152, 78);
             this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(154, 20);
+            this.txtTelefono.Size = new System.Drawing.Size(209, 20);
             this.txtTelefono.TabIndex = 9;
+            this.txtTelefono.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido_KeyPress);
             // 
             // txtCuit
             // 
             this.txtCuit.Location = new System.Drawing.Point(152, 112);
             this.txtCuit.Name = "txtCuit";
-            this.txtCuit.Size = new System.Drawing.Size(154, 20);
+            this.txtCuit.Size = new System.Drawing.Size(209, 20);
             this.txtCuit.TabIndex = 10;
+            this.txtCuit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtCuit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsuario_KeyPress);
             // 
             // lblOperaciones
@@ -257,15 +215,16 @@ namespace capaPresentacion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(152, 179);
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(154, 20);
+            this.txtDireccion.Size = new System.Drawing.Size(209, 20);
             this.txtDireccion.TabIndex = 12;
             // 
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(152, 146);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(154, 20);
+            this.txtEmail.Size = new System.Drawing.Size(209, 20);
             this.txtEmail.TabIndex = 11;
+            this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // lblGestionClientes
             // 
@@ -289,7 +248,7 @@ namespace capaPresentacion
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(144, 44);
             this.btnEliminar.TabIndex = 21;
-            this.btnEliminar.Text = "Eliminar Usuario";
+            this.btnEliminar.Text = "Eliminar Proveedor";
             this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -305,7 +264,7 @@ namespace capaPresentacion
             this.btnAñadir.Name = "btnAñadir";
             this.btnAñadir.Size = new System.Drawing.Size(144, 42);
             this.btnAñadir.TabIndex = 23;
-            this.btnAñadir.Text = "Añadir Usuario";
+            this.btnAñadir.Text = "Añadir Proveedor";
             this.btnAñadir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAñadir.UseVisualStyleBackColor = true;
             this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
@@ -370,36 +329,74 @@ namespace capaPresentacion
             this.rbtnFinal.Text = "Consumidor final";
             this.rbtnFinal.UseVisualStyleBackColor = true;
             // 
-            // lblBuscar
+            // txtBuscarCuit
             // 
-            this.lblBuscar.AutoSize = true;
-            this.lblBuscar.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBuscar.ForeColor = System.Drawing.Color.White;
-            this.lblBuscar.Location = new System.Drawing.Point(65, 211);
-            this.lblBuscar.Name = "lblBuscar";
-            this.lblBuscar.Size = new System.Drawing.Size(71, 22);
-            this.lblBuscar.TabIndex = 32;
-            this.lblBuscar.Text = "Buscar";
+            this.txtBuscarCuit.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBuscarCuit.DefaultText = "";
+            this.txtBuscarCuit.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtBuscarCuit.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtBuscarCuit.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscarCuit.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBuscarCuit.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscarCuit.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtBuscarCuit.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBuscarCuit.Location = new System.Drawing.Point(789, 233);
+            this.txtBuscarCuit.Name = "txtBuscarCuit";
+            this.txtBuscarCuit.PasswordChar = '\0';
+            this.txtBuscarCuit.PlaceholderText = "Filtrar por Cuit";
+            this.txtBuscarCuit.SelectedText = "";
+            this.txtBuscarCuit.Size = new System.Drawing.Size(154, 20);
+            this.txtBuscarCuit.TabIndex = 33;
+            this.txtBuscarCuit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtBuscarCuit.TextChanged += new System.EventHandler(this.txtBuscarCuit_TextChanged);
+            this.txtBuscarCuit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscarCuit_KeyPress);
             // 
-            // txtBuscar
+            // btnAlternarEstado
             // 
-            this.txtBuscar.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtBuscar.DefaultText = "";
-            this.txtBuscar.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtBuscar.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtBuscar.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscar.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtBuscar.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtBuscar.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBuscar.Location = new System.Drawing.Point(152, 213);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.PasswordChar = '\0';
-            this.txtBuscar.PlaceholderText = "Cuit";
-            this.txtBuscar.SelectedText = "";
-            this.txtBuscar.Size = new System.Drawing.Size(154, 20);
-            this.txtBuscar.TabIndex = 33;
-            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            this.btnAlternarEstado.IconChar = FontAwesome.Sharp.IconChar.ArrowsDownToPeople;
+            this.btnAlternarEstado.IconColor = System.Drawing.Color.Black;
+            this.btnAlternarEstado.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAlternarEstado.IconSize = 50;
+            this.btnAlternarEstado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAlternarEstado.Location = new System.Drawing.Point(968, 209);
+            this.btnAlternarEstado.Name = "btnAlternarEstado";
+            this.btnAlternarEstado.Size = new System.Drawing.Size(127, 44);
+            this.btnAlternarEstado.TabIndex = 34;
+            this.btnAlternarEstado.Text = "Alternar Estado";
+            this.btnAlternarEstado.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAlternarEstado.UseVisualStyleBackColor = true;
+            this.btnAlternarEstado.Click += new System.EventHandler(this.btnAlternarEstado_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // btnCambiarEstado
+            // 
+            this.btnCambiarEstado.IconChar = FontAwesome.Sharp.IconChar.UserClock;
+            this.btnCambiarEstado.IconColor = System.Drawing.Color.Black;
+            this.btnCambiarEstado.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnCambiarEstado.IconSize = 50;
+            this.btnCambiarEstado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCambiarEstado.Location = new System.Drawing.Point(857, 148);
+            this.btnCambiarEstado.Name = "btnCambiarEstado";
+            this.btnCambiarEstado.Size = new System.Drawing.Size(144, 43);
+            this.btnCambiarEstado.TabIndex = 55;
+            this.btnCambiarEstado.Text = "Cambiar Estado";
+            this.btnCambiarEstado.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCambiarEstado.UseVisualStyleBackColor = true;
+            this.btnCambiarEstado.Visible = false;
+            // 
+            // lblBuscarCuit
+            // 
+            this.lblBuscarCuit.AutoSize = true;
+            this.lblBuscarCuit.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBuscarCuit.ForeColor = System.Drawing.Color.White;
+            this.lblBuscarCuit.Location = new System.Drawing.Point(718, 232);
+            this.lblBuscarCuit.Name = "lblBuscarCuit";
+            this.lblBuscarCuit.Size = new System.Drawing.Size(65, 21);
+            this.lblBuscarCuit.TabIndex = 56;
+            this.lblBuscarCuit.Text = "Buscar:";
             // 
             // FormProveedores
             // 
@@ -407,8 +404,10 @@ namespace capaPresentacion
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(1107, 576);
-            this.Controls.Add(this.lblBuscar);
-            this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.lblBuscarCuit);
+            this.Controls.Add(this.btnCambiarEstado);
+            this.Controls.Add(this.btnAlternarEstado);
+            this.Controls.Add(this.txtBuscarCuit);
             this.Controls.Add(this.btnAñadir);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.groupBox1);
@@ -429,9 +428,11 @@ namespace capaPresentacion
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormProveedores";
             this.Text = "FormProveedores";
+            this.Load += new System.EventHandler(this.FormProveedores_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -457,14 +458,11 @@ namespace capaPresentacion
         private System.Windows.Forms.RadioButton rbtnInscripto;
         private System.Windows.Forms.RadioButton rbtnNoInscripto;
         private System.Windows.Forms.RadioButton rbtnFinal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cuit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
-        private System.Windows.Forms.DataGridViewTextBoxColumn email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iva;
-        private System.Windows.Forms.DataGridViewTextBoxColumn direccion;
-        private System.Windows.Forms.Label lblBuscar;
-        private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
+        private Guna.UI2.WinForms.Guna2TextBox txtBuscarCuit;
         public Guna.UI2.WinForms.Guna2DataGridView dgvProveedores;
+        private FontAwesome.Sharp.IconButton btnAlternarEstado;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private FontAwesome.Sharp.IconButton btnCambiarEstado;
+        private System.Windows.Forms.Label lblBuscarCuit;
     }
 }

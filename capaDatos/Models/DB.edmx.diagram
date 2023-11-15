@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fa908eed580f45c19072bfd1268e5ba5" Name="Diagram1">
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.categoria" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.cliente" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.pedido" Width="1.5" PointX="10.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.producto" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.proveedor" Width="1.5" PointX="6" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.RegistroUsuario" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.tipo_pago" Width="1.5" PointX="6" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.tipo_rol" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.usuario" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.venta" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoTPII_MoraesLeandroModel.venta_detalle" Width="1.5" PointX="10.5" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="ProyectoTPII_MoraesLeandroModel.FK__producto__id_cat__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoTPII_MoraesLeandroModel.FK__venta__id_client__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoTPII_MoraesLeandroModel.FK__pedido__id_prove__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoTPII_MoraesLeandroModel.FK_id_producto_pedido" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoTPII_MoraesLeandroModel.FK__producto__id_pro__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoTPII_MoraesLeandroModel.FK__venta_det__id_pr__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoTPII_MoraesLeandroModel.FK_id_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoTPII_MoraesLeandroModel.FK_id_tipo_pago" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoTPII_MoraesLeandroModel.FK_id_rol" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoTPII_MoraesLeandroModel.FK_id_vendedor" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoTPII_MoraesLeandroModel.FK__venta_det__id_ve__59063A47" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

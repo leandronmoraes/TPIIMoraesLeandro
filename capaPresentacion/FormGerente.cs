@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using capaDatos.Models;
 using capaPresentacion;
 
 namespace capaPresentacion
@@ -92,8 +94,32 @@ namespace capaPresentacion
             DialogResult result = MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
             {
-                // Crear una lista de formularios a cerrar
-                List<Form> formulariosParaCerrar = new List<Form>();
+                // Formatea la fecha y hora actual en el formato deseado
+                string fechaIngresoFormateada = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                // Convierte la cadena formateada en un objeto DateTime
+                DateTime fechaSalida = DateTime.ParseExact(fechaIngresoFormateada, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                int usuarioId = ContextoCompartido.UsuarioId;
+                if (usuarioId > 0)
+                {
+
+                    using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+                    {
+                        var registro = db.RegistroUsuario
+                            .Where(r => r.id_usuario == usuarioId)
+                            .OrderByDescending(r => r.fecha_ingreso)
+                            .FirstOrDefault();
+
+                        if (registro != null)
+                        {
+                            registro.fecha_salida = fechaSalida;
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
+                    // Crear una lista de formularios a cerrar
+                    List<Form> formulariosParaCerrar = new List<Form>();
 
                 // Identificar los formularios a cerrar
                 foreach (Form form in Application.OpenForms)
@@ -121,8 +147,62 @@ namespace capaPresentacion
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-        }
+
+            DialogResult result = MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.Yes)
+            {
+
+
+                // Formatea la fecha y hora actual en el formato deseado
+                string fechaIngresoFormateada = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                // Convierte la cadena formateada en un objeto DateTime
+                DateTime fechaSalida = DateTime.ParseExact(fechaIngresoFormateada, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                int usuarioId = ContextoCompartido.UsuarioId;
+                if (usuarioId > 0)
+                {
+
+                    using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+                    {
+                        var registro = db.RegistroUsuario
+                            .Where(r => r.id_usuario == usuarioId)
+                            .OrderByDescending(r => r.fecha_ingreso)
+                            .FirstOrDefault();
+
+                        if (registro != null)
+                        {
+                            registro.fecha_salida = fechaSalida;
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
+                // Crear una lista de formularios a cerrar
+                List<Form> formulariosParaCerrar = new List<Form>();
+
+                // Identificar los formularios a cerrar
+                foreach (Form form in Application.OpenForms)
+                {
+                    if (form != this && (form.Name == "listaDetalleVenta"))
+                    {
+                        formulariosParaCerrar.Add(form);
+                    }
+                }
+
+                // Cerrar los formularios en la lista
+                foreach (Form form in formulariosParaCerrar)
+                {
+                    form.Close();
+                }
+
+                // Abre un nuevo formulario 
+                Login form1 = new Login();
+                form1.Show();
+
+                // Oculta este formulario
+                this.Hide();
+            }
+           }
 
        
 

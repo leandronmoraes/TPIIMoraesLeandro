@@ -35,6 +35,7 @@
             this.btnCerrar = new System.Windows.Forms.PictureBox();
             this.lblAdmin = new System.Windows.Forms.Label();
             this.panelVerticalMenu = new System.Windows.Forms.Panel();
+            this.btnGestionClientes = new FontAwesome.Sharp.IconButton();
             this.btnGestionUsuario = new FontAwesome.Sharp.IconButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -45,7 +46,6 @@
             this.txtBoxLogo = new System.Windows.Forms.TextBox();
             this.btnConfiguracion = new FontAwesome.Sharp.IconButton();
             this.btnDetalleVentas = new FontAwesome.Sharp.IconButton();
-            this.btnEmpleados = new FontAwesome.Sharp.IconButton();
             this.btnInicio = new FontAwesome.Sharp.IconButton();
             this.btnCerrarSesion = new FontAwesome.Sharp.IconButton();
             this.btnGestionProducto = new FontAwesome.Sharp.IconButton();
@@ -117,6 +117,7 @@
             // panelVerticalMenu
             // 
             this.panelVerticalMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            this.panelVerticalMenu.Controls.Add(this.btnGestionClientes);
             this.panelVerticalMenu.Controls.Add(this.btnGestionUsuario);
             this.panelVerticalMenu.Controls.Add(this.panel4);
             this.panelVerticalMenu.Controls.Add(this.panel3);
@@ -125,7 +126,6 @@
             this.panelVerticalMenu.Controls.Add(this.panelLogo);
             this.panelVerticalMenu.Controls.Add(this.btnConfiguracion);
             this.panelVerticalMenu.Controls.Add(this.btnDetalleVentas);
-            this.panelVerticalMenu.Controls.Add(this.btnEmpleados);
             this.panelVerticalMenu.Controls.Add(this.btnInicio);
             this.panelVerticalMenu.Controls.Add(this.btnCerrarSesion);
             this.panelVerticalMenu.Controls.Add(this.btnGestionProducto);
@@ -135,6 +135,27 @@
             this.panelVerticalMenu.Name = "panelVerticalMenu";
             this.panelVerticalMenu.Size = new System.Drawing.Size(197, 612);
             this.panelVerticalMenu.TabIndex = 3;
+            // 
+            // btnGestionClientes
+            // 
+            this.btnGestionClientes.FlatAppearance.BorderSize = 0;
+            this.btnGestionClientes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(200)))));
+            this.btnGestionClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGestionClientes.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionClientes.ForeColor = System.Drawing.Color.White;
+            this.btnGestionClientes.IconChar = FontAwesome.Sharp.IconChar.PersonCircleCheck;
+            this.btnGestionClientes.IconColor = System.Drawing.Color.White;
+            this.btnGestionClientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnGestionClientes.IconSize = 40;
+            this.btnGestionClientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGestionClientes.Location = new System.Drawing.Point(0, 254);
+            this.btnGestionClientes.Name = "btnGestionClientes";
+            this.btnGestionClientes.Size = new System.Drawing.Size(194, 42);
+            this.btnGestionClientes.TabIndex = 19;
+            this.btnGestionClientes.Text = "Gestión Cliente";
+            this.btnGestionClientes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGestionClientes.UseVisualStyleBackColor = true;
+            this.btnGestionClientes.Click += new System.EventHandler(this.btnGestionClientes_Click);
             // 
             // btnGestionUsuario
             // 
@@ -152,7 +173,7 @@
             this.btnGestionUsuario.Name = "btnGestionUsuario";
             this.btnGestionUsuario.Size = new System.Drawing.Size(194, 42);
             this.btnGestionUsuario.TabIndex = 18;
-            this.btnGestionUsuario.Text = "Gestión Usuarios";
+            this.btnGestionUsuario.Text = "Gestión Empleado";
             this.btnGestionUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGestionUsuario.UseVisualStyleBackColor = true;
             this.btnGestionUsuario.Click += new System.EventHandler(this.btnGestionUsuario_Click);
@@ -238,7 +259,7 @@
             this.btnConfiguracion.Name = "btnConfiguracion";
             this.btnConfiguracion.Size = new System.Drawing.Size(195, 42);
             this.btnConfiguracion.TabIndex = 11;
-            this.btnConfiguracion.Text = "Configuraciones";
+            this.btnConfiguracion.Text = "Configuración";
             this.btnConfiguracion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnConfiguracion.UseVisualStyleBackColor = true;
             this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);
@@ -259,31 +280,10 @@
             this.btnDetalleVentas.Name = "btnDetalleVentas";
             this.btnDetalleVentas.Size = new System.Drawing.Size(197, 42);
             this.btnDetalleVentas.TabIndex = 10;
-            this.btnDetalleVentas.Text = "Detalle Ventas";
+            this.btnDetalleVentas.Text = "Detalle Venta";
             this.btnDetalleVentas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDetalleVentas.UseVisualStyleBackColor = true;
             this.btnDetalleVentas.Click += new System.EventHandler(this.btnDetalleVentas_Click);
-            // 
-            // btnEmpleados
-            // 
-            this.btnEmpleados.FlatAppearance.BorderSize = 0;
-            this.btnEmpleados.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(200)))));
-            this.btnEmpleados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEmpleados.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEmpleados.ForeColor = System.Drawing.Color.White;
-            this.btnEmpleados.IconChar = FontAwesome.Sharp.IconChar.AddressCard;
-            this.btnEmpleados.IconColor = System.Drawing.Color.White;
-            this.btnEmpleados.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnEmpleados.IconSize = 40;
-            this.btnEmpleados.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEmpleados.Location = new System.Drawing.Point(0, 254);
-            this.btnEmpleados.Name = "btnEmpleados";
-            this.btnEmpleados.Size = new System.Drawing.Size(197, 42);
-            this.btnEmpleados.TabIndex = 9;
-            this.btnEmpleados.Text = "Empleados";
-            this.btnEmpleados.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEmpleados.UseVisualStyleBackColor = true;
-            this.btnEmpleados.Click += new System.EventHandler(this.btnEmpleados_Click);
             // 
             // btnInicio
             // 
@@ -345,7 +345,7 @@
             this.btnGestionProducto.Name = "btnGestionProducto";
             this.btnGestionProducto.Size = new System.Drawing.Size(194, 42);
             this.btnGestionProducto.TabIndex = 2;
-            this.btnGestionProducto.Text = "Gestión Productos";
+            this.btnGestionProducto.Text = "Gestión Producto";
             this.btnGestionProducto.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGestionProducto.UseVisualStyleBackColor = true;
             this.btnGestionProducto.Click += new System.EventHandler(this.btnGestionProducto_Click);
@@ -440,7 +440,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administrador";
             this.Load += new System.EventHandler(this.FormAdministrador_Load);
-            this.SizeChanged += new System.EventHandler(this.FormAdministrador_SizeChanged);
             this.Resize += new System.EventHandler(this.FormAdministrador_Resize);
             this.panelTitulo.ResumeLayout(false);
             this.panelTitulo.PerformLayout();
@@ -468,7 +467,6 @@
         private FontAwesome.Sharp.IconButton btnGestionProducto;
         private FontAwesome.Sharp.IconButton btnCerrarSesion;
         private FontAwesome.Sharp.IconButton btnInicio;
-        private FontAwesome.Sharp.IconButton btnEmpleados;
         private System.Windows.Forms.Label lblMensaje;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Label lblHora;
@@ -485,5 +483,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private FontAwesome.Sharp.IconButton btnGestionUsuario;
+        private FontAwesome.Sharp.IconButton btnGestionClientes;
     }
 }

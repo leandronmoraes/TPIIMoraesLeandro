@@ -1,67 +1,109 @@
-﻿using System;
+﻿using capaDatos.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace capaPresentacion
 {
     public partial class listaPedidos : Form
     {
+        private ProyectoTPII_MoraesLeandroEntities dbContext; // Declarar dbContext como un campo de clase
+       
         public listaPedidos()
         {
             InitializeComponent();
+
             // Deshabilitamos los botones Eliminar y Modificar al cargar el formulario.
             btnEliminar.Enabled = false;
-            btnModificar.Enabled = false;
+            btnConfirmarPedido.Enabled = false;
 
             cmbProveedor.SelectedIndex = 0;
             // se deshabilito la modificación de fecha, para que solo se registre la fecha actual.
             fecha.Enabled = false;
+
+            dbContext = new ProyectoTPII_MoraesLeandroEntities();
+
+            // Carga la lista de proveedores en el ComboBox al cargar el formulario
+            CargarProveedores();
         }
+
+
 
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar))
+            // Verifica si el carácter ingresado no es un número ni la tecla de retroceso
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
             {
-                e.Handled = true;
+                e.Handled = true; // No permite que el carácter sea ingresado en el TextBox
             }
+
+            // Verifica si el dígito "0" o un espacio es el primer carácter
+            if ((e.KeyChar == '0' || e.KeyChar == ' ') && txtCantidad.Text.Length == 0)
+            {
+                e.Handled = true; // No permite que el carácter sea ingresado en el TextBox
+            }
+        }
+
+
+
+
+
+
+        private void CargarProveedores()
+        {
+            // Utiliza Entity Framework para obtener la lista de proveedores de la base de datos
+            var proveedores = dbContext.proveedor.ToList();
+
+            // Asigna la lista de proveedores al ComboBox
+            cmbProveedor.DisplayMember = "nombre_proveedor"; // Muestra el nombre del proveedor en el ComboBox
+            cmbProveedor.ValueMember = "id_proveedor"; // Utiliza el ID del proveedor como valor interno
+            cmbProveedor.DataSource = proveedores;
         }
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
             if (txtNombreProducto.Text.Length > 0 && txtCantidad.Text.Length > 0 &&
-                 txtDescripcion.Text.Length > 0 &&
-                txtDireccion.Text.Length > 0)
+                 txtDescripcion.Text.Length > 0 && txtDireccion.Text.Length > 0)
             {
                 // Confirmación para poder ingresar un pedido
                 DialogResult eleccion = MessageBox.Show("¿Confirmar Inserción?", "Agregar Pedido", MessageBoxButtons.YesNo);
+                if (eleccion == DialogResult.Yes)
                 {
-                    // Elección en el caso que sí, guarda los datos
-                    if (eleccion == DialogResult.Yes)
+                    using (var db = new ProyectoTPII_MoraesLeandroEntities())
                     {
-                        // Obtén la fecha seleccionada del DateTimePicker
-                        DateTime fechaSeleccionada = fecha.Value;
-
-                        // Agrega el pedido al DataGridView
-                        dgvPedidos.Rows.Add(txtNombreProducto.Text, txtCantidad.Text, cmbProveedor.Text,
-                            txtDescripcion.Text, txtDireccion.Text, fechaSeleccionada.ToString("yyyy-MM-dd")); // Formatea la fecha como desees
-
-                        txtNombreProducto.Clear();
-                        txtCantidad.Clear();              
-                        txtDescripcion.Clear();
-                        txtDireccion.Clear();
-
-                        MessageBox.Show("Pedido Agregado", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        pedido nuevoPedido = new pedido
+                        {
+                            // Obtén la fecha seleccionada del DateTimePicker
+                            fecha_pedido = fecha.Value,
+                            nombre_producto_pedido = txtNombreProducto.Text,
+                            cantidad_pedido = int.Parse(txtCantidad.Text),
+                            descripcion_pedido = txtDescripcion.Text,
+                            direccion_pedido = txtDireccion.Text,
+                            id_proveedor = int.Parse(cmbProveedor.SelectedValue.ToString()),
+                            estado = 1,
+                        };
+                        db.pedido.Add(nuevoPedido);
+                        db.SaveChanges();
                     }
-                    else
-                    {
-                        MessageBox.Show("Pedido no agregado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+
+                    txtNombreProducto.Clear();
+                    txtCantidad.Clear();
+                    txtDescripcion.Clear();
+                    txtDireccion.Clear();
+
+                    MessageBox.Show("Pedido Agregado", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Pedido no agregado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -69,6 +111,7 @@ namespace capaPresentacion
                 MessageBox.Show("No ingresaste todos los datos necesarios para poder añadir un pedido.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -83,7 +126,17 @@ namespace capaPresentacion
                     //Elección en el caso que si, guarda los datos
                     if (eleccion == DialogResult.Yes)
                     {
-                        dgvPedidos.Rows.Remove(dgvPedidos.CurrentRow);
+                        int pedidoId = (int)dgvPedidos.CurrentRow.Cells["id_pedido"].Value;
+
+                        using (var db = new ProyectoTPII_MoraesLeandroEntities())
+                        {
+                            var pedidoAEliminar = db.pedido.FirstOrDefault(p => p.id_pedido == pedidoId);
+                            if (pedidoAEliminar != null)
+                            {
+                                db.pedido.Remove(pedidoAEliminar);
+                                db.SaveChanges();
+                            }
+                        }
 
                         txtNombreProducto.Clear();
                         txtCantidad.Clear();      
@@ -94,7 +147,7 @@ namespace capaPresentacion
 
                         // Deshabilitar los botones "Eliminar" y "Modificar" después de eliminar un pedido
                         btnEliminar.Enabled = false;
-                        btnModificar.Enabled = false;
+                        btnConfirmarPedido.Enabled = false;
                     }
                     else
                     {
@@ -108,119 +161,182 @@ namespace capaPresentacion
             }
         }
 
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            if (txtNombreProducto.Text.Length > 0 && txtCantidad.Text.Length > 0 &&
-                txtDescripcion.Text.Length > 0 &&
-               txtDireccion.Text.Length > 0)
-            {
-                //Confirmación para poder modificar un pedido
-                DialogResult eleccion = MessageBox.Show("¿Confirmar modificación?", "Modificación Pedido", MessageBoxButtons.YesNo);
-                {
-                    //Elección en el caso que si, guarda los datos
-                    if (eleccion == DialogResult.Yes)
-                    {
-                        dgvPedidos.CurrentRow.Cells[0].Value = txtNombreProducto.Text;
-                        dgvPedidos.CurrentRow.Cells[1].Value = txtCantidad.Text;
-                        dgvPedidos.CurrentRow.Cells[2].Value = cmbProveedor.Text;
-                        dgvPedidos.CurrentRow.Cells[4].Value = txtDireccion.Text;
-                        dgvPedidos.CurrentRow.Cells[3].Value = txtDescripcion.Text;
-
-                        // Actualizar la fecha si es necesario (dependiendo de cómo quieras manejar la fecha)
-                        DateTime fechaSeleccionada = fecha.Value;
-                        dgvPedidos.CurrentRow.Cells[5].Value = fechaSeleccionada.ToString("yyyy-MM-dd");
-
-                        txtNombreProducto.Clear();
-                        txtCantidad.Clear();
-                        txtDireccion.Clear();
-                        txtDescripcion.Clear();
-
-                        MessageBox.Show("Se modificaron correctamente los datos", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // Deshabilitar los botones "Eliminar" y "Modificar" después de modificar un pedido
-                        btnEliminar.Enabled = false;
-                        btnModificar.Enabled = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Pedido no modificado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un pedido de la lista antes de modificarlo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        
 
         private void dgvPedidos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                if (dgvPedidos.CurrentRow != null && dgvPedidos.CurrentRow.Cells.Count >= 5)
+                if (dgvPedidos.CurrentRow != null)
                 {
-                    txtNombreProducto.Text = dgvPedidos.CurrentRow.Cells[0].Value.ToString();
-                    txtCantidad.Text = dgvPedidos.CurrentRow.Cells[1].Value.ToString();
-                    cmbProveedor.Text = dgvPedidos.CurrentRow.Cells[2].Value.ToString();
-                    txtDescripcion.Text = dgvPedidos.CurrentRow.Cells[3].Value.ToString();
-                    txtDireccion.Text = dgvPedidos.CurrentRow.Cells[4].Value.ToString();
+                    txtNombreProducto.Text = dgvPedidos.CurrentRow.Cells["nombre_producto_pedido"].Value.ToString();
+                    txtCantidad.Text = dgvPedidos.CurrentRow.Cells["cantidad_pedido"].Value.ToString();
+                    cmbProveedor.Text = dgvPedidos.CurrentRow.Cells["id_proveedor"].Value.ToString();
+                    txtDescripcion.Text = dgvPedidos.CurrentRow.Cells["descripcion_pedido"].Value.ToString();
+                    txtDireccion.Text = dgvPedidos.CurrentRow.Cells["direccion_pedido"].Value.ToString();
 
-                    // Intentar convertir la cadena de la celda en un valor de DateTime de forma segura
-                    DateTime fechaPedido;
-                    if (DateTime.TryParse(dgvPedidos.CurrentRow.Cells[5].Value.ToString(), out fechaPedido))
+                    if (DateTime.TryParse(dgvPedidos.CurrentRow.Cells["fecha_pedido"].Value.ToString(), out DateTime fechaPedido))
                     {
-                        fecha.Value = fechaPedido; // Establece la fecha seleccionada
-                    }
-                    else
-                    {
-                        // La cadena no es una fecha válida
-                        MessageBox.Show("La fecha del pedido no es válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        fecha.Value = fechaPedido;
                     }
 
-                    // Habilitar los botones Eliminar y Modificar cuando se selecciona una fila.
                     btnEliminar.Enabled = true;
-                    btnModificar.Enabled = true;
+                    btnConfirmarPedido.Enabled = true;
                 }
                 else
                 {
-                    // Mostrar un mensaje de error o realizar alguna otra acción apropiada cuando no hay elementos seleccionados o no hay suficientes columnas.
                     MessageBox.Show("No se ha seleccionado un pedido válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                // Manejar cualquier otra excepción que pueda ocurrir durante la recuperación de datos.
                 MessageBox.Show("Se ha producido un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
-            string encontrarPedido = txtBuscar.Text;
-            bool encontrado = false;
+        
 
-            foreach (DataGridViewRow recorrer in dgvPedidos.Rows)
+        private void listaPedidos_Load(object sender, EventArgs e)
+        {
+            using (var db = new ProyectoTPII_MoraesLeandroEntities())
             {
-                if (recorrer.Cells[0].Value.ToString().IndexOf(encontrarPedido, StringComparison.OrdinalIgnoreCase) >= 0 )
+                var pedidos = from p in db.pedido
+                              where p.estado == 1 //filtrar por aquellos pedidos pendientes
+                              select new
+                              {
+                                  p.id_pedido,
+                                  p.nombre_producto_pedido,
+                                  p.descripcion_pedido,
+                                  p.direccion_pedido,
+                                  p.cantidad_pedido,
+                                  p.fecha_pedido,
+                                  p.id_proveedor,
+                                  p.id_producto,
+                                  p.estado,
+                                  
+                              };
+                dgvPedidos.DataSource = pedidos.ToList();
+            }
+
+            cambiarColumna();
+        }
+
+        private void btnBuscarProducto_Click(object sender, EventArgs e)
+        {
+            // Crear una instancia del formulario de lista de productos
+            listaProductosForm listaProductosForm = new listaProductosForm();
+
+            // Mostrar el formulario de lista de productos como un diálogo
+            DialogResult result = listaProductosForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                // Crear una instancia del contexto de Entity Framework
+                ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities();
+
+
+
+                string nombreProductoSeleccionado = listaProductosForm.NombreProductoSeleccionado;
+                txtNombreProducto.Text = nombreProductoSeleccionado;
+
+
+
+                btnLimpiarProducto.Visible = true;
+            }    
+        }
+
+
+
+        private void btnLimpiarProducto_Click(object sender, EventArgs e)
+        {
+            txtNombreProducto.Clear();
+            btnLimpiarProducto.Visible = false;
+        }
+
+        private void btnConfirmarPedido_Click(object sender, EventArgs e)
+        {
+            if (txtNombreProducto.Text.Length > 0 && txtCantidad.Text.Length > 0 &&
+                txtDescripcion.Text.Length > 0 && txtDireccion.Text.Length > 0)
+            {
+                // Confirmación para confirmar el pedido
+                DialogResult eleccion = MessageBox.Show("¿Confirmar Pedido?", "Confirmar Pedido", MessageBoxButtons.YesNo);
+                if (eleccion == DialogResult.Yes)
                 {
-                    recorrer.Visible = true;
-                    encontrado = true;
+                    using (var db = new ProyectoTPII_MoraesLeandroEntities())
+                    {
+                        // Obtener el producto seleccionado
+                        string nombreProductoSeleccionado = txtNombreProducto.Text;
+                        producto productoSeleccionado = db.producto.FirstOrDefault(p => p.nombre_producto == nombreProductoSeleccionado);
+
+                        if (productoSeleccionado != null)
+                        {
+                            // Actualizar el stock del producto sumando la cantidad del pedido
+                            productoSeleccionado.stock_producto += int.Parse(txtCantidad.Text);
+
+                            // Crear un nuevo pedido con estado confirmado (2)
+                            pedido nuevoPedido = new pedido
+                            {
+                                fecha_pedido = fecha.Value,
+                                nombre_producto_pedido = txtNombreProducto.Text,
+                                cantidad_pedido = int.Parse(txtCantidad.Text),
+                                descripcion_pedido = txtDescripcion.Text,
+                                direccion_pedido = txtDireccion.Text,
+                                id_proveedor = int.Parse(cmbProveedor.SelectedValue.ToString()),
+                                
+                                estado = 2, // Estado confirmado
+                            };
+
+                            // Asignar el producto seleccionado al nuevo pedido
+                            nuevoPedido.producto = productoSeleccionado;
+
+                            // Agregar el nuevo pedido a la base de datos
+                            db.pedido.Add(nuevoPedido);
+
+                            // Guardar los cambios en el stock del producto y en el nuevo pedido
+                            db.Entry(productoSeleccionado).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró el producto seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                    // Limpiar los campos después de confirmar el pedido
+                    txtNombreProducto.Clear();
+                    txtCantidad.Clear();
+                    txtDescripcion.Clear();
+                    txtDireccion.Clear();
+
+                    MessageBox.Show("Pedido Confirmado", "Confirmación de Pedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    recorrer.Visible = false;
+                    MessageBox.Show("Pedido no confirmado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-            if (!encontrado)
+            else
             {
-                // Si no se encuentra ningún pedido, muestra todas las filas
-                foreach (DataGridViewRow recorrer in dgvPedidos.Rows)
-                {
-                    recorrer.Visible = true;
-                }
+                MessageBox.Show("No ingresaste todos los datos necesarios para poder confirmar el pedido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    
+
+        private void cambiarColumna()
+        {
+            //Cambiar Header
+            dgvPedidos.Columns["id_pedido"].HeaderText = "ID";
+            dgvPedidos.Columns["cantidad_pedido"].HeaderText = "Cantidad";
+            dgvPedidos.Columns["descripcion_pedido"].HeaderText = "Descripción";
+            dgvPedidos.Columns["direccion_pedido"].HeaderText = "Dirección";
+            dgvPedidos.Columns["fecha_pedido"].HeaderText = "Fecha";
+            dgvPedidos.Columns["id_proveedor"].HeaderText = "Proveedor";
+            dgvPedidos.Columns["nombre_producto_pedido"].HeaderText = "Producto";
+            dgvPedidos.Columns["id_producto"].HeaderText = "ID del producto";
+
+            //Ocultar Tablas
+
+            dgvPedidos.Columns["estado"].Visible = false;
+        }
+
     }
 }

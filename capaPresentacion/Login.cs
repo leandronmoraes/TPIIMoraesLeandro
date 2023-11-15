@@ -3,124 +3,107 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.ModelBinding;
 using System.Windows.Forms;
+using capaDatos;
+using capaDatos.Models;
+using capaNegocio;
+using Org.BouncyCastle.Crypto.Generators;
+using System.Net;
+using System.Security.Policy;
+using BCrypt.Net;
 
 namespace capaPresentacion
 {
     public partial class Login : Form
     {
+        private CN_Login cnLogin;
+
         public Login()
         {
             InitializeComponent();
+            txtContraseña.PasswordChar = '*';
+            btnMostrarContraseña.Visible = false;
+            cnLogin = new CN_Login();
         }
 
-        private void txtUsuario_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-
-            if (textBox.Text.Contains(" "))
-            {
-                errorInicioUsuario.SetError(textBox, "No se permiten espacios en este campo.");
-            }
-            else
-            {
-                errorInicioUsuario.SetError(textBox, ""); // Limpia el mensaje de error si no hay espacios.
-            }
-        }
-
-
-
+        int idUsuario = ContextoCompartido.UsuarioId;
+       
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             eliminarErrores();
-            if (txtContraseña.Text.Length > 0 && txtUsuario.Text.Length > 0)
+
+            // Obtener el usuarioDNI desde el campo de texto
+            int.TryParse(txtUsuario.Text, out int usuarioDNI);
+
+            // Obtener la contraseña desde el campo de texto
+            string contraseña = txtContraseña.Text.Trim();
+
+            // Obtener el hash de la contraseña almacenada en la base de datos
+            string hashAlmacenado = ObtenerHashContraseñaDesdeBD(usuarioDNI);
+
+            // Verificar la contraseña utilizando BCrypt
+            if (hashAlmacenado != null && (cnLogin.VerificarContraseña(usuarioDNI, contraseña) || BCrypt.Net.BCrypt.Verify(contraseña, hashAlmacenado)))
             {
-                string usuario = txtUsuario.Text;
-                string contraseña = txtContraseña.Text;
+                // Obtener el usuario desde la base de datos si es necesario para obtener su id_rol
+                int id_rol = cnLogin.ObtenerIdRol(usuarioDNI);
 
-                switch (usuario)
-                {
-                    case "admin":
-                        if (contraseña == "admin")
-                        {
-                            Form formAdm = new FormAdministrador();
-                            formAdm.Show();
-                            this.Hide();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Contraseña incorrecta para el perfil de administrador.");
-                        }
-                        break;
+                // Almacena el ID del usuario en el contexto compartido
+                ContextoCompartido.UsuarioId = cnLogin.ObtenerIdVendedor(usuarioDNI);
 
-                    case "gerente":
-                        if (contraseña == "gerente")
-                        {
-
-                            Form formGerente = new FormGerente();
-                            formGerente.Show();
-                            this.Hide();
-                            MessageBox.Show("¡Bienvenido, Gerente!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Contraseña incorrecta para el perfil de Gerente.");
-                        }
-                        break;
-
-                    case "vendedor":
-                        if (contraseña == "vendedor")
-                        {
-                            Form formVendedor = new FormVendedor();
-                            formVendedor.Show();
-                            this.Hide();
-                            MessageBox.Show("¡Bienvenido, vendedor!");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Contraseña incorrecta para el perfil de vendedor.");
-                        }
-                        break;
-
-                    default:
-                        MessageBox.Show("Usuario Inexistente");
-                        break;
-                }
+                // Abrir el formulario correspondiente según el rol del usuario
+                AbrirFormularioSegunRol(id_rol);
+                
             }
             else
             {
-                MessageBox.Show("Debe completar todos los campos");
+                MessageBox.Show("Credenciales incorrectas. Verificar usuario y contraseña.");
                 mostrarErrores();
             }
         }
 
-        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+
+        // Función para obtener el hash de la contraseña almacenada en la base de datos
+        private string ObtenerHashContraseñaDesdeBD(int usuarioDNI)
         {
-            //Validación para que no se pueda agregar espacios
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && char.IsWhiteSpace(e.KeyChar))
+            using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
             {
-                e.Handled = true;
+                var usuario = db.usuario.FirstOrDefault(u => u.DNI_usuario == usuarioDNI);
+                return usuario?.contraseña_usuario;
             }
         }
 
 
-
-        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
+        // lógica para abrir el formulario correspondiente
+        private void AbrirFormularioSegunRol(int id_rol)
         {
-            if (e.KeyChar == (char)Keys.Enter)
+            switch (id_rol)
             {
-                e.Handled = true;
-                // Llamar a la función de inicio de sesión
-                btnIngresar_Click(sender, e);
-            }
-            else if (e.KeyChar == ' ')
-            {
-                e.Handled = true;
+                case 1: // "administrador"
+                    FormAdministrador formAdm = new FormAdministrador();
+                    formAdm.Show();
+                    this.Hide();
+                    break;
+                case 2: // "gerente"
+                    FormGerente formGerente = new FormGerente();
+                    formGerente.Show();
+                    this.Hide();
+                    break;
+                case 3: // "vendedor"
+                    FormVendedor formVendedor = new FormVendedor();
+                    formVendedor.Show();
+                    this.Hide();
+                    break;
+                default:
+                    MessageBox.Show("Perfil no reconocido");
+                    break;
             }
         }
+
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
@@ -130,7 +113,7 @@ namespace capaPresentacion
             if (eleccion == DialogResult.Yes)
             {
                 // Si el usuario elige "Sí", cerrar la aplicación
-                Close();
+                Application.Exit();
             }
             // Si el usuario elige "No", no hacer nada y la aplicación continuará en ejecución
         }
@@ -160,6 +143,58 @@ namespace capaPresentacion
         {
             errorInicioUsuario.SetError(txtUsuario, "");
             errorInicioContraseña.SetError(txtContraseña, "");
+        }
+
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si el carácter es un número o una tecla de control (como "Borrar")
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
+                // Llamar a la función de inicio de sesión
+                btnIngresar_Click(sender, e);
+            }
+            else if (e.KeyChar == ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btnMostrarContraseña_Click(object sender, EventArgs e)
+        {
+            if (txtContraseña.PasswordChar == '\0') // Si es '\0', la contraseña está visible
+            {
+                txtContraseña.PasswordChar = '*'; // Cambia a '*' u otro carácter de tu elección
+            }
+            else
+            {
+                txtContraseña.PasswordChar = '\0'; // Muestra la contraseña
+            }
+        }
+
+        private void txtContraseña_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtContraseña.Text))
+            {
+                btnMostrarContraseña.Visible = true;
+            }
+            else
+            {
+                btnMostrarContraseña.Visible = false;
+            }
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

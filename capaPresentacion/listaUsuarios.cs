@@ -1,10 +1,14 @@
 ﻿using capaDatos;
+using capaDatos.Models;
+using capaNegocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,15 +20,210 @@ namespace capaPresentacion
 {
     public partial class listaUsuarios : Form
     {
-        private Image imagenPorDefecto;
+        private CN_Usuario cnUsuario = new CN_Usuario();
+        private CN_TipoRol cnTipoRol = new CN_TipoRol();
+
+        private List<usuario> usuarios;
+
         public listaUsuarios()
         {
             InitializeComponent();
             btnModificar.Enabled = false;
             btnEliminar.Enabled = false;
+            btnCambiarEstado.Visible = false;
+            // Configura la interfaz de usuario según sea necesario.
+            cnTipoRol = new CN_TipoRol(); // Inicializa cnTipoRol
+        }
 
+        private void listaUsuarios_Load(object sender, EventArgs e)
+        {
+            MostrarUsuarios();
+            MostrarTiposRol();
+            ConfigurarNombresColumnas();
+        }
+
+        private void MostrarUsuarios()
+        {
+            // Obtener solo los usuarios activos (estado = 1)
+            usuarios = cnUsuario.ObtenerUsuariosPorEstado(1);
+
+            // Asignar la lista de usuarios al DataSource del dataGridClientes
+            dataGridClientes.DataSource = usuarios;
+        }
+
+        private int ObtenerIdRolSeleccionado()
+        {
+            if (rbtnAdmin.Checked)
+            {
+                return 1; // ID del rol "administrador"
+            }
+            else if (rbtnGerente.Checked)
+            {
+                return 2; // ID del rol "gerente"
+            }
+            else if (rbtnVendedor.Checked)
+            {
+                return 3; // ID del rol "vendedor"
+            }
+
+            MessageBox.Show("Debe seleccionar un tipo de usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+             return 0;
+        }
+
+
+        private void MostrarTiposRol()
+        {
+            List<tipo_rol> tiposRol = cnTipoRol.ObtenerTiposRol();
+
+            if (tiposRol.Count >= 3)
+            {
+                rbtnAdmin.Text = tiposRol[0].descripcion_rol;
+                rbtnGerente.Text = tiposRol[1].descripcion_rol;
+                rbtnVendedor.Text = tiposRol[2].descripcion_rol;
+            }
+        }
+
+
+
+        private void btnAñadir_Click(object sender, EventArgs e)
+        {
+            int DNI;
+            if (!int.TryParse(txtDNI.Text, out DNI))
+            {
+                MessageBox.Show("El DNI debe ser un número válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int idRol = ObtenerIdRolSeleccionado();
+            string nombre = txtNombre.Text;
+            string apellido = txtApellido.Text;
+            string direccion = txtDireccion.Text;
+            string contraseña = txtContraseña.Text;
+
+            if (idRol == 0 || string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(apellido) || string.IsNullOrEmpty(direccion) || string.IsNullOrEmpty(contraseña))
+            {
+                MessageBox.Show("Todos los campos son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Preguntar al usuario si realmente desea agregar el nuevo usuario
+            DialogResult resultado = MessageBox.Show("¿Está seguro de que desea agregar este usuario?", "Confirmar Adición", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            // Verificar la respuesta del usuario
+            if (resultado == DialogResult.Yes)
+            {
+                // Verificar si ya existe un usuario con el mismo DNI
+                if (usuarios.Any(u => u.DNI_usuario == DNI))
+                {
+                    MessageBox.Show("Ya existe un usuario con el mismo DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    // Crear un objeto usuario con los datos obtenidos de los controles.
+                    var nuevoUsuario = new usuario
+                    {
+                        DNI_usuario = DNI,
+                        id_rol = idRol,
+                        nombre_usuario = nombre,
+                        apellido_usuario = apellido,
+                        direccion_usuario = direccion,
+                        contraseña_usuario = contraseña,
+                        estado = 1
+                    };
+
+                    // Llamar al método de la capa de negocio para agregar el usuario.
+                    cnUsuario.AgregarUsuario(nuevoUsuario);
+
+                   
+                    // Limpia los campos después de agregar el usuario.
+                    LimpiarCampos();
+                    MessageBox.Show("Usuario agregado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    // Actualizar la lista de usuarios si es necesario.
+                    MostrarUsuarios();
+                }
+            }
             
         }
+
+
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dataGridClientes.CurrentRow != null)
+            {
+                // Preguntar al usuario si realmente desea modificar el registro
+                DialogResult resultado = MessageBox.Show("¿Está seguro de que desea modificar este usuario?", "Confirmar Modificación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // Verificar la respuesta del usuario
+                if (resultado == DialogResult.Yes)
+                {
+                    var usuarioSeleccionado = ObtenerUsuarioSeleccionado();
+
+                    // Actualizar los datos del usuario seleccionado
+                    usuarioSeleccionado.DNI_usuario = int.Parse(txtDNI.Text);
+                    usuarioSeleccionado.id_rol = ObtenerIdRolSeleccionado();
+                    usuarioSeleccionado.nombre_usuario = txtNombre.Text;
+                    usuarioSeleccionado.apellido_usuario = txtApellido.Text;
+                    usuarioSeleccionado.direccion_usuario = txtDireccion.Text;
+
+                    // Obtener el valor del campo de contraseña
+                    string nuevaContraseña = txtContraseña.Text;
+
+                    // Llama al método de la capa de negocio para modificar el usuario
+                    cnUsuario.ModificarUsuario(usuarioSeleccionado, nuevaContraseña);
+
+                    // Vuelve a cargar la lista de usuarios
+                    MostrarUsuarios();
+
+                    // Limpia los campos después de modificar el usuario
+                    LimpiarCampos();
+                }
+            }
+        }
+
+
+
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dataGridClientes.CurrentRow != null)
+            {
+                // Preguntar al usuario si realmente desea eliminar el registro
+                DialogResult resultado = MessageBox.Show("¿Está seguro de que desea eliminar este usuario?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // Verificar la respuesta del usuario
+                if (resultado == DialogResult.Yes)
+                {
+                    var usuarioSeleccionado = ObtenerUsuarioSeleccionado();
+                    cnUsuario.DarDeBajaUsuario(usuarioSeleccionado.id_usuario);
+                    MostrarUsuarios();
+                    LimpiarCampos();
+                }
+              
+            }
+        }
+
+
+        private usuario ObtenerUsuarioSeleccionado()
+        {
+            int idUsuario = (int)dataGridClientes.CurrentRow.Cells["id_usuario"].Value;
+            return usuarios.Find(u => u.id_usuario == idUsuario);
+        }
+
+
+        private void LimpiarCampos()
+        {
+            txtDNI.Clear();
+            txtNombre.Clear();
+            txtApellido.Clear();
+            txtDireccion.Clear();
+            txtContraseña.Clear();   
+            btnModificar.Enabled = false;
+            btnEliminar.Enabled = false;
+        }
+
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -66,274 +265,18 @@ namespace capaPresentacion
             }
         }
 
-        //Envia la celda determinada a su textbox correspondiente
-        private void dataGridClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (dataGridClientes.CurrentRow != null && dataGridClientes.CurrentRow.Cells.Count >= 8)
-                {
-                    txtNombre.Text = dataGridClientes.CurrentRow.Cells[0].Value.ToString();
-                    txtApellido.Text = dataGridClientes.CurrentRow.Cells[1].Value.ToString();
-                    txtUsuario.Text = dataGridClientes.CurrentRow.Cells[2].Value.ToString();
-                    txtDNI.Text = dataGridClientes.CurrentRow.Cells[3].Value.ToString();
-                    txtDireccion.Text = dataGridClientes.CurrentRow.Cells[4].Value.ToString();
-                    txtContraseña.Text = dataGridClientes.CurrentRow.Cells[5].Value.ToString();
-
-                    // Recuperar el perfil actual
-                    string perfilActual = dataGridClientes.CurrentRow.Cells[6].Value.ToString();
-
-                    // Asignar el perfil actual a los radio buttons
-                    if (perfilActual == "Admin")
-                    {
-                        rbtnAdmin.Checked = true;
-                    }
-                    else if (perfilActual == "Gerente")
-                    {
-                        rbtnGerente.Checked = true;
-                    }
-                    else if (perfilActual == "Vendedor")
-                    {
-                        rbtnVendedor.Checked = true;
-                    }
-                
-                    Image imagen = (Image)dataGridClientes.CurrentRow.Cells[7].Value as System.Drawing.Image;
-                    pBoxAvatar.Image = imagen;
-                    btnModificar.Enabled = true;
-                    btnEliminar.Enabled = true;
-                }
-                else
-                {
-                    // Mostrar un mensaje de error o realizar alguna otra acción apropiada cuando no hay elementos seleccionados o no hay suficientes columnas.
-                    MessageBox.Show("No se ha seleccionado un usuario válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejar cualquier otra excepción que pueda ocurrir durante la recuperación de datos.
-                MessageBox.Show("Se ha producido un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnAñadir_Click(object sender, EventArgs e)
-        {
-            if (txtApellido.Text.Length > 0 && txtContraseña.Text.Length > 0 &&
-                txtDireccion.Text.Length > 0 && txtDNI.Text.Length > 0 &&
-                txtNombre.Text.Length > 0 && txtUsuario.Text.Length > 0 &&
-                pBoxAvatar.Image != null)
-            {
-                // Verifica si el usuario ya existe
-                if (UsuarioYaExiste(txtUsuario.Text, int.Parse(txtDNI.Text)))
-                {
-                    MessageBox.Show("El usuario se encuentra registrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-
-                    // Agregamos el usuario en esta parte
-                    string perfil = rbtnAdmin.Checked ? "Admin" : (rbtnGerente.Checked ? "Gerente" : "Vendedor");
-
-                    dataGridClientes.Rows.Add(txtNombre.Text, txtApellido.Text, txtUsuario.Text,
-                        txtDNI.Text, txtDireccion.Text, txtContraseña.Text, perfil, pBoxAvatar.Image);
-
-                    txtApellido.Clear();
-                    txtContraseña.Clear();
-                    txtDireccion.Clear();
-                    txtNombre.Clear();
-                    txtUsuario.Clear();
-                    txtDNI.Clear();
-
-                    pBoxAvatar.Image = imagenPorDefecto;
-                    btnModificar.Enabled = false;
-                    btnEliminar.Enabled = false;
-
-                 
-                    MessageBox.Show("Usuario Agregado", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else
-            {
-                MessageBox.Show("No ingresaste todos los datos necesarios para poder añadir un usuario.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnEliminar_Click_1(object sender, EventArgs e)
-        {
-            if (txtApellido.Text.Length > 0 && txtContraseña.Text.Length > 0 &&
-                txtDireccion.Text.Length > 0 && txtDNI.Text.Length > 0 &&
-                txtNombre.Text.Length > 0 && txtUsuario.Text.Length > 0 &&
-                pBoxAvatar.Image != null)
-            {
-                //Confirmación para poder eliminar un usuario
-                DialogResult eleccion = MessageBox.Show("¿Confirmar Eliminación?", "Eliminar Usuario", MessageBoxButtons.YesNo);
-                {
-                    //Elección en el caso que si, guarda los datos
-                    if (eleccion == DialogResult.Yes)
-                    {
-                        dataGridClientes.Rows.Remove(dataGridClientes.CurrentRow);
-
-                        txtApellido.Clear();
-                        txtContraseña.Clear();
-                        txtDireccion.Clear();
-                        txtNombre.Clear();
-                        txtUsuario.Clear();
-                        txtDNI.Clear();
-                        pBoxAvatar.Image = imagenPorDefecto;
-
-                        MessageBox.Show("Usuario Eliminado", "Eliminación Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        btnModificar.Enabled = false;
-                        btnEliminar.Enabled = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Usuario no eliminado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un usuario de la lista antes de eliminarlo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnModificar_Click_1(object sender, EventArgs e)
-        {
-            if (txtApellido.Text.Length > 0 && txtContraseña.Text.Length > 0 &&
-                txtDireccion.Text.Length > 0 && txtDNI.Text.Length > 0 &&
-                txtNombre.Text.Length > 0 && txtUsuario.Text.Length > 0 &&
-                pBoxAvatar.Image != null)
-            {
-                //Confirmación para poder modificar un usuario
-                DialogResult eleccion = MessageBox.Show("¿Confirmar modificación?", "Modificación Usuario", MessageBoxButtons.YesNo);
-                {
-                    //Elección en el caso que si, guarda los datos
-                    if (eleccion == DialogResult.Yes)
-                    {
-                        dataGridClientes.CurrentRow.Cells[0].Value = txtNombre.Text;
-                        dataGridClientes.CurrentRow.Cells[1].Value = txtApellido.Text;
-                        dataGridClientes.CurrentRow.Cells[2].Value = txtUsuario.Text;
-                        dataGridClientes.CurrentRow.Cells[3].Value = txtDNI.Text;
-                        dataGridClientes.CurrentRow.Cells[4].Value = txtDireccion.Text;
-                        dataGridClientes.CurrentRow.Cells[5].Value = txtContraseña.Text;
-
-                        // Actualiza el perfil en función de los radio buttons
-                        if (rbtnAdmin.Checked)
-                        {
-                            dataGridClientes.CurrentRow.Cells[6].Value = "Admin";
-                        }
-                        else if (rbtnGerente.Checked)
-                        {
-                            dataGridClientes.CurrentRow.Cells[6].Value = "Gerente";
-                        }
-                        else if (rbtnVendedor.Checked)
-                        {
-                            dataGridClientes.CurrentRow.Cells[6].Value = "Vendedor";
-                        }
-                        else
-                        {
-                            MessageBox.Show("Seleccione una opción");
-                        }
-
-                        dataGridClientes.CurrentRow.Cells[7].Value = pBoxAvatar.Image;
-                        System.Drawing.Image imagen = dataGridClientes.CurrentRow.Cells[7].Value as System.Drawing.Image;
-                        pBoxAvatar.Image = imagen;
-
-                        txtApellido.Clear();
-                        txtContraseña.Clear();
-                        txtDireccion.Clear();
-                        txtNombre.Clear();
-                        txtUsuario.Clear();
-                        txtDNI.Clear();
-                        pBoxAvatar.Image = imagenPorDefecto;
-
-                        btnModificar.Enabled = false;
-                        btnEliminar.Enabled = false;
-
-                        MessageBox.Show("Se modificaron correctamente los datos", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Usuario no modificado", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Debe seleccionar un usuario de la lista antes de modificarlo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        private void btnAñadirAvatar_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog avatar = new OpenFileDialog();
-            avatar.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.gif;*.bmp"; // Filtra por extensiones de imágenes comunes
-            if (avatar.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    // Intenta cargar el archivo como una imagen
-                    Image img = Image.FromFile(avatar.FileName);
-
-                    // Verifica si es una imagen válida
-                    if (EsImagenValida(img))
-                    {
-                        pBoxAvatar.BackgroundImage = null;
-                        pBoxAvatar.Image = img;
-                    }
-                    else
-                    {
-                        MessageBox.Show("El archivo seleccionado no es una imagen válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al cargar la imagen: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private bool EsImagenValida(Image img)
-        {
-            if (img != null)
-            {
-                // Puedes agregar más validaciones si es necesario, como tamaño máximo, resolución, etc.
-                return true;
-            }
-            return false;
-        }
-
-        private void listaUsuarios_Load(object sender, EventArgs e)
-        {
-
-
-
-
-            //Image imagenPorDefecto = Properties.Resources.usuario_verificado;
-            //pBoxAvatar.Image = imagenPorDefecto;
-
-
-            //Cargamos de manera local
-
-            //dataGridClientes.Rows.Add("Leandro", "Moraes", "leandromoraes", 1228, "dirección 1", "contraseña", "admin", imagenPorDefecto);
-            //dataGridClientes.Rows.Add("usuario1", "user1", "usuario1", 1234, "dirección 1", "contraseña", "vendedor", imagenPorDefecto);
-            //dataGridClientes.Rows.Add("usuario2", "user2", "usuario2", 4321, "dirección 1", "contraseña", "gerente", imagenPorDefecto);
-
-            
-
-        }
+        
 
         public void MostrarSoloDataGridClientes()
         {
             foreach (Control control in this.Controls)
             {
-                if (control != dataGridClientes )
+                if (control != dataGridClientes)
                 {
                     control.Visible = false;
                 }
             }
-           
+
             // Se definio un color personalizado
             Color miColor = Color.FromArgb(49, 66, 82);
 
@@ -346,7 +289,7 @@ namespace capaPresentacion
             dataGridClientes.Width = 1123; // Establecer el ancho deseado
             dataGridClientes.Height = 615; // Establecer la altura deseada
             label1.Visible = true;
-            
+
 
             // Cambia la ubicación del DataGridView
             int x = 0; // Cambia esto a la posición X deseada
@@ -369,55 +312,152 @@ namespace capaPresentacion
             int lblBuscarY = 70;
             lblBuscar.Location = new Point(lblBuscarX, lblBuscarY);
 
+        }
+
+        private void dataGridClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (dataGridClientes.CurrentRow != null && dataGridClientes.CurrentRow.Cells.Count >= 8)
+                {
+                    txtDNI.Text = dataGridClientes.CurrentRow.Cells[1].Value.ToString();
+                    txtNombre.Text = dataGridClientes.CurrentRow.Cells[3].Value.ToString();
+                    txtApellido.Text = dataGridClientes.CurrentRow.Cells[4].Value.ToString();
+                    txtDireccion.Text = dataGridClientes.CurrentRow.Cells[5].Value.ToString();
+                    //txtContraseña.Text = dataGridClientes.CurrentRow.Cells[6].Value.ToString();
+
+                    // Recuperar el perfil actual
+                    string perfilActual = dataGridClientes.CurrentRow.Cells[2].Value.ToString();
+
+                    // Asignar el perfil actual a los radio buttons
+                    switch (perfilActual)
+                    {
+                        case "administrador":
+                            rbtnAdmin.Checked = true;
+                            break;
+                        case "gerente":
+                            rbtnGerente.Checked = true;
+                            break;
+                        case "vendedor":
+                            rbtnVendedor.Checked = true;
+                            break;
+                        default:
+                            // Puedes manejar el caso en el que el perfil no coincide con ninguno de los casos anteriores.
+                            break;
+                    }
+
+                    btnModificar.Enabled = true;
+                    btnEliminar.Enabled = true;
+                }
+                else
+                {
+                    // Mostrar un mensaje de error o realizar alguna otra acción apropiada cuando no hay elementos seleccionados o no hay suficientes columnas.
+                    MessageBox.Show("No se ha seleccionado un usuario válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier otra excepción que pueda ocurrir durante la recuperación de datos.
+                MessageBox.Show("Se ha producido un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
+
+       
+
+        
+
+        private void btnCambiarEstado_Click(object sender, EventArgs e)
+        {
+            if (dataGridClientes.CurrentRow != null)
+            {
+                int idUsuario = (int)dataGridClientes.CurrentRow.Cells["id_usuario"].Value;
+
+                // Mensaje de confirmación antes de cambiar el estado
+                DialogResult result = MessageBox.Show("¿Está seguro de cambiar el estado del usuario?", "Confirmar Cambio de Estado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    int nuevoEstado = (estadoActual == 1) ? 0 : 1;
+
+                    cnUsuario.CambiarEstadoUsuario(idUsuario, nuevoEstado);
+
+                    // Vuelve a cargar la lista de usuarios según el estado actual
+                    var usuarios = cnUsuario.ObtenerUsuariosPorEstado(estadoActual);
+                    dataGridClientes.DataSource = usuarios;
+
+                    // Mostrar u ocultar el botón "Cambiar Estado" según el estado actual
+                    btnCambiarEstado.Visible = (estadoActual == 0);
+                    btnCambiarEstado.Enabled = (estadoActual == 0);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un usuario antes de cambiar el estado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            string encontrarCliente = txtBuscar.Text;
-            bool encontrado = false;
+            string textoBusqueda = txtBuscar.Text;
 
-            foreach (DataGridViewRow recorrer in dataGridClientes.Rows)
-            {
-                if (recorrer.Cells[2].Value.ToString().IndexOf(encontrarCliente, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    recorrer.Cells[3].Value.ToString().IndexOf(encontrarCliente, StringComparison.OrdinalIgnoreCase) >= 0)
-                {
-                    recorrer.Visible = true;
-                    encontrado = true;
-                }
-                else
-                {
-                    recorrer.Visible = false;
-                }
-            }
+            // Llamar al método de búsqueda en la capa de negocios según el estado actual
+            List<usuario> resultados = cnUsuario.BuscarUsuariosPorDNIEnTiempoReal(textoBusqueda, estadoActual);
 
-            if (!encontrado)
-            {
-                // Si no se encuentra ningún cliente, muestra todas las filas
-                foreach (DataGridViewRow recorrer in dataGridClientes.Rows)
-                {
-                    recorrer.Visible = true;
-                }
-            }
+            // Actualizar el DataSource del DataGridView con los resultados
+            dataGridClientes.DataSource = resultados;
         }
 
-        private bool UsuarioYaExiste(string nombreUsuario, int dni)
+        private void ConfigurarNombresColumnas()
         {
-            foreach (DataGridViewRow row in dataGridClientes.Rows)
-            {
-                string usuarioExistente = row.Cells[2].Value.ToString();
-                int dniExistente = Convert.ToInt32(row.Cells[3].Value);
 
-                if (usuarioExistente.Equals(nombreUsuario, StringComparison.OrdinalIgnoreCase) || dniExistente == dni)
-                {
-                    return true; // El usuario ya existe
-                }
-            }
+            // Ocultar columnas que no deseas mostrar
+            dataGridClientes.Columns["RegistroUsuario"].Visible = false;
+            dataGridClientes.Columns["tipo_rol"].Visible = false;
+            dataGridClientes.Columns["venta"].Visible = false;
+            dataGridClientes.Columns["estado"].Visible = false;
 
-            return false; // El usuario no existe
+            // Cambiar el nombre de las columnas programáticamente
+            dataGridClientes.Columns["id_usuario"].HeaderText = "ID";
+            dataGridClientes.Columns["DNI_usuario"].HeaderText = "DNI";
+            dataGridClientes.Columns["nombre_usuario"].HeaderText = "Nombre";
+            dataGridClientes.Columns["apellido_usuario"].HeaderText = "Apellido";
+            dataGridClientes.Columns["direccion_usuario"].HeaderText = "Dirección";
+            dataGridClientes.Columns["contraseña_usuario"].HeaderText = "Contraseña";
+            
+          
         }
 
+        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                // Si no es un número ni la tecla de retroceso, suprimir el carácter ingresado
+                e.Handled = true;
+            }
+        }
+        private int estadoActual = 1; // 1 para usuarios activos, 0 para usuarios inactivos
+        private void btnVerInactivos_Click_1(object sender, EventArgs e)
+        {
+            btnCambiarEstado.Visible = true;
+
+            // Alterna entre usuarios activos e inactivos con cada clic
+            estadoActual = (estadoActual == 1) ? 0 : 1;
+
+            var usuarios = cnUsuario.ObtenerUsuariosPorEstado(estadoActual);
+            dataGridClientes.DataSource = usuarios;
+
+            // Oculta el botón "Cambiar Estado" si estamos mostrando usuarios activos
+            btnCambiarEstado.Visible = (estadoActual == 0);
+            btnCambiarEstado.Enabled = (estadoActual == 0);
+
+            btnAñadir.Visible = (estadoActual == 1);
+            btnModificar.Visible = (estadoActual == 1);
+            btnEliminar.Visible = (estadoActual == 1);
+        }
     }
 }
+    
+
 

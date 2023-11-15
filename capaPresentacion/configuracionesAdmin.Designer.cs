@@ -35,6 +35,7 @@
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
             this.panel = new System.Windows.Forms.Panel();
+            this.txtSubir = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             this.panel.SuspendLayout();
@@ -56,11 +57,11 @@
             this.btnBackup.IconChar = FontAwesome.Sharp.IconChar.None;
             this.btnBackup.IconColor = System.Drawing.Color.Black;
             this.btnBackup.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnBackup.Location = new System.Drawing.Point(577, 263);
+            this.btnBackup.Location = new System.Drawing.Point(618, 258);
             this.btnBackup.Name = "btnBackup";
             this.btnBackup.Size = new System.Drawing.Size(206, 69);
             this.btnBackup.TabIndex = 1;
-            this.btnBackup.Text = "Backup";
+            this.btnBackup.Text = "Copia DB";
             this.btnBackup.UseVisualStyleBackColor = true;
             this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
             // 
@@ -70,11 +71,11 @@
             this.btnRestore.IconChar = FontAwesome.Sharp.IconChar.None;
             this.btnRestore.IconColor = System.Drawing.Color.Black;
             this.btnRestore.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnRestore.Location = new System.Drawing.Point(316, 263);
+            this.btnRestore.Location = new System.Drawing.Point(304, 258);
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.Size = new System.Drawing.Size(206, 69);
             this.btnRestore.TabIndex = 2;
-            this.btnRestore.Text = "Restore";
+            this.btnRestore.Text = "Restaurar DB";
             this.btnRestore.UseVisualStyleBackColor = true;
             this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
@@ -96,7 +97,7 @@
             this.iconPictureBox1.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconPictureBox1.IconSize = 81;
-            this.iconPictureBox1.Location = new System.Drawing.Point(645, 352);
+            this.iconPictureBox1.Location = new System.Drawing.Point(686, 347);
             this.iconPictureBox1.Name = "iconPictureBox1";
             this.iconPictureBox1.Size = new System.Drawing.Size(85, 81);
             this.iconPictureBox1.TabIndex = 4;
@@ -110,7 +111,7 @@
             this.iconPictureBox2.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconPictureBox2.IconSize = 81;
-            this.iconPictureBox2.Location = new System.Drawing.Point(367, 352);
+            this.iconPictureBox2.Location = new System.Drawing.Point(355, 347);
             this.iconPictureBox2.Name = "iconPictureBox2";
             this.iconPictureBox2.Size = new System.Drawing.Size(85, 81);
             this.iconPictureBox2.TabIndex = 5;
@@ -121,6 +122,7 @@
             this.panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel.Controls.Add(this.txtSubir);
             this.panel.Controls.Add(this.iconPictureBox2);
             this.panel.Controls.Add(this.btnRestore);
             this.panel.Controls.Add(this.iconPictureBox1);
@@ -129,6 +131,13 @@
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(1117, 616);
             this.panel.TabIndex = 6;
+            // 
+            // txtSubir
+            // 
+            this.txtSubir.Location = new System.Drawing.Point(340, 434);
+            this.txtSubir.Name = "txtSubir";
+            this.txtSubir.Size = new System.Drawing.Size(115, 20);
+            this.txtSubir.TabIndex = 6;
             // 
             // configuracionesAdmin
             // 
@@ -145,6 +154,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
             this.panel.ResumeLayout(false);
+            this.panel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,5 +169,6 @@
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox2;
         private System.Windows.Forms.Panel panel;
+        private System.Windows.Forms.TextBox txtSubir;
     }
 }

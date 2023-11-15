@@ -1,0 +1,26 @@
+Proyecto Librería Moraes - Credenciales
+
+Perfil Administrador.
+
+DNI: 1111
+PW: admin
+
+o
+
+DNI: 42743277
+PW: leandro123
+
+Perfil Gerente.
+
+DNI: 2222
+PW: gerente
+
+Perfil Vendedor.
+
+DNI: 3333
+PW: vendedor
+
+o
+
+DNI: 92512026
+PW: gustavo123

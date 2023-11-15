@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using capaNegocio;
 using capaPresentacion;
 
 namespace capaPresentacion
@@ -33,6 +34,7 @@ namespace capaPresentacion
             panelContenedor.Controls.Add(lblMensaje);
             panelContenedor.Controls.Add(pBoxInicio);
         }
+
     }
 }
 

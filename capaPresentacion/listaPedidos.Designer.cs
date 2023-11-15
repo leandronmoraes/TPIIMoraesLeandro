@@ -44,19 +44,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.fecha = new System.Windows.Forms.DateTimePicker();
             this.dgvPedidos = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.nombreproducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proveedor1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.direccion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaPedido1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.lblBuscar = new System.Windows.Forms.Label();
             this.btnAñadir = new FontAwesome.Sharp.IconButton();
-            this.btnModificar = new FontAwesome.Sharp.IconButton();
             this.btnEliminar = new FontAwesome.Sharp.IconButton();
             this.lblOperaciones = new System.Windows.Forms.Label();
             this.cmbProveedor = new System.Windows.Forms.ComboBox();
+            this.btnBuscarProducto = new FontAwesome.Sharp.IconButton();
+            this.btnLimpiarProducto = new FontAwesome.Sharp.IconButton();
+            this.lblListaPedidos = new System.Windows.Forms.Label();
+            this.btnConfirmarPedido = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,15 +70,17 @@
             // 
             this.txtCantidad.Location = new System.Drawing.Point(212, 96);
             this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(154, 20);
+            this.txtCantidad.Size = new System.Drawing.Size(205, 20);
             this.txtCantidad.TabIndex = 28;
+            this.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // txtNombreProducto
             // 
             this.txtNombreProducto.Location = new System.Drawing.Point(212, 63);
             this.txtNombreProducto.Name = "txtNombreProducto";
-            this.txtNombreProducto.Size = new System.Drawing.Size(154, 20);
+            this.txtNombreProducto.ReadOnly = true;
+            this.txtNombreProducto.Size = new System.Drawing.Size(205, 20);
             this.txtNombreProducto.TabIndex = 27;
             // 
             // lblNombre
@@ -124,7 +121,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(212, 163);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(154, 62);
+            this.txtDescripcion.Size = new System.Drawing.Size(205, 62);
             this.txtDescripcion.TabIndex = 36;
             // 
             // label1
@@ -143,7 +140,7 @@
             this.lblDireccion.AutoSize = true;
             this.lblDireccion.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDireccion.ForeColor = System.Drawing.Color.White;
-            this.lblDireccion.Location = new System.Drawing.Point(34, 231);
+            this.lblDireccion.Location = new System.Drawing.Point(34, 228);
             this.lblDireccion.Name = "lblDireccion";
             this.lblDireccion.Size = new System.Drawing.Size(87, 21);
             this.lblDireccion.TabIndex = 37;
@@ -151,9 +148,9 @@
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(212, 234);
+            this.txtDireccion.Location = new System.Drawing.Point(212, 231);
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(154, 20);
+            this.txtDireccion.Size = new System.Drawing.Size(205, 20);
             this.txtDireccion.TabIndex = 38;
             // 
             // label3
@@ -161,7 +158,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(430, 63);
+            this.label3.Location = new System.Drawing.Point(523, 30);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 21);
             this.label3.TabIndex = 39;
@@ -169,7 +166,7 @@
             // 
             // fecha
             // 
-            this.fecha.Location = new System.Drawing.Point(553, 64);
+            this.fecha.Location = new System.Drawing.Point(646, 31);
             this.fecha.Name = "fecha";
             this.fecha.Size = new System.Drawing.Size(233, 20);
             this.fecha.TabIndex = 40;
@@ -190,13 +187,6 @@
             this.dgvPedidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPedidos.ColumnHeadersHeight = 15;
             this.dgvPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.dgvPedidos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nombreproducto,
-            this.cantidad1,
-            this.proveedor1,
-            this.descripcion1,
-            this.direccion1,
-            this.fechaPedido1});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -235,67 +225,12 @@
             this.dgvPedidos.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvPedidos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPedidos_CellDoubleClick);
             // 
-            // nombreproducto
-            // 
-            this.nombreproducto.HeaderText = "Producto";
-            this.nombreproducto.Name = "nombreproducto";
-            this.nombreproducto.ReadOnly = true;
-            // 
-            // cantidad1
-            // 
-            this.cantidad1.HeaderText = "Cantidad";
-            this.cantidad1.Name = "cantidad1";
-            this.cantidad1.ReadOnly = true;
-            // 
-            // proveedor1
-            // 
-            this.proveedor1.HeaderText = "Proveedor";
-            this.proveedor1.Name = "proveedor1";
-            this.proveedor1.ReadOnly = true;
-            // 
-            // descripcion1
-            // 
-            this.descripcion1.HeaderText = "Descripción";
-            this.descripcion1.Name = "descripcion1";
-            this.descripcion1.ReadOnly = true;
-            // 
-            // direccion1
-            // 
-            this.direccion1.HeaderText = "Dirección";
-            this.direccion1.Name = "direccion1";
-            this.direccion1.ReadOnly = true;
-            // 
-            // fechaPedido1
-            // 
-            this.fechaPedido1.HeaderText = "Fecha Pedido";
-            this.fechaPedido1.Name = "fechaPedido1";
-            this.fechaPedido1.ReadOnly = true;
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Location = new System.Drawing.Point(212, 285);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(154, 20);
-            this.txtBuscar.TabIndex = 43;
-            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
-            // 
-            // lblBuscar
-            // 
-            this.lblBuscar.AutoSize = true;
-            this.lblBuscar.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBuscar.ForeColor = System.Drawing.Color.White;
-            this.lblBuscar.Location = new System.Drawing.Point(32, 285);
-            this.lblBuscar.Name = "lblBuscar";
-            this.lblBuscar.Size = new System.Drawing.Size(119, 21);
-            this.lblBuscar.TabIndex = 42;
-            this.lblBuscar.Text = "Buscar Pedido";
-            // 
             // btnAñadir
             // 
-            this.btnAñadir.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            this.btnAñadir.IconChar = FontAwesome.Sharp.IconChar.ParachuteBox;
             this.btnAñadir.IconColor = System.Drawing.Color.Black;
             this.btnAñadir.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnAñadir.IconSize = 50;
+            this.btnAñadir.IconSize = 49;
             this.btnAñadir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAñadir.Location = new System.Drawing.Point(896, 84);
             this.btnAñadir.Name = "btnAñadir";
@@ -306,34 +241,18 @@
             this.btnAñadir.UseVisualStyleBackColor = true;
             this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
             // 
-            // btnModificar
-            // 
-            this.btnModificar.IconChar = FontAwesome.Sharp.IconChar.UserGear;
-            this.btnModificar.IconColor = System.Drawing.Color.Black;
-            this.btnModificar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnModificar.IconSize = 50;
-            this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new System.Drawing.Point(896, 182);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(144, 43);
-            this.btnModificar.TabIndex = 46;
-            this.btnModificar.Text = "Modificar Pedido";
-            this.btnModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
             // btnEliminar
             // 
-            this.btnEliminar.IconChar = FontAwesome.Sharp.IconChar.UserXmark;
+            this.btnEliminar.IconChar = FontAwesome.Sharp.IconChar.HouseCircleXmark;
             this.btnEliminar.IconColor = System.Drawing.Color.Black;
             this.btnEliminar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnEliminar.IconSize = 50;
+            this.btnEliminar.IconSize = 49;
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEliminar.Location = new System.Drawing.Point(896, 132);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(144, 44);
             this.btnEliminar.TabIndex = 45;
-            this.btnEliminar.Text = "Eliminar Pedido";
+            this.btnEliminar.Text = "Cancelar Pedido";
             this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -350,6 +269,7 @@
             // 
             // cmbProveedor
             // 
+            this.cmbProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProveedor.FormattingEnabled = true;
             this.cmbProveedor.Items.AddRange(new object[] {
             "Proveedor1",
@@ -357,8 +277,62 @@
             "Proveedor3"});
             this.cmbProveedor.Location = new System.Drawing.Point(212, 132);
             this.cmbProveedor.Name = "cmbProveedor";
-            this.cmbProveedor.Size = new System.Drawing.Size(154, 21);
+            this.cmbProveedor.Size = new System.Drawing.Size(205, 21);
             this.cmbProveedor.TabIndex = 48;
+            // 
+            // btnBuscarProducto
+            // 
+            this.btnBuscarProducto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBuscarProducto.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnBuscarProducto.IconColor = System.Drawing.Color.Black;
+            this.btnBuscarProducto.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnBuscarProducto.Location = new System.Drawing.Point(437, 60);
+            this.btnBuscarProducto.Name = "btnBuscarProducto";
+            this.btnBuscarProducto.Size = new System.Drawing.Size(97, 23);
+            this.btnBuscarProducto.TabIndex = 51;
+            this.btnBuscarProducto.Text = "Buscar Producto";
+            this.btnBuscarProducto.UseVisualStyleBackColor = true;
+            this.btnBuscarProducto.Click += new System.EventHandler(this.btnBuscarProducto_Click);
+            // 
+            // btnLimpiarProducto
+            // 
+            this.btnLimpiarProducto.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnLimpiarProducto.IconColor = System.Drawing.Color.Black;
+            this.btnLimpiarProducto.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnLimpiarProducto.Location = new System.Drawing.Point(549, 60);
+            this.btnLimpiarProducto.Name = "btnLimpiarProducto";
+            this.btnLimpiarProducto.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiarProducto.TabIndex = 57;
+            this.btnLimpiarProducto.Text = "Limpiar Producto";
+            this.btnLimpiarProducto.UseVisualStyleBackColor = true;
+            this.btnLimpiarProducto.Click += new System.EventHandler(this.btnLimpiarProducto_Click);
+            // 
+            // lblListaPedidos
+            // 
+            this.lblListaPedidos.AutoSize = true;
+            this.lblListaPedidos.Font = new System.Drawing.Font("Century Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblListaPedidos.ForeColor = System.Drawing.Color.White;
+            this.lblListaPedidos.Location = new System.Drawing.Point(337, 275);
+            this.lblListaPedidos.Name = "lblListaPedidos";
+            this.lblListaPedidos.Size = new System.Drawing.Size(450, 39);
+            this.lblListaPedidos.TabIndex = 58;
+            this.lblListaPedidos.Text = "Lista de Pedidos Pendientes";
+            // 
+            // btnConfirmarPedido
+            // 
+            this.btnConfirmarPedido.IconChar = FontAwesome.Sharp.IconChar.PeopleCarryBox;
+            this.btnConfirmarPedido.IconColor = System.Drawing.Color.Black;
+            this.btnConfirmarPedido.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnConfirmarPedido.IconSize = 49;
+            this.btnConfirmarPedido.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConfirmarPedido.Location = new System.Drawing.Point(896, 182);
+            this.btnConfirmarPedido.Name = "btnConfirmarPedido";
+            this.btnConfirmarPedido.Size = new System.Drawing.Size(144, 44);
+            this.btnConfirmarPedido.TabIndex = 59;
+            this.btnConfirmarPedido.Text = "Confirmar Pedido";
+            this.btnConfirmarPedido.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnConfirmarPedido.UseVisualStyleBackColor = true;
+            this.btnConfirmarPedido.Click += new System.EventHandler(this.btnConfirmarPedido_Click);
             // 
             // listaPedidos
             // 
@@ -366,13 +340,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(1103, 612);
+            this.Controls.Add(this.btnConfirmarPedido);
+            this.Controls.Add(this.lblListaPedidos);
+            this.Controls.Add(this.btnLimpiarProducto);
+            this.Controls.Add(this.btnBuscarProducto);
             this.Controls.Add(this.cmbProveedor);
             this.Controls.Add(this.btnAñadir);
-            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.lblOperaciones);
-            this.Controls.Add(this.txtBuscar);
-            this.Controls.Add(this.lblBuscar);
             this.Controls.Add(this.dgvPedidos);
             this.Controls.Add(this.fecha);
             this.Controls.Add(this.label3);
@@ -389,6 +364,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "listaPedidos";
             this.Text = "listaPedidos";
+            this.Load += new System.EventHandler(this.listaPedidos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -409,19 +385,14 @@
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker fecha;
-        private System.Windows.Forms.TextBox txtBuscar;
-        private System.Windows.Forms.Label lblBuscar;
         private FontAwesome.Sharp.IconButton btnAñadir;
-        private FontAwesome.Sharp.IconButton btnModificar;
         private FontAwesome.Sharp.IconButton btnEliminar;
         private System.Windows.Forms.Label lblOperaciones;
         private Guna.UI2.WinForms.Guna2DataGridView dgvPedidos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombreproducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proveedor1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn direccion1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechaPedido1;
         private System.Windows.Forms.ComboBox cmbProveedor;
+        private FontAwesome.Sharp.IconButton btnBuscarProducto;
+        private FontAwesome.Sharp.IconButton btnLimpiarProducto;
+        private System.Windows.Forms.Label lblListaPedidos;
+        private FontAwesome.Sharp.IconButton btnConfirmarPedido;
     }
 }

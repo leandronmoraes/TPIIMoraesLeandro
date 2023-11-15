@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CapaEntidad;
+using capaDatos.Models;
 
 namespace capaNegocio
 {
     public class CN_Cliente
     {
-        public static List<capaDatos.cliente> Get ()
+        public static List<capaDatos.Models.cliente> Get ()
         {
-            using (capaDatos.ProyectoTPII_MoraesLeandroEntities db = new capaDatos.ProyectoTPII_MoraesLeandroEntities())
+            using (capaDatos.Models.ProyectoTPII_MoraesLeandroEntities db = new capaDatos.Models.ProyectoTPII_MoraesLeandroEntities())
             {
                 return db.cliente.ToList();
             }

@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "capaPresentacion", "capaPre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "capaDatos", "capaDatos\capaDatos.csproj", "{3E9F61C8-DCF4-470A-91E3-35E75D84EB58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaEntidad", "CapaEntidad\CapaEntidad.csproj", "{0E640468-E4BE-4956-8C3C-B371F99E44A9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "capaNegocio", "capaNegocio\capaNegocio.csproj", "{EC77C332-7C51-4392-8471-FADA65240615}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{3E9F61C8-DCF4-470A-91E3-35E75D84EB58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E9F61C8-DCF4-470A-91E3-35E75D84EB58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E9F61C8-DCF4-470A-91E3-35E75D84EB58}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E640468-E4BE-4956-8C3C-B371F99E44A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E640468-E4BE-4956-8C3C-B371F99E44A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E640468-E4BE-4956-8C3C-B371F99E44A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E640468-E4BE-4956-8C3C-B371F99E44A9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EC77C332-7C51-4392-8471-FADA65240615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC77C332-7C51-4392-8471-FADA65240615}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC77C332-7C51-4392-8471-FADA65240615}.Release|Any CPU.ActiveCfg = Release|Any CPU

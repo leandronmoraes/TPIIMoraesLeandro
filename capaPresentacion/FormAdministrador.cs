@@ -11,12 +11,18 @@ using System.Runtime.InteropServices;
 using FontAwesome.Sharp;
 using System.Windows.Media;
 using capaPresentacion;
-
+using capaDatos.Models;
+using capaNegocio;
+using System.Data.Entity;
+using capaDatos;
+using System.Globalization;
 
 namespace capaPresentacion
 {
     public partial class FormAdministrador : Form
     {
+
+        private CN_Login cnLogin;
         //Clase que obtiene Hora y Fecha Actual, y los carga en su respectivo Label
         private TemporizadorHoraFecha temporizadorHoraFecha;
 
@@ -35,6 +41,8 @@ namespace capaPresentacion
             // Crear instancia de TemporizadorHoraFecha y pasar los Label correspondientes
             temporizadorHoraFecha = new TemporizadorHoraFecha(lblHora, lblFecha);
 
+            // Inicializa la instancia de CN_Login
+            cnLogin = new CN_Login();
             // Asigna los controles necesarios
             formularioBase = new FormularioBase(panelContenedor, lblHora, lblFecha, lblMensaje, pBoxInicio);
 
@@ -124,31 +132,35 @@ namespace capaPresentacion
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-        }
-
-
-        private void btnMinimizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void FormAdministrador_Resize(object sender, EventArgs e)
-        {
-            panelContenedor.Size = this.ClientSize;
-        }
-
-        private void btnGestionProducto_Click(object sender, EventArgs e)
-        {
-            AbrirFormProductos(new listaProductos());
-        }
-
-
-        private void btnCerrarSesion_Click(object sender, EventArgs e)
-        {
             DialogResult result = MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
             {
+
+
+                // Formatea la fecha y hora actual en el formato deseado
+                string fechaIngresoFormateada = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                // Convierte la cadena formateada en un objeto DateTime
+                DateTime fechaSalida = DateTime.ParseExact(fechaIngresoFormateada, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                int usuarioId = ContextoCompartido.UsuarioId;
+                if (usuarioId > 0)
+                {
+
+                    using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+                    {
+                        var registro = db.RegistroUsuario
+                            .Where(r => r.id_usuario == usuarioId)
+                            .OrderByDescending(r => r.fecha_ingreso)
+                            .FirstOrDefault();
+
+                        if (registro != null)
+                        {
+                            registro.fecha_salida = fechaSalida;
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
                 // Crear una lista de formularios a cerrar
                 List<Form> formulariosParaCerrar = new List<Form>();
 
@@ -176,7 +188,81 @@ namespace capaPresentacion
             }
         }
 
-            private void btnConfiguracion_Click(object sender, EventArgs e)
+
+        private void btnMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void FormAdministrador_Resize(object sender, EventArgs e)
+        {
+            panelContenedor.Size = this.ClientSize;
+        }
+
+        private void btnGestionProducto_Click(object sender, EventArgs e)
+        {
+            AbrirFormProductos(new listaProductos());
+        }
+
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("¿Seguro que desea cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.Yes)
+            {
+
+
+                // Formatea la fecha y hora actual en el formato deseado
+                string fechaIngresoFormateada = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                // Convierte la cadena formateada en un objeto DateTime
+                DateTime fechaSalida = DateTime.ParseExact(fechaIngresoFormateada, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                int usuarioId = ContextoCompartido.UsuarioId;
+                if (usuarioId > 0)
+                {
+
+                    using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+                    {
+                        var registro = db.RegistroUsuario
+                            .Where(r => r.id_usuario == usuarioId)
+                            .OrderByDescending(r => r.fecha_ingreso)
+                            .FirstOrDefault();
+
+                        if (registro != null)
+                        {
+                            registro.fecha_salida = fechaSalida;
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
+                // Crear una lista de formularios a cerrar
+                List<Form> formulariosParaCerrar = new List<Form>();
+
+                // Identificar los formularios a cerrar
+                foreach (Form form in Application.OpenForms)
+                {
+                    if (form != this && (form.Name == "listaDetalleVenta"))
+                    {
+                        formulariosParaCerrar.Add(form);
+                    }
+                }
+
+                // Cerrar los formularios en la lista
+                foreach (Form form in formulariosParaCerrar)
+                {
+                    form.Close();
+                }
+
+                // Abre un nuevo formulario 
+                Login form1 = new Login();
+                form1.Show();
+
+                // Oculta este formulario
+                this.Hide();
+            }
+        }
+        private void btnConfiguracion_Click(object sender, EventArgs e)
         {
             AbrirFormConfiguraciones(new configuracionesAdmin());
         }
@@ -201,19 +287,15 @@ namespace capaPresentacion
 
         }
 
-        private void FormAdministrador_SizeChanged(object sender, EventArgs e)
-        {
-                // Asegúramos de que haya un formulario cargado en el panelContenedor
-                if (panelContenedor.Controls.Count > 0 && panelContenedor.Controls[0] is Form formularioCargado)
-                {
-                    // Redimensiona el formulario cargado para que coincida con el tamaño del panelContenedor
-                    formularioCargado.Size = panelContenedor.Size;
-                }    
-        }
-
+  
         private void btnGestionUsuario_Click(object sender, EventArgs e)
         {
             AbrirFormClientes(new listaUsuarios());
+        }
+
+        private void btnGestionClientes_Click(object sender, EventArgs e)
+        {
+            AbrirFormClientes(new listaClientes());
         }
     }
 }
