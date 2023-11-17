@@ -159,6 +159,61 @@ namespace capaPresentacion
         }
 
 
+        //private void btnModificar_Click(object sender, EventArgs e)
+        //{
+        //    if (txtApellido.Text.Length > 0 && txtDireccion.Text.Length > 0 && txtDNI.Text.Length > 0 && txtNombre.Text.Length > 0)
+        //    {
+        //        int numeroDNI = 0;
+        //        int.TryParse(txtDNI.Text, out numeroDNI);
+
+        //        using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+        //        {
+        //            // Obtener el DNI del cliente seleccionado en el DataGridView
+        //            int dniClienteSeleccionado = Convert.ToInt32(dataGridClientes.CurrentRow.Cells[0].Value);
+
+        //            // Buscar el cliente en la base de datos por su DNI
+        //            cliente clienteModificar = db.cliente.FirstOrDefault(c => c.DNI_cliente == txtDNI.Text);
+
+        //            if (clienteModificar != null)
+        //            {
+        //                // Mostrar un cuadro de diálogo de confirmación
+        //                DialogResult result = MessageBox.Show("¿Desea modificar este cliente?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+        //                if (result == DialogResult.Yes)
+        //                {
+        //                    // Realizar la modificación solo si el usuario confirma
+        //                    // Actualizar los valores del cliente
+        //                    clienteModificar.nombre_cliente = txtNombre.Text;
+        //                    clienteModificar.apellido_cliente = txtApellido.Text;
+        //                    clienteModificar.direccion = txtDireccion.Text;
+        //                    clienteModificar.telefono = txtTelefono.Text;
+
+        //                    // Guardar los cambios en la base de datos
+        //                    db.SaveChanges();
+        //                    cargarFormulario();
+
+        //                    // Actualizar el DataGridView si es necesario
+        //                    dataGridClientes.CurrentRow.Cells[1].Value = txtDNI.Text;
+        //                    dataGridClientes.CurrentRow.Cells[2].Value = txtNombre.Text;
+        //                    dataGridClientes.CurrentRow.Cells[3].Value = txtApellido.Text;
+        //                    dataGridClientes.CurrentRow.Cells[4].Value = txtDireccion.Text;
+        //                    dataGridClientes.CurrentRow.Cells[5].Value = txtTelefono.Text;
+
+        //                    MessageBox.Show("Se modificaron correctamente los datos", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //                }
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("No se encontró un cliente con el DNI especificado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Debe seleccionar un cliente de la lista antes de modificarlo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (txtApellido.Text.Length > 0 && txtDireccion.Text.Length > 0 && txtDNI.Text.Length > 0 && txtNombre.Text.Length > 0)
@@ -168,11 +223,11 @@ namespace capaPresentacion
 
                 using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
                 {
-                    // Obtener el DNI del cliente seleccionado en el DataGridView
-                    int dniClienteSeleccionado = Convert.ToInt32(dataGridClientes.CurrentRow.Cells[0].Value);
+                    // Obtener el ID del cliente seleccionado en el DataGridView
+                    int idClienteSeleccionado = Convert.ToInt32(dataGridClientes.CurrentRow.Cells[0].Value);
 
-                    // Buscar el cliente en la base de datos por su DNI
-                    cliente clienteModificar = db.cliente.FirstOrDefault(c => c.DNI_cliente == txtDNI.Text);
+                    // Buscar el cliente en la base de datos por su ID
+                    cliente clienteModificar = db.cliente.FirstOrDefault(c => c.id_cliente == idClienteSeleccionado);
 
                     if (clienteModificar != null)
                     {
@@ -188,6 +243,24 @@ namespace capaPresentacion
                             clienteModificar.direccion = txtDireccion.Text;
                             clienteModificar.telefono = txtTelefono.Text;
 
+                            // Actualizar el DNI del cliente si ha cambiado
+                            if (clienteModificar.DNI_cliente != txtDNI.Text)
+                            {
+                                // Validar si no existe otro cliente con el mismo DNI
+                                cliente clienteExistente = db.cliente.FirstOrDefault(c => c.DNI_cliente == txtDNI.Text);
+
+                                if (clienteExistente == null)
+                                {
+                                    // Actualizar el DNI solo si no hay otro cliente con el mismo DNI
+                                    clienteModificar.DNI_cliente = txtDNI.Text;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Ya existe otro cliente con el mismo DNI.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return; // Salir del método si no se puede actualizar el DNI
+                                }
+                            }
+
                             // Guardar los cambios en la base de datos
                             db.SaveChanges();
                             cargarFormulario();
@@ -200,6 +273,7 @@ namespace capaPresentacion
                             dataGridClientes.CurrentRow.Cells[5].Value = txtTelefono.Text;
 
                             MessageBox.Show("Se modificaron correctamente los datos", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                         }
                     }
                     else
@@ -214,43 +288,7 @@ namespace capaPresentacion
             }
         }
 
-
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-            {
-                // Se obtiene el DNI ingresado en el textBoxBuscar
-                int dniBuscado = 0;
-                if (int.TryParse(txtBuscar.Text, out dniBuscado))
-                {
-                    using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
-                    {
-                        // Realizamos la consulta en la base de datos para buscar el cliente por DNI
-                        var clienteEncontrado = db.cliente.FirstOrDefault(c => c.DNI_cliente == txtDNI.Text);
-
-                        if (clienteEncontrado != null)
-                        {
-                            // Si se encuentra el cliente, muestra sus datos
-                            txtNombre.Text = clienteEncontrado.nombre_cliente;
-                            txtApellido.Text = clienteEncontrado.apellido_cliente;
-                            txtDNI.Text = clienteEncontrado.DNI_cliente.ToString();
-                            txtDireccion.Text = clienteEncontrado.direccion;
-                            txtTelefono.Text = clienteEncontrado.telefono.ToString();
-
-                            btnModificar.Enabled = true;
-                        }
-                        else
-                        {
-                            // Si no se encuentra el cliente, muestra un mensaje indicando que no se encontró
-                            MessageBox.Show("No se encontró un cliente con el DNI especificado.", "Cliente no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                }
-                else
-                {
-                    // Si el número de DNI ingresado no es válido, muestra un mensaje de error
-                    MessageBox.Show("Por favor, ingresa un número de DNI válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+       
 
    
 

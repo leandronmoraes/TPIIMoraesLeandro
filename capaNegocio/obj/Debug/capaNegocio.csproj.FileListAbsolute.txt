@@ -63,3 +63,13 @@ C:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.csproj.CoreCompi
 C:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.csproj.CopyComplete
 C:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.dll
 C:\ProyectoTPII_MoraesLeandro\capaNegocio\obj\Debug\capaNegocio.pdb
+D:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\BCrypt.Net-Next.dll
+D:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\System.Buffers.dll
+D:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\System.Memory.dll
+D:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\System.Numerics.Vectors.dll
+D:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\BCrypt.Net-Next.xml
+D:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\System.Buffers.xml
+D:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\System.Memory.xml
+D:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\System.Numerics.Vectors.xml
+D:\ProyectoTPII_MoraesLeandro\capaNegocio\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml

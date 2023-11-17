@@ -57,9 +57,25 @@ namespace capaPresentacion
             // Obtén la categoría seleccionada en el ComboBox
             string categoriaSeleccionada = cmbFiltrarCategorias.Text;
 
+            //// Filtra la fuente de datos actual en base a la categoría seleccionada
+            //var productosFiltrados = fuenteDatosActual
+            //    .Where(p => ObtenerNombreCategoria(p.id_categoria).Equals(categoriaSeleccionada, StringComparison.OrdinalIgnoreCase))
+            //    .ToList();
+
             // Filtra la fuente de datos actual en base a la categoría seleccionada
             var productosFiltrados = fuenteDatosActual
                 .Where(p => ObtenerNombreCategoria(p.id_categoria).Equals(categoriaSeleccionada, StringComparison.OrdinalIgnoreCase))
+                .Select(p => new
+                {
+                    p.id_producto,
+                    p.imagen_producto,
+                    p.nombre_producto,
+                    p.descripcion_producto,
+                    Categoria = p.categoria.descripcion_categoria,
+                    Proveedor = p.proveedor.nombre_proveedor,
+                    p.precio_producto,
+                    p.stock_producto,
+                })
                 .ToList();
 
             // Muestra los productos filtrados en el DataGridView
@@ -68,10 +84,14 @@ namespace capaPresentacion
             // Ajusta el tamaño de la columna de la imagen después de cargar los productos
             AjustarColumnaImagen();
 
-            dataGridProductos.Columns["pedido"].Visible = false;
-            dataGridProductos.Columns["venta_detalle"].Visible = false;
-            dataGridProductos.Columns["categoria"].Visible = false;
-            dataGridProductos.Columns["proveedor"].Visible = false;
+            //dataGridProductos.Columns["pedido"].Visible = false;
+            //dataGridProductos.Columns["venta_detalle"].Visible = false;
+            //dataGridProductos.Columns["categoria"].Visible = false;
+            //dataGridProductos.Columns["proveedor"].Visible = false;
+
+            dataGridProductos.Columns["id_producto"].Width = 50; // Ajusta el valor según tus necesidades
+            dataGridProductos.Columns["descripcion_producto"].Width = 400;
+
 
             dataGridProductos.Columns["id_producto"].HeaderText = "ID";
             dataGridProductos.Columns["nombre_producto"].HeaderText = "Nombre";
@@ -140,17 +160,16 @@ namespace capaPresentacion
                 p.imagen_producto,
                 p.nombre_producto,
                 p.descripcion_producto,
-                p.categoria.descripcion_categoria,
-                p.proveedor.nombre_proveedor,
+                Categoria = p.categoria.descripcion_categoria,
+                Proveedor = p.proveedor.nombre_proveedor,
                 p.precio_producto,
                 p.stock_producto,
-                
-                
             }).ToList();
 
-            
-            dataGridProductos.DataSource = productosConNombres;
 
+
+            dataGridProductos.DataSource = productosConNombres;
+            
             // Después de cargar los productos en el DataGridView
             dataGridProductos.Columns["id_producto"].Width = 50; // Ajusta el valor según tus necesidades
             dataGridProductos.Columns["descripcion_producto"].Width = 400;
@@ -159,8 +178,8 @@ namespace capaPresentacion
             dataGridProductos.Columns["id_producto"].HeaderText = "ID";
             dataGridProductos.Columns["nombre_producto"].HeaderText = "Nombre";
             dataGridProductos.Columns["descripcion_producto"].HeaderText = "Descripción";
-            dataGridProductos.Columns["descripcion_categoria"].HeaderText = "Categoría";
-            dataGridProductos.Columns["nombre_proveedor"].HeaderText = "Proveedor";
+            //dataGridProductos.Columns["descripcion_categoria"].HeaderText = "Categoría";
+            //dataGridProductos.Columns["nombre_proveedor"].HeaderText = "Proveedor";
             dataGridProductos.Columns["precio_producto"].HeaderText = "Precio";
             dataGridProductos.Columns["stock_producto"].HeaderText = "Stock";
             dataGridProductos.Columns["imagen_producto"].HeaderText = "Imagen";
@@ -619,8 +638,8 @@ namespace capaPresentacion
                     p.id_producto,
                     p.nombre_producto,
                     p.descripcion_producto,
-                    p.categoria.descripcion_categoria,
-                    p.proveedor.nombre_proveedor,
+                    Categoria = p.categoria?.descripcion_categoria ?? "Sin Categoría",
+                    Proveedor = p.proveedor?.nombre_proveedor ?? "Sin Proveedor",
                     p.precio_producto,
                     p.stock_producto,
                     p.imagen_producto,
@@ -634,6 +653,10 @@ namespace capaPresentacion
                 // Ajusta la columna de la imagen después de cargar los productos
                
                 AjustarColumnaImagen();
+
+                // Cambiar nombres de columnas específicas
+                dataGridProductos.Columns["Categoria"].HeaderText = "Categoría";
+                dataGridProductos.Columns["Proveedor"].HeaderText = "Proveedor";
                 dataGridProductos.DataSource = productosInactivos;
 
             }
@@ -648,7 +671,6 @@ namespace capaPresentacion
                 btnModificarProducto.Visible = true;
             }
         }
-
 
         private void btnCambiarEstado_Click(object sender, EventArgs e)
         {
@@ -679,17 +701,33 @@ namespace capaPresentacion
                         if (mostrarInactivos)
                         {
                             List<producto> productosInactivos = cnProducto.ObtenerProductosInactivos();
-                            dataGridProductos.DataSource = productosInactivos;
-                            // Ajusta el tamaño de la columna de la imagen para que la imagen sea más grande
-                            dataGridProductos.Columns["imagen_producto"].Width = 100; // Puedes ajustar este valor según tus necesidades
+                            // Mapear el ID de la categoría y del proveedor a sus nombres correspondientes
+                            var productosConNombres = productosInactivos.Select(p => new
+                            {
+                                p.id_producto,
+                                p.imagen_producto,
+                                p.nombre_producto,
+                                p.descripcion_producto,
+                                Categoria = p.categoria.descripcion_categoria,
+                                Proveedor = p.proveedor.nombre_proveedor,
+                                p.precio_producto,
+                                p.stock_producto,
+                            }).ToList();
 
-                            // Ajusta la columna de la imagen después de cargar los productos
-                            AjustarColumnaImagen();
+                            dataGridProductos.DataSource = productosConNombres;
                         }
                         else
                         {
                             CargarProductos();
                         }
+
+                        dataGridProductos.Columns["id_producto"].Width = 50; // Ajusta el valor según tus necesidades
+                        dataGridProductos.Columns["descripcion_producto"].Width = 400;
+                        // Ajusta el tamaño de la columna de la imagen para que la imagen sea más grande
+                        dataGridProductos.Columns["imagen_producto"].Width = 100; // Puedes ajustar este valor según tus necesidades
+
+                        // Ajusta la columna de la imagen después de cargar los productos
+                        AjustarColumnaImagen();
                     }
                 }
                 else
@@ -702,6 +740,7 @@ namespace capaPresentacion
                 MessageBox.Show("Error al cambiar el estado del producto: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private List<producto> fuenteDatosActual;
 
@@ -720,15 +759,29 @@ namespace capaPresentacion
                 .Where(p =>
                     (mostrarInactivos ? p.estado == 0 : p.estado == 1) &&
                     p.nombre_producto.ToLower().Contains(textoBusqueda))
+                .Select(p => new
+                {
+                    p.id_producto,
+                    p.imagen_producto,
+                    p.nombre_producto,
+                    p.descripcion_producto,
+                    Categoria = p.categoria.descripcion_categoria,
+                    Proveedor = p.proveedor.nombre_proveedor,
+                    p.precio_producto,
+                    p.stock_producto,
+                })
                 .ToList();
 
             // Muestra los productos filtrados en el DataGridView
             dataGridProductos.DataSource = productosFiltrados;
 
-            dataGridProductos.Columns["pedido"].Visible = false;
-            dataGridProductos.Columns["venta_detalle"].Visible = false;
-            dataGridProductos.Columns["categoria"].Visible = false;
-            dataGridProductos.Columns["proveedor"].Visible = false;
+            //dataGridProductos.Columns["pedido"].Visible = false;
+            //dataGridProductos.Columns["venta_detalle"].Visible = false;
+            //dataGridProductos.Columns["categoria"].Visible = false;
+            //dataGridProductos.Columns["proveedor"].Visible = false;
+
+            dataGridProductos.Columns["id_producto"].Width = 50; // Ajusta el valor según tus necesidades
+            dataGridProductos.Columns["descripcion_producto"].Width = 400;
 
             dataGridProductos.Columns["id_producto"].HeaderText = "ID";
             dataGridProductos.Columns["nombre_producto"].HeaderText = "Nombre";

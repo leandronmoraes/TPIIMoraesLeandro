@@ -65,7 +65,19 @@ namespace capaPresentacion
             }
         }
 
-        
-       
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            FiltrarProductosPorNombre(txtBuscar.Text);
+        }
+
+        private void FiltrarProductosPorNombre(string nombre)
+        {
+            var productosFiltrados = dbContext.producto
+                .Where(p => p.estado == 1 && p.stock_producto != 0 && (p.nombre_producto.Contains(nombre) || p.descripcion_producto.Contains(nombre)))
+                .ToList();
+
+            dataGridViewProductos.DataSource = productosFiltrados;
+        }
+
     }
 }

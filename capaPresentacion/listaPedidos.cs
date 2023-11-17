@@ -194,30 +194,11 @@ namespace capaPresentacion
             }
         }
 
-        
 
+        private int estadoFiltrado = 1; // Variable para almacenar el estado actual de filtrado (1 por defecto)
         private void listaPedidos_Load(object sender, EventArgs e)
         {
-            using (var db = new ProyectoTPII_MoraesLeandroEntities())
-            {
-                var pedidos = from p in db.pedido
-                              where p.estado == 1 //filtrar por aquellos pedidos pendientes
-                              select new
-                              {
-                                  p.id_pedido,
-                                  p.nombre_producto_pedido,
-                                  p.descripcion_pedido,
-                                  p.direccion_pedido,
-                                  p.cantidad_pedido,
-                                  p.fecha_pedido,
-                                  p.id_proveedor,
-                                  p.id_producto,
-                                  p.estado,
-                                  
-                              };
-                dgvPedidos.DataSource = pedidos.ToList();
-            }
-
+            CargarPedidosConEstado(estadoFiltrado);
             cambiarColumna();
         }
 
@@ -246,7 +227,26 @@ namespace capaPresentacion
         }
 
 
-
+        private void CargarPedidosConEstado(int estado)
+        {
+            using (var db = new ProyectoTPII_MoraesLeandroEntities())
+            {
+                var pedidos = from p in db.pedido
+                              where p.estado == estado
+                              select new
+                              {
+                                  p.id_pedido,
+                                  p.nombre_producto_pedido,
+                                  p.descripcion_pedido,
+                                  p.direccion_pedido,
+                                  p.cantidad_pedido,
+                                  p.fecha_pedido,
+                                  p.id_proveedor,
+                                  p.estado,
+                              };
+                dgvPedidos.DataSource = pedidos.ToList();
+            }
+        }
         private void btnLimpiarProducto_Click(object sender, EventArgs e)
         {
             txtNombreProducto.Clear();
@@ -282,8 +282,8 @@ namespace capaPresentacion
                                 descripcion_pedido = txtDescripcion.Text,
                                 direccion_pedido = txtDireccion.Text,
                                 id_proveedor = int.Parse(cmbProveedor.SelectedValue.ToString()),
-                                
-                                estado = 2, // Estado confirmado
+
+                                estado = 2, // Cambiado a estado confirmado
                             };
 
                             // Asignar el producto seleccionado al nuevo pedido
@@ -291,6 +291,15 @@ namespace capaPresentacion
 
                             // Agregar el nuevo pedido a la base de datos
                             db.pedido.Add(nuevoPedido);
+
+                            // Cambiar el estado del pedido original a confirmado (2)
+                            int pedidoId = (int)dgvPedidos.CurrentRow.Cells["id_pedido"].Value;
+                            var pedidoOriginal = db.pedido.FirstOrDefault(p => p.id_pedido == pedidoId);
+                            if (pedidoOriginal != null)
+                            {
+                                pedidoOriginal.estado = 2; // Cambiar a estado confirmado
+                                db.Entry(pedidoOriginal).State = EntityState.Modified;
+                            }
 
                             // Guardar los cambios en el stock del producto y en el nuevo pedido
                             db.Entry(productoSeleccionado).State = EntityState.Modified;
@@ -308,6 +317,9 @@ namespace capaPresentacion
                     txtDescripcion.Clear();
                     txtDireccion.Clear();
 
+                    // Volver a cargar los pedidos pendientes (estado 1)
+                    CargarPedidosConEstado(1);
+
                     MessageBox.Show("Pedido Confirmado", "Confirmación de Pedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -321,6 +333,7 @@ namespace capaPresentacion
             }
         }
 
+
         private void cambiarColumna()
         {
             //Cambiar Header
@@ -331,12 +344,23 @@ namespace capaPresentacion
             dgvPedidos.Columns["fecha_pedido"].HeaderText = "Fecha";
             dgvPedidos.Columns["id_proveedor"].HeaderText = "Proveedor";
             dgvPedidos.Columns["nombre_producto_pedido"].HeaderText = "Producto";
-            dgvPedidos.Columns["id_producto"].HeaderText = "ID del producto";
+            //dgvPedidos.Columns["id_producto"].HeaderText = "ID del producto";
 
             //Ocultar Tablas
 
             dgvPedidos.Columns["estado"].Visible = false;
         }
 
+        private void btnVerConfirmados_Click(object sender, EventArgs e)
+        {
+            estadoFiltrado = 2; // Cambiar al estado 2 (confirmado)
+            CargarPedidosConEstado(estadoFiltrado);
+        }
+
+        private void btnVerPendientes_Click(object sender, EventArgs e)
+        {
+            estadoFiltrado = 1; // Cambiar al estado 1 (pendiente)
+            CargarPedidosConEstado(estadoFiltrado);
+        }
     }
 }

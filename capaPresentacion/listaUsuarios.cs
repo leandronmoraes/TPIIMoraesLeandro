@@ -326,19 +326,19 @@ namespace capaPresentacion
                     txtDireccion.Text = dataGridClientes.CurrentRow.Cells[5].Value.ToString();
                     //txtContraseña.Text = dataGridClientes.CurrentRow.Cells[6].Value.ToString();
 
-                    // Recuperar el perfil actual
-                    string perfilActual = dataGridClientes.CurrentRow.Cells[2].Value.ToString();
+                    // Obtener el perfil actual
+                    string perfilActual = dataGridClientes.CurrentRow.Cells["id_rol"].Value.ToString();
 
                     // Asignar el perfil actual a los radio buttons
                     switch (perfilActual)
                     {
-                        case "administrador":
+                        case "1":
                             rbtnAdmin.Checked = true;
                             break;
-                        case "gerente":
+                        case "2":
                             rbtnGerente.Checked = true;
                             break;
-                        case "vendedor":
+                        case "3":
                             rbtnVendedor.Checked = true;
                             break;
                         default:
@@ -425,8 +425,14 @@ namespace capaPresentacion
             dataGridClientes.Columns["apellido_usuario"].HeaderText = "Apellido";
             dataGridClientes.Columns["direccion_usuario"].HeaderText = "Dirección";
             dataGridClientes.Columns["contraseña_usuario"].HeaderText = "Contraseña";
-            
-          
+            dataGridClientes.Columns["id_rol"].HeaderText = "Rol";
+            dataGridClientes.Columns["estado"].HeaderText = "Estado"; // Añade esta línea
+
+            dataGridClientes.Columns["id_rol"].DataPropertyName = "id_rol";
+            dataGridClientes.Columns["estado"].DataPropertyName = "estado"; // Añade esta línea
+
+
+
         }
 
         private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
@@ -456,6 +462,42 @@ namespace capaPresentacion
             btnModificar.Visible = (estadoActual == 1);
             btnEliminar.Visible = (estadoActual == 1);
         }
+
+        private void dataGridClientes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridClientes.Columns["id_rol"].Index && e.Value != null)
+            {
+                int idRol = Convert.ToInt32(e.Value);
+
+                // Mapea el ID del rol a su descripción correspondiente
+                switch (idRol)
+                {
+                    case 1:
+                        e.Value = "Admin";
+                        break;
+                    case 2:
+                        e.Value = "Gerente";
+                        break;
+                    case 3:
+                        e.Value = "Vendedor";
+                        break;
+                    default:
+                        e.Value = "Desconocido";
+                        break;
+                }
+            }
+
+            // Añade este bloque para la columna de estado
+            if (e.ColumnIndex == dataGridClientes.Columns["estado"].Index && e.Value != null)
+            {
+                int estado = Convert.ToInt32(e.Value);
+
+                // Mapea el valor del estado a "activo" o "inactivo"
+                e.Value = (estado == 1) ? "Activo" : "Inactivo";
+            }
+
+        }
+
     }
 }
     

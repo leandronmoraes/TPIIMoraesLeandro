@@ -186,10 +186,14 @@ namespace capaPresentacion
             }
         }
 
-
-
-
-
-
+        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verificar si el carácter presionado es un número o la tecla de retroceso
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8) // 8 es el código ASCII para la tecla de retroceso (Backspace)
+            {
+                // Si no es un número, cancelar el evento para evitar que se agregue al TextBox
+                e.Handled = true;
+            }
+        }
     }
 }

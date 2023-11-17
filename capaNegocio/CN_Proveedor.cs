@@ -48,5 +48,14 @@ namespace capaNegocio
             return datos.BuscarProveedorPorCUIT(cuit);
         }
 
+        public bool ProveedorDuplicado(string cuit)
+        {
+            using (ProyectoTPII_MoraesLeandroEntities db = new ProyectoTPII_MoraesLeandroEntities())
+            {
+                // Verificar si existe un proveedor con el mismo CUIT
+                return db.proveedor.Any(p => p.cuit_proveedor == cuit);
+            }
+        }
+
     }
 }

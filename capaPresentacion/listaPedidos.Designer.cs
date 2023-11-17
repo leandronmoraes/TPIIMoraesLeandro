@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblGestionClientes = new System.Windows.Forms.Label();
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.txtNombreProducto = new System.Windows.Forms.TextBox();
@@ -52,6 +52,8 @@
             this.btnLimpiarProducto = new FontAwesome.Sharp.IconButton();
             this.lblListaPedidos = new System.Windows.Forms.Label();
             this.btnConfirmarPedido = new FontAwesome.Sharp.IconButton();
+            this.btnVerPendientes = new FontAwesome.Sharp.IconButton();
+            this.btnVerConfirmados = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -175,26 +177,26 @@
             // 
             this.dgvPedidos.AllowUserToAddRows = false;
             this.dgvPedidos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvPedidos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvPedidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            this.dgvPedidos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvPedidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvPedidos.ColumnHeadersHeight = 15;
             this.dgvPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPedidos.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPedidos.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvPedidos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvPedidos.Location = new System.Drawing.Point(6, 317);
             this.dgvPedidos.Name = "dgvPedidos";
@@ -312,11 +314,11 @@
             this.lblListaPedidos.AutoSize = true;
             this.lblListaPedidos.Font = new System.Drawing.Font("Century Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblListaPedidos.ForeColor = System.Drawing.Color.White;
-            this.lblListaPedidos.Location = new System.Drawing.Point(337, 275);
+            this.lblListaPedidos.Location = new System.Drawing.Point(389, 275);
             this.lblListaPedidos.Name = "lblListaPedidos";
-            this.lblListaPedidos.Size = new System.Drawing.Size(450, 39);
+            this.lblListaPedidos.Size = new System.Drawing.Size(268, 39);
             this.lblListaPedidos.TabIndex = 58;
-            this.lblListaPedidos.Text = "Lista de Pedidos Pendientes";
+            this.lblListaPedidos.Text = "Lista de Pedidos";
             // 
             // btnConfirmarPedido
             // 
@@ -334,12 +336,40 @@
             this.btnConfirmarPedido.UseVisualStyleBackColor = true;
             this.btnConfirmarPedido.Click += new System.EventHandler(this.btnConfirmarPedido_Click);
             // 
+            // btnVerPendientes
+            // 
+            this.btnVerPendientes.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnVerPendientes.IconColor = System.Drawing.Color.Black;
+            this.btnVerPendientes.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnVerPendientes.Location = new System.Drawing.Point(888, 275);
+            this.btnVerPendientes.Name = "btnVerPendientes";
+            this.btnVerPendientes.Size = new System.Drawing.Size(81, 36);
+            this.btnVerPendientes.TabIndex = 60;
+            this.btnVerPendientes.Text = "Ver Pendientes";
+            this.btnVerPendientes.UseVisualStyleBackColor = true;
+            this.btnVerPendientes.Click += new System.EventHandler(this.btnVerPendientes_Click);
+            // 
+            // btnVerConfirmados
+            // 
+            this.btnVerConfirmados.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnVerConfirmados.IconColor = System.Drawing.Color.Black;
+            this.btnVerConfirmados.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnVerConfirmados.Location = new System.Drawing.Point(975, 275);
+            this.btnVerConfirmados.Name = "btnVerConfirmados";
+            this.btnVerConfirmados.Size = new System.Drawing.Size(83, 36);
+            this.btnVerConfirmados.TabIndex = 61;
+            this.btnVerConfirmados.Text = "Ver Confirmados";
+            this.btnVerConfirmados.UseVisualStyleBackColor = true;
+            this.btnVerConfirmados.Click += new System.EventHandler(this.btnVerConfirmados_Click);
+            // 
             // listaPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(66)))), ((int)(((byte)(82)))));
             this.ClientSize = new System.Drawing.Size(1103, 612);
+            this.Controls.Add(this.btnVerConfirmados);
+            this.Controls.Add(this.btnVerPendientes);
             this.Controls.Add(this.btnConfirmarPedido);
             this.Controls.Add(this.lblListaPedidos);
             this.Controls.Add(this.btnLimpiarProducto);
@@ -394,5 +424,7 @@
         private FontAwesome.Sharp.IconButton btnLimpiarProducto;
         private System.Windows.Forms.Label lblListaPedidos;
         private FontAwesome.Sharp.IconButton btnConfirmarPedido;
+        private FontAwesome.Sharp.IconButton btnVerPendientes;
+        private FontAwesome.Sharp.IconButton btnVerConfirmados;
     }
 }

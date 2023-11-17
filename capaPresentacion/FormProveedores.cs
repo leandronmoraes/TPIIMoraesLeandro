@@ -27,22 +27,22 @@ namespace capaPresentacion
             
         }
 
-        
+
         private void btnAñadir_Click(object sender, EventArgs e)
         {
             string correo = txtEmail.Text;
             if (txtDireccion.Text.Length > 0 && correoBueno(correo) && txtNombre.Text.Length > 0 && txtCuit.Text.Length > 0 && txtEmail.Text.Length > 0
                 && txtTelefono.Text.Length > 0)
             {
-                // Verifica si al menos un radio button está marcado
-                if (rbtnInscripto.Checked || rbtnNoInscripto.Checked || rbtnFinal.Checked)
+                // Validar que no haya proveedores duplicados
+                if (!proveedorNegocio.ProveedorDuplicado(txtCuit.Text))
                 {
                     // Confirmación para poder ingresar un proveedor
                     DialogResult eleccion = MessageBox.Show("¿Confirmar Inserción?", "Agregar Proveedor", MessageBoxButtons.YesNo);
                     if (eleccion == DialogResult.Yes)
                     {
                         // Obtiene el valor seleccionado de los radio buttons
-                        string perfil = rbtnInscripto.Checked ? "Responsable inscripto" : (rbtnNoInscripto.Checked ? "Responsable no inscripto" : "Consumidor final");
+                        string perfil = GetRadioButtonCheckedText();
 
                         // Crear una nueva entidad de Proveedor con los datos del formulario
                         proveedor nuevoProveedor = new proveedor
@@ -53,21 +53,13 @@ namespace capaPresentacion
                             email_proveedor = txtEmail.Text,
                             IVA = perfil,
                             direccion_proveedor = txtDireccion.Text
-                           
                         };
-                        
 
                         // Agregar el nuevo proveedor a través de la capa de negocio
                         proveedorNegocio.AgregarProveedor(nuevoProveedor);
 
-
-                        txtCuit.Clear();
-                        txtNombre.Clear();
-                        txtTelefono.Clear();
-                        txtEmail.Clear();
-                        txtDireccion.Clear();
-
-                        errorProvider1.SetError(txtEmail, "");
+                        // Limpiar los campos del formulario
+                        LimpiarCampos();
 
                         MessageBox.Show("Proveedor Agregado", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -78,7 +70,7 @@ namespace capaPresentacion
                 }
                 else
                 {
-                    MessageBox.Show("Debes seleccionar un perfil antes de agregar un proveedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ya existe un proveedor con el mismo CUIT.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -114,6 +106,34 @@ namespace capaPresentacion
             {
                 MessageBox.Show("Debe seleccionar un proveedor de la lista antes de cambiar su estado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private string GetRadioButtonCheckedText()
+        {
+            if (rbtnInscripto.Checked)
+            {
+                return "Responsable inscripto";
+            }
+            else if (rbtnNoInscripto.Checked)
+            {
+                return "Responsable no inscripto";
+            }
+            else if (rbtnFinal.Checked)
+            {
+                return "Consumidor final";
+            }
+
+            return string.Empty; // Devuelve una cadena vacía si no hay ninguno seleccionado
+        }
+
+        private void LimpiarCampos()
+        {
+            txtCuit.Clear();
+            txtNombre.Clear();
+            txtTelefono.Clear();
+            txtEmail.Clear();
+            txtDireccion.Clear();
+            errorProvider1.SetError(txtEmail, "");
         }
 
         private void dgvProveedores_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

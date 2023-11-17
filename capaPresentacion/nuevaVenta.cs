@@ -592,7 +592,7 @@ namespace capaPresentacion
                         venta nuevaVenta = new venta
                         {
                             id_cliente = idCliente,
-                            fecha_venta = DateTime.Now,
+                            fecha_venta = DateTime.Today,
                             total_venta = decimal.Parse(txtTotal.Text),
                             id_vendedor = idVendedor,
                             id_tipo_pago = idTipoPago,

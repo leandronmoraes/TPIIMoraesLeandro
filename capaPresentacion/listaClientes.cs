@@ -20,6 +20,7 @@ namespace capaPresentacion
             btnModificar.Enabled = false;
             btnEliminar.Enabled = false;
             btnMostrarInactivos.Text = "Mostrar Inactivos";
+
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
@@ -63,7 +64,6 @@ namespace capaPresentacion
         }
 
 
-
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (txtApellido.Text.Length > 0 && txtDireccion.Text.Length > 0 && txtDNI.Text.Length > 0 && txtNombre.Text.Length > 0)
@@ -76,8 +76,15 @@ namespace capaPresentacion
                     // Obtener el DNI del cliente seleccionado en el DataGridView
                     int dniClienteSeleccionado = Convert.ToInt32(dataGridClientes.CurrentRow.Cells[0].Value);
 
-                    // Buscar el cliente en la base de datos por su DNI
-                    cliente clienteModificar = db.cliente.FirstOrDefault(c => c.DNI_cliente == txtDNI.Text);
+                    // Verificar si el nuevo DNI ya está registrado para otro cliente
+                    if (db.cliente.Any(c => c.DNI_cliente == txtDNI.Text && c.id_cliente != dniClienteSeleccionado))
+                    {
+                        MessageBox.Show("El DNI ingresado ya está registrado para otro cliente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return; // No continuar con la modificación
+                    }
+
+                    // Buscar el cliente en la base de datos por su ID
+                    cliente clienteModificar = db.cliente.FirstOrDefault(c => c.id_cliente == dniClienteSeleccionado);
 
                     if (clienteModificar != null)
                     {
@@ -88,6 +95,7 @@ namespace capaPresentacion
                         {
                             // Realizar la modificación solo si el usuario confirma
                             // Actualizar los valores del cliente
+                            clienteModificar.DNI_cliente = txtDNI.Text;
                             clienteModificar.nombre_cliente = txtNombre.Text;
                             clienteModificar.apellido_cliente = txtApellido.Text;
                             clienteModificar.direccion = txtDireccion.Text;
@@ -104,12 +112,13 @@ namespace capaPresentacion
                             dataGridClientes.CurrentRow.Cells[4].Value = txtDireccion.Text;
                             dataGridClientes.CurrentRow.Cells[5].Value = txtTelefono.Text;
 
-                            MessageBox.Show("Se modificaron correctamente los datos", "Datos Correctos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            // Agregar un mensaje indicando que la modificación fue exitosa
+                            MessageBox.Show("La modificación del cliente fue exitosa", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("No se encontró un cliente con el DNI especificado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No se encontró un cliente con el ID especificado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -118,6 +127,10 @@ namespace capaPresentacion
                 MessageBox.Show("Debe seleccionar un cliente de la lista antes de modificarlo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+
 
         private void listaClientes_Load(object sender, EventArgs e)
         {
@@ -355,6 +368,18 @@ namespace capaPresentacion
                 e.Handled = true;
             }
         }
+
+        private void dataGridClientes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Verifica si la celda pertenece a la columna de "estado" y si su valor es numérico
+            if (e.ColumnIndex == dataGridClientes.Columns["estado"].Index && e.Value != null && e.Value is int)
+            {
+                int estado = (int)e.Value;
+                e.Value = (estado == 1) ? "Activo" : "Inactivo";
+                e.FormattingApplied = true;
+            }
+        }
+
     }
 }
 

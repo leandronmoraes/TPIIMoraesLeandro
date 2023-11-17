@@ -54,3 +54,13 @@ C:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.csproj.CoreCompileIn
 C:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.csproj.CopyComplete
 C:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.dll
 C:\ProyectoTPII_MoraesLeandro\capaDatos\obj\Debug\capaDatos.pdb
+D:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\BCrypt.Net-Next.dll
+D:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\System.Buffers.dll
+D:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\System.Memory.dll
+D:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\System.Numerics.Vectors.dll
+D:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\BCrypt.Net-Next.xml
+D:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\System.Buffers.xml
+D:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\System.Memory.xml
+D:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\System.Numerics.Vectors.xml
+D:\ProyectoTPII_MoraesLeandro\capaDatos\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml

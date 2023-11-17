@@ -64,8 +64,25 @@ namespace capaPresentacion
             }
         }
 
-        
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            FiltrarClientesPorNombre(txtBuscar.Text);
+        }
+
+        private void FiltrarClientesPorNombre(string filtro)
+        {
+            var clientesFiltrados = dbContext.cliente
+                .Where(c => c.estado == 1 &&
+                    (c.nombre_cliente.Contains(filtro) ||
+                     c.apellido_cliente.Contains(filtro) ||
+                     c.DNI_cliente.Contains(filtro)))
+                .ToList();
+
+            dataGridViewClientes.DataSource = clientesFiltrados;
+        }
+
+
     }
-    }
+}
  
 

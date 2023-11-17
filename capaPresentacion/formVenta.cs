@@ -28,7 +28,9 @@ namespace capaPresentacion
             // Asegúrate de que estás obteniendo el ID del vendedor utilizando la capa de negocio
             CN_Login cnLogin = new CN_Login();
             this.idVendedorConectado = idVendedorConectado;
+
             
+
         }
 
 
@@ -50,14 +52,15 @@ namespace capaPresentacion
 
         private void formVenta_Load(object sender, EventArgs e)
         {
-
             // Agregar un controlador de eventos para el botón de búsqueda
             btnBuscar.Click += btnBuscar_Click;
-            DateTime fechaActual = DateTime.Now.Date;
 
-            // Obtén las fechas seleccionadas
-            DateTime fechaDesde = fechaDesdePicker.Value.Date;
-            DateTime fechaHasta = fechaHastaPicker.Value.Date;
+            // Obtén la fecha actual
+            DateTime fechaActual = DateTime.Today;
+
+            // Asegúrate de obtener el principio y final del día actual
+            DateTime fechaDesde = fechaActual;
+            DateTime fechaHasta = fechaActual.AddDays(1).AddTicks(-1);
 
             // Validación: fechaDesde no puede ser mayor que la fecha actual
             if (fechaDesde > fechaActual)
@@ -72,10 +75,10 @@ namespace capaPresentacion
                 MessageBox.Show("La fecha hasta no puede ser menor que la fecha actual.");
                 // Puedes hacer más aquí, como establecer la fechaHasta en la fecha actual, etc.
             }
-            
-                // Asegúrate de proporcionar un valor predeterminado para terminoBusqueda o modificar según sea necesario
-                CargarVentasDelVendedor(ContextoCompartido.UsuarioId, fechaDesdePicker.Value, fechaHastaPicker.Value, "");
-            
+
+            // Asegúrate de proporcionar un valor predeterminado para terminoBusqueda o modificar según sea necesario
+            CargarVentasDelVendedor(ContextoCompartido.UsuarioId, fechaDesde, fechaHasta, "");
+
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -83,9 +86,51 @@ namespace capaPresentacion
             string terminoBusqueda = txtBuscar.Text.Trim();
             CargarVentasDelVendedor(ContextoCompartido.UsuarioId, fechaDesdePicker.Value, fechaHastaPicker.Value, terminoBusqueda);
         }
+        //private void CargarVentasDelVendedor(int idVendedor, DateTime fechaDesde, DateTime fechaHasta, string terminoBusqueda)
+        //{
+        //    // Asegúrate de obtener la fecha hasta el final del día
+        //    fechaHasta = fechaHasta.Date.AddDays(1);
+
+
+        //    // Conecta con la base de datos utilizando Entity Framework u otro método de tu elección.
+        //    using (var dbContext = new ProyectoTPII_MoraesLeandroEntities())
+        //    {
+        //        dataGridVenta.Columns["id_venta"].DataPropertyName = "id_venta";
+        //        dataGridVenta.Columns["nombre_cliente"].DataPropertyName = "nombre_cliente";
+        //        dataGridVenta.Columns["fecha_venta"].DataPropertyName = "fecha_venta";
+
+        //        dataGridVenta.Columns["total_venta"].DataPropertyName = "total_venta";
+        //        //dataGridVenta.Columns["nombre_usuario"].DataPropertyName = "nombre_usuario";
+        //        dataGridVenta.Columns["descripcion_tipo_pago"].DataPropertyName = "descripcion_tipo_pago";
+        //        //dataGridVenta.Columns["estado"].DataPropertyName = "estado";
+        //        dataGridVenta.Columns["detalles"].DataPropertyName = "detalles";
+
+        //        // Obtiene los datos de la base de datos y los enlaza al DataGridView, filtrando por el ID del vendedor
+        //        var ventas = dbContext.venta
+        //    .Where(v => v.id_vendedor == idVendedor &&
+        //                v.fecha_venta >= fechaDesde &&
+        //                v.fecha_venta <= fechaHasta &&
+        //                (v.cliente.nombre_cliente.Contains(terminoBusqueda) || v.cliente.DNI_cliente.Contains(terminoBusqueda))) // Modifica según tus necesidades
+        //    .Select(v => new
+        //    {
+        //        v.id_venta,
+        //        v.cliente.nombre_cliente,
+        //        v.fecha_venta,
+        //        v.total_venta,
+        //        v.cliente.DNI_cliente,
+        //        v.tipo_pago.descripcion_tipo_pago,
+        //        v.estado,
+        //    })
+        //    .ToList();
+
+        //        dataGridVenta.DataSource = ventas;
+        //    }
+        //}
+
         private void CargarVentasDelVendedor(int idVendedor, DateTime fechaDesde, DateTime fechaHasta, string terminoBusqueda)
         {
-            
+            // Asegúrate de obtener el final del día para la fecha de finalización
+            fechaHasta = fechaHasta.Date.AddDays(1).AddTicks(-1);
 
             // Conecta con la base de datos utilizando Entity Framework u otro método de tu elección.
             using (var dbContext = new ProyectoTPII_MoraesLeandroEntities())
@@ -95,32 +140,31 @@ namespace capaPresentacion
                 dataGridVenta.Columns["fecha_venta"].DataPropertyName = "fecha_venta";
 
                 dataGridVenta.Columns["total_venta"].DataPropertyName = "total_venta";
-                //dataGridVenta.Columns["nombre_usuario"].DataPropertyName = "nombre_usuario";
                 dataGridVenta.Columns["descripcion_tipo_pago"].DataPropertyName = "descripcion_tipo_pago";
-                //dataGridVenta.Columns["estado"].DataPropertyName = "estado";
                 dataGridVenta.Columns["detalles"].DataPropertyName = "detalles";
 
-                // Obtiene los datos de la base de datos y los enlaza al DataGridView, filtrando por el ID del vendedor
+                // Ajusta la lógica para manejar el caso cuando ambas fechas son iguales
                 var ventas = dbContext.venta
-            .Where(v => v.id_vendedor == idVendedor &&
-                        v.fecha_venta >= fechaDesde &&
-                        v.fecha_venta <= fechaHasta &&
-                        (v.cliente.nombre_cliente.Contains(terminoBusqueda) || v.cliente.DNI_cliente.Contains(terminoBusqueda))) // Modifica según tus necesidades
-            .Select(v => new
-            {
-                v.id_venta,
-                v.cliente.nombre_cliente,
-                v.fecha_venta,
-                v.total_venta,
-                v.cliente.DNI_cliente,
-                v.tipo_pago.descripcion_tipo_pago,
-                v.estado,
-            })
-            .ToList();
+                    .Where(v => v.id_vendedor == idVendedor &&
+                                v.fecha_venta >= fechaDesde &&
+                                v.fecha_venta <= fechaHasta &&
+                                (v.cliente.nombre_cliente.Contains(terminoBusqueda) || v.cliente.DNI_cliente.Contains(terminoBusqueda)))
+                    .Select(v => new
+                    {
+                        v.id_venta,
+                        v.cliente.nombre_cliente,
+                        v.fecha_venta,
+                        v.total_venta,
+                        v.cliente.DNI_cliente,
+                        v.tipo_pago.descripcion_tipo_pago,
+                        v.estado,
+                    })
+                    .ToList();
 
                 dataGridVenta.DataSource = ventas;
             }
         }
+
 
         private void fechaDesdePicker_ValueChanged(object sender, EventArgs e)
         {
@@ -153,7 +197,7 @@ namespace capaPresentacion
 
         private void fechaHastaPicker_ValueChanged(object sender, EventArgs e)
         {
-            DateTime fechaActual = DateTime.Now.Date;
+            DateTime fechaActual = DateTime.Today;
             DateTime fechaDesde = fechaDesdePicker.Value.Date;
             DateTime fechaHasta = fechaHastaPicker.Value.Date;
 

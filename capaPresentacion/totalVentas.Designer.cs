@@ -225,6 +225,7 @@
             this.txtBuscar.Size = new System.Drawing.Size(154, 19);
             this.txtBuscar.TabIndex = 1;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
             // 
             // lblBuscar
             // 
